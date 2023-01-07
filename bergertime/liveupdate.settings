@@ -1,0 +1,6 @@
+[liveupdate]
+mode = Zip
+zip-filepath = /home/david/DEFOLD/1/bergertime/updates
+publickey = /home/david/DEFOLD/1/bergertime/manifest.public.der
+privatekey = /home/david/DEFOLD/1/bergertime/manifest.private.der
+

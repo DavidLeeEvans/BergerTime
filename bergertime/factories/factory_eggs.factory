@@ -1,0 +1,2 @@
+prototype: "/entities_go/eggs/eggs.go"
+load_dynamically: false

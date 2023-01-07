@@ -1,0 +1,2 @@
+prototype: "/entities_go/pickle/pickle.go"
+load_dynamically: false

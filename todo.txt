@@ -1,0 +1,5 @@
+Finish SWEN code.
+Download some "Edge Detection" code, for jumping off burgers!!
+Add SETI ufo aliens?
+Improve on the collision code, use triggers instead of rays.
+

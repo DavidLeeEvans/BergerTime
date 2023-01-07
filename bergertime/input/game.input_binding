@@ -1,0 +1,35 @@
+mouse_trigger {
+  input: MOUSE_BUTTON_1
+  action: "touch"
+}
+
+key_trigger {
+  input: KEY_SPACE
+  action: "debug_toggle"
+}
+
+key_trigger {
+  input: KEY_UP
+  action: "move_up"
+}
+
+key_trigger {
+  input: KEY_DOWN
+  action: "move_down"
+}
+
+key_trigger {
+  input: KEY_RIGHT
+  action: "move_right"
+}
+
+key_trigger {
+  input: KEY_LEFT
+  action: "move_left"
+}
+
+key_trigger {
+  input: KEY_P
+  action: "pepper"
+}
+

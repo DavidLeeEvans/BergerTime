@@ -1,0 +1,14 @@
+-cp src
+-debug
+-lua main.lua
+-lib hxdefold
+-lib random
+-lib eskimo
+-lib deepnightLibs
+-lib assertion
+-dce full
+-D analyzer-optimize
+--macro include("", true, null, ["src"])
+# --verbose
+#-D hxdefold-projectroot=.
+#-D hxdefold-scriptdir=scripts

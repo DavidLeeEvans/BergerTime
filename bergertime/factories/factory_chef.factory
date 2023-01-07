@@ -1,0 +1,2 @@
+prototype: "/entities_go/chef/chef.go"
+load_dynamically: false

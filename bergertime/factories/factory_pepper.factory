@@ -1,0 +1,2 @@
+prototype: "/entities_go/pepper/pepper.go"
+load_dynamically: false

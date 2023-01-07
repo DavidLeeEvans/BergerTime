@@ -1,0 +1,101 @@
+# App manifest generated Fri Jan 06 2023 11:03:28 GMT-0500 (Eastern Standard Time)
+# Settings: Physics3D,Record,LiveUpdate,Basis Transcoder,OpenGL
+platforms:
+    x86_64-osx:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","liveupdate","graphics_transcoder_basisu","basis_transcoder"]
+            excludeSymbols: []
+            symbols: []
+            libs: ["physics_2d","record_null","liveupdate_null","graphics_transcoder_null"]
+            frameworks: []
+            linkFlags: []
+
+    x86_64-linux:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","liveupdate","graphics_transcoder_basisu","basis_transcoder"]
+            excludeSymbols: []
+            symbols: []
+            libs: ["physics_2d","record_null","liveupdate_null","graphics_transcoder_null"]
+            linkFlags: []
+
+    js-web:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","liveupdate","graphics_transcoder_basisu","basis_transcoder"]
+            excludeJsLibs: []
+            excludeSymbols: []
+            symbols: []
+            libs: ["physics_2d","record_null","liveupdate_null","graphics_transcoder_null"]
+            linkFlags: []
+
+    wasm-web:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","liveupdate","graphics_transcoder_basisu","basis_transcoder"]
+            excludeJsLibs: []
+            excludeSymbols: []
+            symbols: []
+            libs: ["physics_2d","record_null","liveupdate_null","graphics_transcoder_null"]
+            linkFlags: []
+
+    x86-win32:
+        context:
+            excludeLibs: ["libphysics","libLinearMath","libBulletDynamics","libBulletCollision","librecord","vpx","libliveupdate","libgraphics_transcoder_basisu","libbasis_transcoder"]
+            excludeSymbols: []
+            symbols: []
+            libs: ["libphysics_2d.lib","librecord_null.lib","libliveupdate_null.lib","libgraphics_transcoder_null.lib"]
+            linkFlags: []
+
+    x86_64-win32:
+        context:
+            excludeLibs: ["libphysics","libLinearMath","libBulletDynamics","libBulletCollision","librecord","vpx","libliveupdate","libgraphics_transcoder_basisu","libbasis_transcoder"]
+            excludeSymbols: []
+            symbols: []
+            libs: ["libphysics_2d.lib","librecord_null.lib","libliveupdate_null.lib","libgraphics_transcoder_null.lib"]
+            linkFlags: []
+
+    armv7-android:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","liveupdate","graphics_transcoder_basisu","basis_transcoder"]
+            excludeJars: []
+            excludeSymbols: []
+            symbols: []
+            libs: ["physics_2d","record_null","liveupdate_null","graphics_transcoder_null"]
+            linkFlags: []
+            jetifier: true
+
+    arm64-android:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","liveupdate","graphics_transcoder_basisu","basis_transcoder"]
+            excludeJars: []
+            excludeSymbols: []
+            symbols: []
+            libs: ["physics_2d","record_null","liveupdate_null","graphics_transcoder_null"]
+            linkFlags: []
+            jetifier: true
+
+    armv7-ios:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","liveupdate","graphics_transcoder_basisu","basis_transcoder"]
+            excludeSymbols: []
+            symbols: []
+            libs: ["physics_2d","record_null","liveupdate_null","graphics_transcoder_null"]
+            frameworks: []
+            linkFlags: []
+
+    arm64-ios:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","liveupdate","graphics_transcoder_basisu","basis_transcoder"]
+            excludeSymbols: []
+            symbols: []
+            libs: ["physics_2d","record_null","liveupdate_null","graphics_transcoder_null"]
+            frameworks: []
+            linkFlags: []
+
+    x86_64-ios:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","liveupdate","graphics_transcoder_basisu","basis_transcoder"]
+            excludeSymbols: []
+            symbols: []
+            libs: ["physics_2d","record_null","liveupdate_null","graphics_transcoder_null"]
+            frameworks: []
+            linkFlags: []
+
