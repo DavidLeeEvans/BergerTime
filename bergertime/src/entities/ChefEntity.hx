@@ -1,39 +1,56 @@
 package entities;
 
-import defold.types.Url;
+import Defold.hash;
 
-import game.BergerGameScript.BergerGameMessage;
+import defold.Factory;
+import defold.Go;
+import defold.Msg;
+import defold.Physics;
+
+import defold.Sprite.SpriteMessages;
 
 import defold.Timer;
 
-import entities.PepperEntity.PepperMessage;
-
-import defold.Factory;
-
-import defold.types.Vector3;
-
-import hud.HudGUI.HudGUIMessage;
-
-import defold.Physics;
-
-import ecs.c.GravityComponent;
-
-import Defold.hash;
-import defold.Go;
-import defold.Msg;
-
 import defold.Vmath.vector3;
 
+import defold.support.Script;
 import defold.support.ScriptOnInputAction;
 
 import defold.types.Hash;
 import defold.types.Message;
+import defold.types.Url;
+import defold.types.Vector3;
 
-import defold.support.Script;
+import ecs.c.GravityComponent;
 
-import defold.Sprite.SpriteMessages;
+import entities.PepperEntity.PepperMessage;
 
 import eskimo.Entity;
+
+import game.BergerGameScript.BergerGameMessage;
+
+import hud.HudGUI.HudGUIMessage;
+
+@:build(defold.support.HashBuilder.build())
+class ChefEntityHash {
+	var treat;
+	var treats_coffee;
+	var treats_fries;
+	var treats_icecream;
+	var treats_candy;
+	var border;
+	var chef_die;
+	var chef;
+	var die;
+	var enemy;
+	//
+	var move_up;
+	var move_down;
+	var move_left;
+	var move_right;
+	//
+	var pepper;
+}
 
 typedef ChefData = {
 	var chefSpeed:Float;
@@ -181,7 +198,7 @@ class ChefEntity extends Script<ChefData> {
 					self.bWestEnable = true;
 				}
 			case SpriteMessages.animation_done:
-				if (message.id == hash('chef-die')) {
+				if (message.id == ChefEntityHash.chef_die) {
 					Globals.total_num_lives--;
 					if (Globals.total_num_lives <= 0)
 						Msg.post("/BergerGameScript", BergerGameMessage.game_over); // TODO NOT RIGHT
@@ -189,38 +206,33 @@ class ChefEntity extends Script<ChefData> {
 					Go.delete();
 				}
 			case PhysicsMessages.collision_response:
-				if (message.other_group == hash('enemy')) {
+				if (message.other_group == ChefEntityHash.enemy) {
 					final socket:String = "level01";
-					// final  hex_url:String = Defold.hash_to_hex(message.other_id);
-					// trace('hex_url $url');
-					// final  fragment:String = Defold.hash_to_hex(hash('currently_peppered'));
-					// trace('hex fragment $fragment');
-					// go.set("myobject#my_script", "my_property", val + 1)
 					var enemy_script:Url = defold.Msg.url(socket, message.other_id, "Entity");
 					var not_peppered:Bool = Go.get(enemy_script, "not_peppered");
 					if (not_peppered) {
 						self.chefSpeed = 0; // Set Russian Chef Speed to Zero
-						Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("chef-die")});
+						Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_die});
 					}
 				}
 
 			case PhysicsMessages.trigger_response:
 				// trace('TRIGGER message_id $message_id message $message');
-				if (message.own_group == hash('chef')) {
-					if (message.other_group == hash('treat')) {
-						if (message.other_id == hash('/treats_coffee')) {
+				if (message.own_group == ChefEntityHash.chef) {
+					if (message.other_group == ChefEntityHash.treat) {
+						if (message.other_id == ChefEntityHash.treats_coffee) {
 							Msg.post("/go#hud", HudGUIMessage.add_score, {num: 11});
 							self.chefSpeed = CHEF_SPEED_COFFEE;
 							Timer.delay(11.0, false, treat_callback); // 11 seconds boost
-						} else if (message.other_id == hash('/treats_fries')) {
+						} else if (message.other_id == ChefEntityHash.treats_fries) {
 							Msg.post("/go#hud", HudGUIMessage.add_score, {num: 61});
-						} else if (message.other_id == hash('/treats_icecream')) {
+						} else if (message.other_id == ChefEntityHash.treats_icecream) {
 							Msg.post("/go#hud", HudGUIMessage.add_score, {num: 4114});
-						} else if (message.other_id == hash('/treats_candy')) {
+						} else if (message.other_id == ChefEntityHash.treats_candy) {
 							Msg.post("/go#hud", HudGUIMessage.add_score, {num: 27});
 						}
 					}
-					if (message.other_group == hash('border')) {
+					if (message.other_group == ChefEntityHash.border) {
 						// TODO test this dle
 					}
 				}
@@ -230,27 +242,27 @@ class ChefEntity extends Script<ChefData> {
 	override function on_input(self:ChefData, action_id:Hash, action:ScriptOnInputAction) {
 		final p = Go.get(".", "position");
 		// North
-		if (action_id == hash("move_up") && !self.bNorthEnable) {
+		if (action_id == ChefEntityHash.move_up && !self.bNorthEnable) {
 			Go.set(".", "position", p + vector3(0, self.chefSpeed, 0));
 			if (self.faceDir != 0)
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("chef-front")});
 			self.faceDir = 0;
-		} else if (action_id == hash("move_down") && !self.bSouthEnable) {
+		} else if (action_id == ChefEntityHash.move_down && !self.bSouthEnable) {
 			Go.set(".", "position", p + vector3(0, -self.chefSpeed, 0));
 			if (self.faceDir != 2)
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("chef-back")});
 			self.faceDir = 2;
-		} else if (action_id == hash("move_left") && self.bWestEnable) {
+		} else if (action_id == ChefEntityHash.move_left && self.bWestEnable) {
 			Go.set(".", "position", p + vector3(-self.chefSpeed, 0, 0));
 			if (self.faceDir != 3)
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("chef-left")});
 			self.faceDir = 3;
-		} else if (action_id == hash("move_right") && self.bEastEnable) {
+		} else if (action_id == ChefEntityHash.move_right && self.bEastEnable) {
 			Go.set(".", "position", p + vector3(self.chefSpeed, 0, 0));
 			if (self.faceDir != 1)
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("chef-right")});
 			self.faceDir = 1;
-		} else if (action_id == hash("pepper") && action.released) {
+		} else if (action_id == ChefEntityHash.pepper && action.released) {
 			trace('pepper');
 			var collision_object:Vector3 = vector3(0, 0, 0);
 			switch (self.faceDir) {
