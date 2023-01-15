@@ -1,6 +1,7 @@
 #!/bin/sh
 rm -fr ./scripts
-haxe build build.hxml
+#haxe build build.hxml haxe
+haxe build build.hxml --debug
 mv main.lua main_temp
 echo 'local broadcast = require "ludobits.m.broadcast"' >> main.lua
 echo 'local bezier = require "ludobits.m.bezier"' >> main.lua
