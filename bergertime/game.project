@@ -60,5 +60,6 @@ ios_tracking_usage_description = Your data will be used to provide you a better 
 app_manifest = /generated.appmanifest
 
 [library]
-include_dirs = extension-firebase extension-admob extension-push
+include_dirs = extension-firebase extension-push extension-admob extension-firebase-analytics extension-firebase-remoteconfig extension-push
+
 
