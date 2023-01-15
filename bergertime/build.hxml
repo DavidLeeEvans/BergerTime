@@ -2,10 +2,8 @@
 -debug
 -lua main.lua
 -lib hxdefold
--lib random
+-lib dex
 -lib eskimo
--lib deepnightLibs
--lib assertion
 -dce full
 -D analyzer-optimize
 --macro include("", true, null, ["src"])
