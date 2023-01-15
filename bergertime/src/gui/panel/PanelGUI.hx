@@ -1,14 +1,15 @@
 package gui.panel;
 
-import defold.Gui;
 import defold.Go;
+import defold.Gui;
 import defold.Msg;
-
-import defold.types.Hash;
+import defold.Sound;
 
 import defold.support.ScriptOnInputAction;
 
-import defold.Sound;
+import defold.types.Hash;
+
+import dex.util.Rand;
 
 import haxe.ds.Map;
 
@@ -66,11 +67,39 @@ enum abstract ItemEnumSelection(Int) {
 
 class PanelGUI extends defold.support.GuiScript<PanelGUIData> {
 	static final Items:Map<ItemEnumSelection, String> = [
-		Bathleth => "bathleth", Boxcutter => "boxcutter", Crossbow => "crossbow", Jetpack => "jetpack", Jetski => "jetski", Net0 => "net0", Net1 => "net1",
-		Net2 => "net2", ColdFusionBomb => "coldfusionbomb", Wmd0 => "wmd0", Wmd1 => "wmd1", Wmd2 => "wmd2", Bee_hive => "bee_hive", Catnip => "catnip",
-		Motorcycle => "motorcycle", Transporter => "transport", Bombs => "bombs", Ied0 => "ied0", Ray_gun0 => "ray_gun0", Xray_glasses => "xray_glasses",
-		candle => 'candle', gem2 => 'gem2', mirror => 'mirror', seekerpumpkin => 'seekerpumkin', wand1 => 'wand1', wand3 => 'wand3', gem1 => 'gem1',
-		mirror2 => 'mirror2', pumpkin => 'pumpkin', wand0 => 'wand0', wand2 => 'wand2', wings => 'wings', Removed => "glassPanel_corners"
+		Bathleth => "bathleth",
+		Boxcutter => "boxcutter",
+		Crossbow => "crossbow",
+		Jetpack => "jetpack",
+		Jetski => "jetski",
+		Net0 => "net0",
+		Net1 => "net1",
+		Net2 => "net2",
+		ColdFusionBomb => "coldfusionbomb",
+		Wmd0 => "wmd0",
+		Wmd1 => "wmd1",
+		Wmd2 => "wmd2",
+		Bee_hive => "bee_hive",
+		Catnip => "catnip",
+		Motorcycle => "motorcycle",
+		Transporter => "transport",
+		Bombs => "bombs",
+		Ied0 => "ied0",
+		Ray_gun0 => "ray_gun0",
+		Xray_glasses => "xray_glasses",
+		candle => 'candle',
+		gem2 => 'gem2',
+		mirror => 'mirror',
+		seekerpumpkin => 'seekerpumkin',
+		wand1 => 'wand1',
+		wand3 => 'wand3',
+		gem1 => 'gem1',
+		mirror2 => 'mirror2',
+		pumpkin => 'pumpkin',
+		wand0 => 'wand0',
+		wand2 => 'wand2',
+		wings => 'wings',
+		Removed => "glassPanel_corners"
 	];
 
 	// Buton Animations
@@ -252,7 +281,7 @@ class PanelGUI extends defold.support.GuiScript<PanelGUIData> {
 					}
 
 				if (!hasSlotsflag)
-					self.nextPosition = Random.int(0, 7);
+					self.nextPosition = Rand.int(0, 7);
 
 				switch (self.nextPosition) {
 					case 0:
@@ -296,7 +325,7 @@ class PanelGUI extends defold.support.GuiScript<PanelGUIData> {
 		Msg.post("/go#master_sound_bus", SoundMessages.play_sound, {});
 		onOff = true;
 		// Gui.animate(Gui.get_node('box'), "position.x", 300.0, GuiEasing.EASING_INEXPO, slideIn, 0.1);
-		Gui.animate(Gui.get_node('box'),GuiAnimateProprty.PROP_POSITION,Vmath.vector3(0,300,0),GuiEasing.EASING_OUTINEXPO,slideIn,0.1);
+		Gui.animate(Gui.get_node('box'), GuiAnimateProprty.PROP_POSITION, Vmath.vector3(0, 300, 0), GuiEasing.EASING_OUTINEXPO, slideIn, 0.1);
 		Gui.set_texture(Gui.get_node('box'), hash('panel_atlas'));
 		Gui.play_flipbook(Gui.get_node('box'), hash(textureOn));
 		//
@@ -309,7 +338,7 @@ class PanelGUI extends defold.support.GuiScript<PanelGUIData> {
 		Msg.post("/go#master_sound_bus", SoundMessages.play_sound, {});
 		onOff = false;
 		// Gui.animate(Gui.get_node('box'), "position.x", 700.0, GuiEasing.EASING_INEXPO, slideOut, 0.0);
-		Gui.animate(Gui.get_node('box'),GuiAnimateProprty.PROP_POSITION,Vmath.vector3(0,700,0),GuiEasing.EASING_OUTINEXPO,slideOut,0.1);
+		Gui.animate(Gui.get_node('box'), GuiAnimateProprty.PROP_POSITION, Vmath.vector3(0, 700, 0), GuiEasing.EASING_OUTINEXPO, slideOut, 0.1);
 
 		Gui.set_texture(Gui.get_node('box'), hash('panel_atlas'));
 		Gui.play_flipbook(Gui.get_node('box'), hash(textureOff));

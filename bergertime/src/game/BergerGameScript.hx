@@ -1,37 +1,36 @@
 package game;
 
-import hud.HudGUI.HudGUIMessage;
-import entities.EnemyEntity.EnemyMessage;
-
-import lua.lib.luasocket.Socket;
+import Defold.hash;
 
 import defold.Factory;
-import defold.Timer;
-
-import ecs.s.SystemGravity;
-import defold.Profiler;
-
-import haxe.Log.trace as ltrace;
-
-//
-import defold.Vmath.vector3;
-
-//
-import defold.types.*;
-
-import defold.support.Script;
-import defold.support.ScriptOnInputAction;
-
-import Defold.hash;
 
 import defold.Go.GoMessages;
 
 import defold.Msg;
+import defold.Profiler;
+import defold.Timer;
+
+import defold.Vmath.vector3;
+
+import defold.support.Script;
+import defold.support.ScriptOnInputAction;
+
+import defold.types.*;
 
 import defold.types.Hash;
 
-import Assertion;
+import ecs.s.SystemGravity;
 
+import entities.EnemyEntity.EnemyMessage;
+
+import haxe.Log.trace as ltrace;
+
+import hud.HudGUI.HudGUIMessage;
+
+import lua.lib.luasocket.Socket;
+
+//
+//
 //
 
 @:build(defold.support.MessageBuilder.build())
@@ -74,7 +73,7 @@ class BergerGameScript extends Script<BergerGameData> {
 		//
 		if (self.handleTimerTreats == Timer.INVALID_TIMER_HANDLE)
 			ltrace("Invalide Timer Handle");
-		Assertion.assert(self.handleTimerTreats != Timer.INVALID_TIMER_HANDLE);
+		lua.Lua.assert(self.handleTimerTreats != Timer.INVALID_TIMER_HANDLE, "Invalid Timer Handle");
 		self.finish_hamburger = 0;
 		Globals.total_num_current_monsters = 0;
 		Globals.total_num_lives = 3;
@@ -112,7 +111,7 @@ class BergerGameScript extends Script<BergerGameData> {
 				self.handleTimerTreats = Timer.delay(lua.Math.random(TREAT_SPAWNDELAY_LOWER, TREAT_SPAWNDELAY_UPPER), false, treate_create);
 				if (self.handleTimerTreats == Timer.INVALID_TIMER_HANDLE)
 					ltrace("Invalide Timer Handle");
-				Assertion.assert(self.handleTimerTreats != Timer.INVALID_TIMER_HANDLE);
+				lua.Lua.assert(self.handleTimerTreats != Timer.INVALID_TIMER_HANDLE, "Invalid Treat Handle");
 			case BergerGameMessage.game_over:
 				trace('game over');
 				Timer.cancel(self.handleTimerTreats);
@@ -148,7 +147,7 @@ class BergerGameScript extends Script<BergerGameData> {
 		self.handleTimerTreats = Timer.delay(lua.Math.random(TREAT_SPAWNDELAY_LOWER, TREAT_SPAWNDELAY_UPPER), false, treate_create);
 		if (self.handleTimerTreats == Timer.INVALID_TIMER_HANDLE)
 			ltrace("Invalide Timer Handle");
-		Assertion.assert(self.handleTimerTreats != Timer.INVALID_TIMER_HANDLE);
+		lua.Lua.assert(self.handleTimerTreats != Timer.INVALID_TIMER_HANDLE, "Invalid Timer Handle");
 	}
 
 	private function spawn_monster(self:BergerGameData):Void {

@@ -1,11 +1,12 @@
+import defold.Window.WindowSize;
+
+import dex.util.Rand;
+
+import eskimo.ComponentManager;
 import eskimo.Context;
+import eskimo.EntityManager;
 
 import eskimo.systems.SystemManager;
-
-import eskimo.EntityManager;
-import eskimo.ComponentManager;
-
-import defold.Window.WindowSize;
 
 @:build(defold.support.MessageBuilder.build())
 class GlobalMessage {
@@ -87,6 +88,6 @@ class Globals {
 	}
 
 	public static function random_game_level():Void {
-		set_game_level(Random.int(4, MaximunLevels));
+		set_game_level(Rand.int(4, MaximunLevels));
 	}
 }

@@ -1,27 +1,19 @@
 package ecs.s;
 
-import defold.types.Url;
-
-import defold.Render;
-import defold.Msg;
 import defold.Go;
+import defold.Msg;
+import defold.Render;
 
-import eskimo.views.BufferView;
-import eskimo.views.EventView;
-import eskimo.views.View;
+import ecs.c.StatisticsComponent;
 
 import eskimo.Context;
 
 import eskimo.systems.System;
 import eskimo.systems.SystemManager;
 
-import ecs.c.StatisticsComponent;
-
-import defold.Vmath;
-
-import Defold.pprint;
-
-import Assertion;
+import eskimo.views.BufferView;
+import eskimo.views.EventView;
+import eskimo.views.View;
 
 using Lambda;
 
@@ -51,11 +43,11 @@ class SystemStatistic extends System {
 		for (ev in _ev.entities) {
 			var s = ev.get(StatisticsComponent);
 			var wp = Go.get_world_position(s.id);
-			Assertion.assert(wp != null);
+			lua.Lua.assert(wp != null, "wp is null");
 			// Example var gc = ev.get(GravityComponent); //
 			//			trace('world position ');pprint(wp);
 			var lp = Go.get_position(s.id);
-			Assertion.assert(lp != null);
+			lua.Lua.assert(lp != null, "lp is null");
 			//			trace('local position ');pprint(lp);
 			Msg.post("@render:", RenderMessages.draw_text, {text: Std.string(s.id), position: lp});
 		}

@@ -1,20 +1,22 @@
 package game;
 
 //
-import defold.Physics;
-import defold.Physics.PhysicsMessages;
-import defold.types.Message;
-import defold.types.Url;
+import Defold.hash;
+
 import defold.Go;
-import defold.Vmath;
-import Assertion;
+
+import defold.Physics.PhysicsMessages;
 import defold.Physics.PhysicsMessages;
 
+import defold.Physics;
+import defold.Vmath;
 
-// Testing
 import defold.support.Script;
 
-import Defold.hash;
+import defold.types.Message;
+import defold.types.Url;
+
+// Testing
 
 typedef TransitionLayerData = {}
 
@@ -28,16 +30,16 @@ class TransitionLayerScript extends Script<TransitionLayerData> {
 
 	override function update(self:TransitionLayerData, dt:Float) {
 		// Testing
-		//var p = Go.get("/topbun_full", "position") + Vmath.vector3(0, -0.61, 0);
+		// var p = Go.get("/topbun_full", "position") + Vmath.vector3(0, -0.61, 0);
 
-	//	Go.set("/topbun_full", "position", p);
+		//	Go.set("/topbun_full", "position", p);
 	}
 
 	override function on_message<TMessage>(self:TransitionLayerData, message_id:Message<TMessage>, message:TMessage, sender:Url) {
 		// switch (message_id){
 		// 	PhysicsMessages.collision_response:
 		// 	trace('Collision Happened Transition Layer');
-			
+
 		// }
 	}
 

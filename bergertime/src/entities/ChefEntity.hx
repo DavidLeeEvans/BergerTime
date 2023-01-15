@@ -125,7 +125,7 @@ class ChefEntity extends Script<ChefData> {
 
 		self.e = Globals.context.entities.create();
 		trace(self.e);
-		Assertion.assert(self.e != null);
+		lua.Lua.assert(self.e != null);
 		Globals.context.components.set(self.e, self.c7);
 	}
 

@@ -1,29 +1,29 @@
 package game;
 
-import eskimo.systems.SystemManager;
-
-import eskimo.EntityManager;
-import eskimo.ComponentManager;
-import eskimo.Context;
-
-//
-import defold.Window;
-
-import defold.Go.GoMessages;
-
-import defold.Timer;
+import Globals;
 
 import defold.Collectionproxy.CollectionproxyMessages;
 
-import defold.support.Script;
+import defold.Go.GoMessages;
 
 import defold.Msg;
+import defold.Timer;
+import defold.Window;
+
+import defold.support.Script;
 
 import defold.types.Message;
 import defold.types.Url;
 
-import Globals;
-import Messages as LocalM;
+import dex.util.Rand;
+
+import eskimo.ComponentManager;
+import eskimo.Context;
+import eskimo.EntityManager;
+
+import eskimo.systems.SystemManager;
+
+//
 
 @:build(defold.support.MessageBuilder.build())
 class LoaderMessage {
@@ -58,13 +58,13 @@ class LoaderScript extends Script<LoaderData> {
 		// End of Testing
 		// Lets initialize the ecs system
 		Globals.context = new Context();
-		Assertion.assert(Globals.context != null);
+		lua.Lua.assert(Globals.context != null);
 		Globals.components = new ComponentManager();
-		Assertion.assert(Globals.components != null);
+		lua.Lua.assert(Globals.components != null);
 		Globals.entities = new EntityManager(Globals.components);
-		Assertion.assert(Globals.entities != null);
+		lua.Lua.assert(Globals.entities != null);
 		Globals.systems = new SystemManager(Globals.entities);
-		Assertion.assert(Globals.systems != null);
+		lua.Lua.assert(Globals.systems != null);
 		//
 		Msg.post(".", GoMessages.acquire_input_focus);
 		trace('Loader.hx func init');
@@ -140,7 +140,7 @@ class LoaderScript extends Script<LoaderData> {
 
 	function load_any_random(self:LoaderData):Void {
 		trace('Loader.hx func load_any_random');
-		var l = Random.int(3, Globals.MaximunLevels);
+		var l = Rand.int(3, Globals.MaximunLevels);
 		Globals.set_prev_game_level(Globals.get_game_level());
 		Globals.set_game_level(l);
 		Msg.post(".", LoaderMessage.disable_collection);
