@@ -7,6 +7,11 @@ import lua.Table.AnyTable;
 	Functions, messages and properties used to manipulate ludobits Bezier Points, Broadcast components.
 
 **/
+typedef LudoBitsCP = {
+	var x:Float;
+	var y:Float;
+}
+
 /**
 	Create a bezier curve
 	@param cp
@@ -14,7 +19,7 @@ import lua.Table.AnyTable;
 **/
 @:native("bezier")
 extern class LudobitsBezier {
-	static function create<T>(cp:{x:Float, y:Float}, points:Int):Array<Vector3>;
+	static function create<T>(cp:Array<LudoBitsCP>, points:Int):Array<Vector3>;
 }
 
 @:native("broadcast")
