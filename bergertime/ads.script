@@ -1,0 +1,349 @@
+local banner_ad_unit = "" -- test unit for banners
+local interstitial_ad_unit = "" -- test unit for interstitial
+local rewardedvideo_ad_unit = "" -- test unit for rewarded
+
+local function get_admob_position(self, m)
+  if m == 1 then
+    return admob.POS_NONE
+  elseif m == 2 then
+    return admob.POS_TOP_LEFT
+  elseif m == 3 then
+    return admob.POS_TOP_CENTER
+  elseif m == 4 then
+    return admob.POS_TOP_RIGHT
+  elseif m == 5 then
+    return admob.POS_BOTTOM_LEFT
+  elseif m == 6 then
+    return admob.POS_BOTTOM_CENTER
+  elseif m == 7 then
+    return admob.POS_BOTTOM_RIGHT
+  elseif m == 8 then
+    return admob.POS_CENTER
+  end
+end
+
+-- LOTS MOORE ASSEMBLY NEEDED
+local function get_admob_type(self, m)
+  if m == 1 then
+    return admob.SIZE_ADAPTIVE_BANNER
+  elseif m == 2 then
+    return admob.SIZE_BANNER
+  elseif m == 3 then
+    return admob.SIZE_FLUID
+  elseif m == 4 then
+    return admob.SIZE_FULL_BANNER
+  elseif m == 5 then
+    return admob.SIZE_LEADEARBOARD
+  elseif m == 6 then
+    return admob.SIZE_MEDIUM_RECTANGLE
+  elseif m == 7 then
+    return admob.SIZE_SEARH
+  elseif m == 8 then
+    return admob.SIZE_SKYSCRAPER
+  elseif m == 9 then
+    return admob.SIZE_SMART_BANNER
+  end
+end
+
+local function admob_callback(self, message_id, message)
+  if message_id == admob.MSG_INITIALIZATION then
+    self.initialized = true
+    if message.event == admob.EVENT_COMPLETE then
+      print("EVENT_COMPLETE: Initialization complete")
+    elseif message.event == admob.EVENT_JSON_ERROR then
+      print("EVENT_JSON_ERROR: Internal NE json error " .. message.error)
+    end
+  elseif message_id == admob.MSG_IDFA then
+    if message.event == admob.EVENT_STATUS_AUTHORIZED then
+      print(
+          "EVENT_STATUS_AUTHORIZED: ATTrackingManagerAuthorizationStatusAuthorized")
+    elseif message.event == admob.EVENT_STATUS_DENIED then
+      print("EVENT_STATUS_DENIED: ATTrackingManagerAuthorizationStatusDenied")
+    elseif message.event == admob.EVENT_STATUS_NOT_DETERMINED then
+      print(
+          "EVENT_STATUS_NOT_DETERMINED: ATTrackingManagerAuthorizationStatusNotDetermined")
+    elseif message.event == admob.EVENT_STATUS_RESTRICTED then
+      print(
+          "EVENT_STATUS_RESTRICTED: ATTrackingManagerAuthorizationStatusRestricted")
+    elseif message.event == admob.EVENT_NOT_SUPPORTED then
+      print(
+          "EVENT_NOT_SUPPORTED: IDFA request not supported on this platform or OS version")
+    end
+  elseif message_id == admob.MSG_INTERSTITIAL then
+    if message.event == admob.EVENT_CLOSED then
+      print("EVENT_CLOSED: Interstitial AD closed")
+    elseif message.event == admob.EVENT_FAILED_TO_SHOW then
+      print("EVENT_FAILED_TO_SHOW: Interstitial AD failed to show\nCode: " ..
+                message.code .. "\nError: " .. message.error)
+    elseif message.event == admob.EVENT_OPENING then
+      -- on android this event fire only when ADS activity closed =(
+      print("EVENT_OPENING: Interstitial AD is opening")
+    elseif message.event == admob.EVENT_FAILED_TO_LOAD then
+      print("EVENT_FAILED_TO_LOAD: Interstitial AD failed to load\nCode: " ..
+                message.code .. "\nError: " .. message.error)
+    elseif message.event == admob.EVENT_LOADED then
+      print("EVENT_LOADED: Interstitial AD loaded")
+    elseif message.event == admob.EVENT_NOT_LOADED then
+      print(
+          "EVENT_NOT_LOADED: can't call show_interstitial() before EVENT_LOADED\nError: " ..
+              message.error)
+    elseif message.event == admob.EVENT_IMPRESSION_RECORDED then
+      print("EVENT_IMPRESSION_RECORDED: Interstitial did record impression")
+    elseif message.event == admob.EVENT_CLICKED then
+      print("EVENT_CLICKED: Interstitial clicked")
+    elseif message.event == admob.EVENT_JSON_ERROR then
+      print("EVENT_JSON_ERROR: Internal NE json error: " .. message.error)
+    end
+  elseif message_id == admob.MSG_REWARDED then
+    if message.event == admob.EVENT_CLOSED then
+      print("EVENT_CLOSED: Rewarded AD closed")
+    elseif message.event == admob.EVENT_FAILED_TO_SHOW then
+      print("EVENT_FAILED_TO_SHOW: Rewarded AD failed to show\nCode: " ..
+                message.code .. "\nError: " .. message.error)
+    elseif message.event == admob.EVENT_OPENING then
+      -- on android this event fire only when ADS activity closed =(
+      print("EVENT_OPENING: Rewarded AD is opening")
+    elseif message.event == admob.EVENT_FAILED_TO_LOAD then
+      print("EVENT_FAILED_TO_LOAD: Rewarded AD failed to load\nCode: " ..
+                message.code .. "\nError: " .. message.error)
+    elseif message.event == admob.EVENT_LOADED then
+      print("EVENT_LOADED: Rewarded AD loaded")
+    elseif message.event == admob.EVENT_NOT_LOADED then
+      print(
+          "EVENT_NOT_LOADED: can't call show_rewarded() before EVENT_LOADED\nError: " ..
+              message.error)
+    elseif message.event == admob.EVENT_EARNED_REWARD then
+      print(
+          "EVENT_EARNED_REWARD: Reward: " .. tostring(message.amount) .. " " ..
+              tostring(message.type))
+    elseif message.event == admob.EVENT_IMPRESSION_RECORDED then
+      print("EVENT_IMPRESSION_RECORDED: Rewarded did record impression")
+    elseif message.event == admob.EVENT_CLICKED then
+      print("EVENT_CLICKED: Rewarded clicked")
+    elseif message.event == admob.EVENT_JSON_ERROR then
+      print("EVENT_JSON_ERROR: Internal NE json error: " .. message.error)
+    end
+  elseif message_id == admob.MSG_BANNER then
+    if message.event == admob.EVENT_LOADED then
+      print("EVENT_LOADED: Banner AD loaded. Height: " .. message.height ..
+                "px Width: " .. message.width .. "px")
+      -- Maybe set_block_height(message.height)
+    elseif message.event == admob.EVENT_OPENING then
+      print("EVENT_OPENING: Banner AD is opening")
+    elseif message.event == admob.EVENT_FAILED_TO_LOAD then
+      print("EVENT_FAILED_TO_LOAD: Banner AD failed to load\nCode: " ..
+                message.code .. "\nError: " .. message.error)
+    elseif message.event == admob.EVENT_CLICKED then
+      print("EVENT_CLICKED: Banner AD clicked")
+    elseif message.event == admob.EVENT_CLOSED then
+      print("EVENT_CLOSED: Banner AD closed")
+    elseif message.event == admob.EVENT_DESTROYED then
+      print("EVENT_DESTROYED: Banner AD destroyed")
+    elseif message.event == admob.EVENT_IMPRESSION_RECORDED then
+      print("EVENT_IMPRESSION_RECORDED: Banner did record impression")
+    elseif message.event == admob.EVENT_JSON_ERROR then
+      print("EVENT_JSON_ERROR: Internal NE json error: " .. message.error)
+    end
+  end
+end
+
+function init(self)
+  local info = sys.get_sys_info()
+  if info.system_name == 'Linux' then return end
+  local engine_info = sys.get_engine_info()
+  self.is_debug = engine_info.is_debug
+
+  if self.is_debug then
+    -- Always test ONLY with test ads units when you test integration!
+    if sys.get_sys_info().system_name == 'iPhone OS' then
+      -- https://developers.google.com/admob/ios/test-ads
+      banner_ad_unit = "ca-app-pub-8289938137729980/3026159609" -- test unit for banners
+      interstitial_ad_unit = "ca-app-pub-8289938137729980/8404664709" -- test unit for interstitial
+      rewardedvideo_ad_unit = "ca-app-pub-8289938137729980/1906156224" -- test unit for rewarded
+    else -- Android
+      -- From https://developers.google.com/admob/android/test-ads
+      banner_ad_unit = "ca-app-pub-8289938137729980/3026159609" -- test unit for banners
+      interstitial_ad_unit = "ca-app-pub-8289938137729980/8404664709" -- test unit for interstitial
+      rewardedvideo_ad_unit = "ca-app-pub-8289938137729980/1906156224" -- test unit for rewarded
+    end
+  else
+    -- Always test ONLY with test ads units when you test integration!
+    --  !!! Replace this keys with your own keys : 
+    -- https://developers.google.com/admob/android/quick-start#set_up_your_app_in_your_admob_account
+    if sys.get_sys_info().system_name == 'iPhone OS' then
+      banner_ad_unit = "ca-app-pub-8289938137729980/3026159609" -- !!! replace it with iOS banner unit
+      interstitial_ad_unit = "ca-app-pub-8289938137729980/8404664709" -- !!! replace it with iOS interstitial unit
+      rewardedvideo_ad_unit = "ca-app-pub-8289938137729980/1906156224" --  !!! replace it with iOS rewarded unit
+    else -- Android
+      banner_ad_unit = "ca-app-pub-8289938137729980/3026159609" --  !!! replace it with Android banner unit
+      interstitial_ad_unit = "ca-app-pub-8289938137729980/8404664709" -- !!! replace it with Android interstitial unit
+      rewardedvideo_ad_unit = "ca-app-pub-8289938137729980/1906156224" -- !!! replace it with Android rewarded unit
+    end
+  end
+
+  self.show_pos = 1
+  self.banner_positions = {
+    "POS_BOTTOM_CENTER", "POS_BOTTOM_LEFT", "POS_BOTTOM_RIGHT", "POS_NONE",
+    "POS_TOP_LEFT", "POS_TOP_CENTER", "POS_TOP_RIGHT", "POS_CENTER"
+  }
+  -- `admob` works only on iOS and Android, make sure the extension is available
+  if admob then
+    -- !!! Set callback before initialization
+    admob.set_callback(admob_callback)
+    -- !!! Read documentation about privacy settings and use the following method if you need to apply it
+    -- https://developers.google.com/admob/ios/ccpa
+    -- https://developers.google.com/admob/android/ccpa
+    -- admob.set_privacy_settings(true)
+    -- admob.initialize()
+    --  admob.request_idfa()
+    -- admob.load_banner(self.banner_ad_unit)
+  else
+    print('Admob not running, must be a Linux System')
+  end
+end
+
+function on_message(self, message_id, message, sender)
+  if (message_id == hash("admob_init")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then
+      print("admob_init SHIMMED")
+      return
+    end
+
+    admob.initialize()
+  elseif (message_id == hash("admob_request_idfa")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then
+      print("admob_reques_idfa SHIMMED")
+      return
+    end
+    admob.request_idfa()
+  elseif (message_id == hash("set_privacy_settings")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then
+      print("set_privacy_settings SHIMMED")
+      return
+    end
+    admob.set_privacy_settings(message.name)
+
+    -- banner
+  elseif (message_id == hash("load_banner")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then
+      print("load_banner SHIMMED")
+      return
+    end
+    if message.size == nil then
+      message.size = admob.SIZE_ADAPTIVE_BANNER
+    else
+      message.size = get_admob_type(self, message.size)
+    end
+    -- TODO OPTIONS for SIZES DLE
+    banner_ad_unit = message.ad_id
+    admob.load_banner(banner_ad_unit, message.size)
+  elseif (message_id == hash("destroy_banner")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then
+      print("destroy_bannerr SHIMMED")
+      return
+    end
+    admob.destroy_banner()
+  elseif (message_id == hash("show_banner")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then
+      print("show_banner SHIMMED")
+      return
+    end
+    if message.position == nil then
+      message.position = admob.POS_TOP_CENTER
+    else
+      message.postion = get_admob_position(self, m)
+    end
+    admob.show_banner(message.position)
+  elseif (message_id == hash("hide_banner")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then
+      print("hide_banner SHIMMED")
+      return
+    end
+    admob.hide_banner()
+  elseif (message_id == hash("is_banner_loaded")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then
+      print("is_banner_loaded SHIMMED")
+      return
+    end
+    msg.post(message.o, hash 'have_is_banner_loaded',
+             { name = admob.is_banner_loaded() })
+    -- reward_video
+  elseif (message_id == hash("load_reward_video")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then
+      print('load_reward_video SHIMMED')
+       return 
+      end
+    rewardedvideo_ad_unit = message.ad_id
+    admob.rewarded(rewardedvideo_ad_unit)
+  elseif (message_id == hash("destroy_reward_video")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then 
+    print('destroy_reward_video SHIMMED')
+      return 
+    end
+    print('destroy_reward_video N/A')
+  elseif (message_id == hash("show_reward_video")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then 
+      print('show_reward_video SHIMMED')
+      return 
+    end
+    admob.show_rewarded()
+  elseif (message_id == hash("hide_reward_video")) then
+    print('Not implemented NA hide_reward_video')
+  elseif (message_id == hash("is_reward_video_loaded")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then
+      print('is_reward_video_loaded SHIMMED')
+      return 
+    end
+    msg.post(message.o, hash 'have_is_reward_video_loaded',
+             { name = admob.is_rewarded_loaded() })
+
+    -- interstitial
+  elseif (message_id == hash("load_interstitial")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then
+      print("load_interstitial SHIMMED")
+      return
+    end
+    interstitial_ad_unit = message.ad_id
+    -- msg.post(message.o, hash 'have_is_reward_video_loaded',
+  elseif (message_id == hash("destroy_interstitial")) then
+    local info = sys.get_sys_info()
+    if info.system_name == 'Linux' then
+      print("destroy_interstitial SHIMMED")
+      return
+    end
+    print('destroy_interstitial NA')
+  elseif (message_id == hash("show_interstitial")) then
+    if info.system_name == 'Linux' then
+      print("show_interstitial SHIMMED")
+      return
+    end
+    print('show_interstitial NA')
+  elseif (message_id == hash("hide_interstitial")) then
+    if info.system_name == 'Linux' then
+      print("hide_interstitial SHIMMED")
+      return
+    end
+    print('Not implemented NA hide_interstitial')
+  elseif (message_id == hash("is_interstitial_loaded")) then
+    if info.system_name == 'Linux' then
+      print("is_interstitial_loaded SHIMMED")
+      return
+    end
+    -- msg.post(message.o,hash'have_is_reward_video_loaded',{name = admob.ininterstitial())})
+    print('interstitial is loaded not NA')
+  end
+end
+
