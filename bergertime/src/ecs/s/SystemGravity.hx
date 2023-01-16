@@ -3,17 +3,6 @@ package ecs.s;
 
 import defold.Go;
 
-import eskimo.views.BufferView;
-import eskimo.views.EventView;
-import eskimo.views.View;
-
-import eskimo.Context;
-
-import ecs.c.GravityComponent;
-
-import eskimo.systems.System;
-import eskimo.systems.SystemManager;
-
 import Defold.pprint;
 
 using Lambda;

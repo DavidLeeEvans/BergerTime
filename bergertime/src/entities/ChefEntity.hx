@@ -25,8 +25,6 @@ import ecs.c.GravityComponent;
 
 import entities.PepperEntity.PepperMessage;
 
-import eskimo.Entity;
-
 import game.BergerGameScript.BergerGameMessage;
 
 import hud.HudGUI.HudGUIMessage;
@@ -62,7 +60,6 @@ typedef ChefData = {
 	var faceDir:Int;
 	//
 	var c7:GravityComponent;
-	var e:Entity;
 	//
 	var tableFloor:lua.Table<Int, Hash>;
 	var tableBorder:lua.Table<Int, Hash>;
