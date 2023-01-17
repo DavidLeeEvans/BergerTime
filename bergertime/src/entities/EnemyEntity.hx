@@ -12,8 +12,6 @@ import defold.Timer;
 
 import defold.Vmath.vector3;
 
-import defold.Vmath;
-
 import defold.support.Script;
 
 import defold.types.Hash;
@@ -23,14 +21,37 @@ import defold.types.Vector3;
 
 import entities.SWEN;
 
-import haxe.ValueException;
-
 @:build(defold.support.MessageBuilder.build())
 class EnemyMessage {
 	var msg_init:{type:Int};
 	var msg_modify_pos:{p:Vector3};
 	var msg_die; // Never really happens in the original game
 	var msg_spawn;
+}
+
+@:build(defold.support.HashBuilder.build())
+class EnemyEntityHash {
+	var egg_dead;
+	var egg_left;
+	var egg_right;
+	var egg_front;
+	var egg_back;
+	var egg_peppered;
+	//
+	var pickle_dead;
+	var pickle_left;
+	var pickle_right;
+	var pickle_front;
+	var pickle_back;
+	var pickle_peppered;
+
+	//
+	var sausage_dead;
+	var sausage_left;
+	var sausage_right;
+	var sausage_front;
+	var sausage_back;
+	var sausage_peppered;
 }
 
 typedef Data = {
@@ -142,15 +163,15 @@ class Entity extends Script<Data> {
 			case EnemyMessage.msg_modify_pos:
 				Go.set(".", "position.y", message.p.y);
 			case SpriteMessages.animation_done:
-				if (message.id == hash('pickle-died')) {
+				if (message.id == EnemyEntityHash.pickle_dead) {
 					Globals.total_num_current_monsters--;
 					Go.delete();
 				}
-				if (message.id == hash('egg-died')) {
+				if (message.id == EnemyEntityHash.egg_dead) {
 					Globals.total_num_current_monsters--;
 					Go.delete();
 				}
-				if (message.id == hash('hotdog-died')) {
+				if (message.id == EnemyEntityHash.sausage_dead) {
 					Globals.total_num_current_monsters--;
 					Go.delete();
 				}
@@ -164,66 +185,66 @@ class Entity extends Script<Data> {
 	private function set_animation_back(t:Int):Void {
 		switch (t) {
 			case 0:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("egg-back")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_back});
 			case 1:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("pickle-back")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_dead});
 			case 2:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-back")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_back});
 		}
 	}
 
 	private function set_animation_left(t:Int):Void {
 		switch (t) {
 			case 0:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("egg-left")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_left});
 			case 1:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("pickle-left")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_left});
 			case 2:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-left")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_left});
 		}
 	}
 
 	private function set_animation_right(t:Int):Void {
 		switch (t) {
 			case 0:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("egg-right")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_right});
 			case 1:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("pickle-right")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_right});
 			case 2:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-right")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_right});
 		}
 	}
 
 	private function set_animation_dead(t:Int):Void {
 		switch (t) {
 			case 0:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("egg-dead")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_dead});
 			case 1:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("pickle-dead")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_dead});
 			case 2:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-dead")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_dead});
 		}
 	}
 
 	private function set_animation_pepper(t:Int):Void {
 		switch (t) {
 			case 0:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("egg-peppered")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_peppered});
 			case 1:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("pickle-peppered")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_peppered});
 			case 2:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-peppered")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_peppered});
 		}
 	}
 
 	private function set_animation_front(t:Int):Void {
 		switch (t) {
 			case 0:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("egg-front")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_front});
 			case 1:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("pickle-front")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_front});
 			case 2:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-front")});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_front});
 		}
 	}
 
