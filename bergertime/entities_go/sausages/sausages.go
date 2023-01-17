@@ -17,7 +17,7 @@ embedded_components {
   id: "sprite"
   type: "sprite"
   data: "tile_set: \"/entities_go/sausages/sausages.atlas\"\n"
-  "default_animation: \"hotdog-front\"\n"
+  "default_animation: \"hotdog_front\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
   ""

@@ -17,7 +17,7 @@ embedded_components {
   id: "sprite"
   type: "sprite"
   data: "tile_set: \"/entities_go/pickle/pickle.atlas\"\n"
-  "default_animation: \"pickle-front\"\n"
+  "default_animation: \"pickle_front\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
   ""

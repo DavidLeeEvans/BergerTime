@@ -17,7 +17,7 @@ embedded_components {
   id: "sprite"
   type: "sprite"
   data: "tile_set: \"/entities_go/eggs/egg.atlas\"\n"
-  "default_animation: \"egg-front\"\n"
+  "default_animation: \"egg_front\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
   ""
