@@ -13,6 +13,8 @@ import defold.Timer;
 
 import defold.Vmath.vector3;
 
+import defold.Vmath;
+
 import defold.support.Script;
 import defold.support.ScriptOnInputAction;
 
@@ -28,7 +30,7 @@ import game.BergerGameScript.BergerGameMessage;
 import hud.HudGUI.HudGUIMessage;
 
 @:build(defold.support.HashBuilder.build())
-class ChefEntityHash {
+private class ChefEntityHash {
 	var treat;
 	var treats_coffee;
 	var treats_fries;
@@ -53,7 +55,7 @@ class ChefEntityHash {
 	var chef_right;
 }
 
-typedef ChefData = {
+private typedef ChefData = {
 	var chefSpeed:Float;
 	var faceDir:Int;
 	//
@@ -65,6 +67,8 @@ typedef ChefData = {
 	//
 	var numPepperShots:Int;
 	// Direction flags
+	// Gravity
+	var bGravity:Bool;
 	var bNorthEnable:Bool;
 	var bEastEnable:Bool;
 	var bSouthEnable:Bool;
@@ -85,15 +89,19 @@ class ChefEntity extends Script<ChefData> {
 	final hFloor:Hash = hash('fixture');
 	final hBorder:Hash = hash('border');
 	var counter:Float = 0;
+	var gravity_counter:Float = 0;
 	//
 	final sPepperFactory = '/chef#pepper_factory';
 	final sHud = '/go#hud';
+	//
+	final FALL_RATE = -1.0;
 
 	override function init(self:ChefData) {
 		self.bNorthEnable = false;
 		self.bEastEnable = false;
 		self.bSouthEnable = false;
 		self.bWestEnable = false;
+		self.bGravity = false;
 
 		//
 		self.chefSpeed = CHEF_SPEED;
@@ -117,8 +125,22 @@ class ChefEntity extends Script<ChefData> {
 	}
 
 	override function update(self:ChefData, dt:Float):Void {
-		// East Y3K testing
 		counter = counter + 1.0;
+		gravity_counter = gravity_counter + 1.0;
+		if (gravity_counter > 2.0) {
+			gravity_counter = 0;
+			final p = Go.get_position();
+			var lenght:Vector3 = vector3(0, -6.0, 0);
+			var efrom = p + vector3(0, -10, 0);
+			var to:Vector3 = vector3(efrom + lenght);
+			Physics.raycast_async(efrom, to, self.tableFloor, RC_ONGROUND);
+			if (self.bGravity) {
+				trace("Gravity Firing True");
+				Tools.draw_line(efrom, to, Vmath.vector4(0, 256, 256, 256));
+				Go.set_position(p + Vmath.vector3(0, FALL_RATE, 0));
+			}
+		}
+
 		if (counter > 15.0) {
 			// trace('counter fired');
 			counter = 0.0;
@@ -126,7 +148,7 @@ class ChefEntity extends Script<ChefData> {
 			var lenght:Vector3 = vector3(0, -6.0, 0); // TODO get image size and adjust
 			var efrom = p + vector3(0, -10, 0); // TODO get image size and adjust
 			var to:Vector3 = vector3(efrom + lenght);
-			Physics.raycast_async(efrom, to, self.tableFloor, RC_ONGROUND);
+			// Physics.raycast_async(efrom, to, self.tableFloor, RC_ONGROUND);
 			//
 			final weray = 32.0;
 			// **North**
@@ -142,9 +164,6 @@ class ChefEntity extends Script<ChefData> {
 			Physics.raycast_async(p, p + vector3(-weray / 2.0, 0.0, 0), self.tableBorder, RC_BORDER_WEST);
 			Tools.draw_line(p, p + vector3(-weray, 0, 0));
 			//
-			// lua.Lua.print(efrom);
-			// lua.Lua.print(to);
-			// draw_line(p, p + vector3(0, -32.0, 0));
 		}
 	}
 
@@ -153,7 +172,9 @@ class ChefEntity extends Script<ChefData> {
 			case PhysicsMessages.ray_cast_response:
 				// trace('message_id $message_id message $message');
 				// TODO try to get script property message.id For Future Use?? ?
-				if (message.request_id == RC_ONGROUND) {}
+				if (message.request_id == RC_ONGROUND) {
+					self.bGravity = false;
+				}
 				if (message.request_id == RC_BORDER_NORTH) {
 					self.bNorthEnable = false;
 				}
@@ -170,7 +191,9 @@ class ChefEntity extends Script<ChefData> {
 
 			case PhysicsMessages.ray_cast_missed:
 				// trace('message_id $message_id message $message');
-				if (message.request_id == RC_ONGROUND) {}
+				if (message.request_id == RC_ONGROUND) {
+					self.bGravity = true;
+				}
 				if (message.request_id == RC_BORDER_NORTH) {
 					self.bNorthEnable = true;
 				}
