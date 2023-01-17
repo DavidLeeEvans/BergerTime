@@ -32,7 +32,7 @@ class CrabCakeMessage {
 typedef CrabCakeData = {
 	var isMoving:Bool;
 	// var e:Entity;
-	var swen:SWEN; //
+	var swenf:SWENF; //
 	var tableFloor:lua.Table<Int, Hash>;
 	var tableNorth:lua.Table<Int, Hash>;
 	var tableEast:lua.Table<Int, Hash>;

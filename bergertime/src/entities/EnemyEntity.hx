@@ -3,6 +3,7 @@ package entities;
 import Defold.hash;
 
 import defold.Go;
+import defold.Label;
 import defold.Msg;
 import defold.Physics;
 
@@ -12,12 +13,16 @@ import defold.Timer;
 
 import defold.Vmath.vector3;
 
+import defold.Vmath;
+
 import defold.support.Script;
 
 import defold.types.Hash;
 import defold.types.Message;
 import defold.types.Url;
 import defold.types.Vector3;
+
+import dex.util.Rand;
 
 import entities.SWEN;
 
@@ -27,10 +32,14 @@ class EnemyMessage {
 	var msg_modify_pos:{p:Vector3};
 	var msg_die; // Never really happens in the original game
 	var msg_spawn;
+	var msg_go_left;
+	var msg_go_right;
 }
 
 @:build(defold.support.HashBuilder.build())
 class EnemyEntityHash {
+	var _debug;
+	//
 	var egg_dead;
 	var egg_left;
 	var egg_right;
@@ -56,10 +65,11 @@ class EnemyEntityHash {
 
 typedef Data = {
 	// go.set("myobject#my_script", "my_property", val + 1)
+	var _debug:Bool;
 	@property(true) var not_peppered:Bool;
 	var type:Int;
 	var isMoving:Bool;
-	var swen:SWEN; //
+	var swenf:SWENF; //
 	var tableFloor:lua.Table<Int, Hash>;
 	var tableNorth:lua.Table<Int, Hash>;
 	var tableEast:lua.Table<Int, Hash>;
@@ -70,7 +80,9 @@ typedef Data = {
 }
 
 class Entity extends Script<Data> {
+	var debug:Bool;
 	var counter:Float;
+	final MOVEMENT_SPEED = 6.0;
 	final RCTABLE_FLOOR:Int = 1;
 	final RCNORTH:Int = 2;
 	final RCEAST:Int = 3;
@@ -92,8 +104,21 @@ class Entity extends Script<Data> {
 		//
 		// self.not_peppered = true;
 		//
+		self._debug = defold.Sys.get_engine_info().is_debug;
+		self.swenf = new SWENF();
 		set_animation_front(self.type);
+		self.swenf.f = false;
+		self.swenf.n = false;
+		self.swenf.e = false;
+		self.swenf.s = false;
+		self.swenf.i = false;
+		self.swenf.w = false;
 		self.isMoving = true;
+		if (Rand.bool())
+			Msg.post("#", EnemyMessage.msg_go_left);
+		else
+			Msg.post("#", EnemyMessage.msg_go_right);
+
 		counter = 0.0;
 		self.tableFloor = lua.Table.create();
 		self.tableNorth = lua.Table.create();
@@ -107,6 +132,12 @@ class Entity extends Script<Data> {
 	override function update(self:Data, dt:Float):Void {
 		counter = counter + 1.0;
 		if (counter > 30.0) {
+			if (self.swenf.e) {
+				Label.set_text("#debug", "e");
+			} else if (self.swenf.w) {
+				Label.set_text("#debug", "w");
+			}
+
 			final rlenght:Float = 4.0;
 			var from = Go.get_position();
 			// South Direction
@@ -132,9 +163,32 @@ class Entity extends Script<Data> {
 			final wto:Vector3 = vector3(from + wlenght);
 			Tools.draw_line(from, wto);
 			Physics.raycast_async(from, wto, self.tableWest, RCWEST);
-
+			//
+			if (self.swenf.f) {
+				trace("Moving Falling");
+				self.swenf.i = false;
+			} else if (self.swenf.n && !self.swenf.i) {
+				trace("Moving North");
+				final p = Go.get_position();
+				Go.set_position(p + Vmath.vector3(0, MOVEMENT_SPEED, 0));
+			} else if (self.swenf.e && !self.swenf.i) {
+				trace("Moving East");
+				final p = Go.get_position();
+				Go.set_position(p + Vmath.vector3(MOVEMENT_SPEED, 0, 0));
+			} else if (self.swenf.s && !self.swenf.i) {
+				trace("Moving South");
+				final p = Go.get_position();
+				Go.set_position(p + Vmath.vector3(0, -MOVEMENT_SPEED, 0));
+			} else if (self.swenf.w && !self.swenf.i) {
+				trace("Moving West");
+				final p = Go.get_position();
+				Go.set_position(p + Vmath.vector3(-MOVEMENT_SPEED, 0, 0));
+			} else if (self.swenf.i) {
+				trace("Not Moving, Idle");
+			}
 			counter = 0.0;
 		}
+		//
 	}
 
 	override function on_message<T>(self:Data, message_id:Message<T>, message:T, sender:Url):Void {
@@ -146,6 +200,7 @@ class Entity extends Script<Data> {
 			case PhysicsMessages.ray_cast_missed:
 				if (message.request_id == RCTABLE_FLOOR) {
 					trace('******MISSED FLOOR message_id $message_id message $message');
+					Go.set_position(Go.get_position() + Vmath.vector3(0, -10, 0));
 				}
 			case defold.PhysicsMessages.collision_response:
 				if (message.other_group == hash('pepper')) {
@@ -162,6 +217,12 @@ class Entity extends Script<Data> {
 				trace('spawn');
 			case EnemyMessage.msg_modify_pos:
 				Go.set(".", "position.y", message.p.y);
+			case EnemyMessage.msg_go_left:
+				self.swenf.w = true;
+				self.swenf.e = false;
+			case EnemyMessage.msg_go_right:
+				self.swenf.w = false;
+				self.swenf.e = true;
 			case SpriteMessages.animation_done:
 				if (message.id == EnemyEntityHash.pickle_dead) {
 					Globals.total_num_current_monsters--;

@@ -1,9 +1,12 @@
 package entities;
 
-class SWEN {
-	var s:Bool;
-	var w:Bool;
-	var e:Bool;
-	var n:Bool;
-static function scan_swen(swen:SWEN):Void{}
+class SWENF {
+	public var s:Bool;
+	public var w:Bool;
+	public var e:Bool;
+	public var n:Bool;
+	public var i:Bool;
+	public var f:Bool; // f is falling
+
+	public function new() {}
 }
