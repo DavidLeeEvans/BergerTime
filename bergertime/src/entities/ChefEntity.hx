@@ -21,8 +21,6 @@ import defold.types.Message;
 import defold.types.Url;
 import defold.types.Vector3;
 
-import ecs.c.GravityComponent;
-
 import entities.PepperEntity.PepperMessage;
 
 import game.BergerGameScript.BergerGameMessage;
@@ -59,7 +57,6 @@ typedef ChefData = {
 	var chefSpeed:Float;
 	var faceDir:Int;
 	//
-	var c7:GravityComponent;
 	//
 	var tableFloor:lua.Table<Int, Hash>;
 	var tableBorder:lua.Table<Int, Hash>;
@@ -117,13 +114,6 @@ class ChefEntity extends Script<ChefData> {
 		lua.Table.insert(self.tableBorder, hBorder);
 		//
 		Msg.post(".", GoMessages.acquire_input_focus);
-		self.c7 = new GravityComponent(Go.get_id(), vector3(0, -0.20, 0));
-		self.c7.changeFlag = true;
-
-		self.e = Globals.context.entities.create();
-		trace(self.e);
-		lua.Lua.assert(self.e != null);
-		Globals.context.components.set(self.e, self.c7);
 	}
 
 	override function update(self:ChefData, dt:Float):Void {
@@ -163,10 +153,7 @@ class ChefEntity extends Script<ChefData> {
 			case PhysicsMessages.ray_cast_response:
 				// trace('message_id $message_id message $message');
 				// TODO try to get script property message.id For Future Use?? ?
-				if (message.request_id == RC_ONGROUND) {
-					self.c7.notOnGround = false;
-					self.c7.changeFlag = true;
-				}
+				if (message.request_id == RC_ONGROUND) {}
 				if (message.request_id == RC_BORDER_NORTH) {
 					self.bNorthEnable = false;
 				}
@@ -183,10 +170,7 @@ class ChefEntity extends Script<ChefData> {
 
 			case PhysicsMessages.ray_cast_missed:
 				// trace('message_id $message_id message $message');
-				if (message.request_id == RC_ONGROUND) {
-					self.c7.notOnGround = true;
-					self.c7.changeFlag = true;
-				}
+				if (message.request_id == RC_ONGROUND) {}
 				if (message.request_id == RC_BORDER_NORTH) {
 					self.bNorthEnable = true;
 				}
@@ -290,7 +274,6 @@ class ChefEntity extends Script<ChefData> {
 
 	override function final_(self:ChefData):Void {
 		Msg.post(".", GoMessages.release_input_focus);
-		Globals.context.components.remove(self.e, GravityComponent);
 	}
 
 	private function treat_callback(self:ChefData, _, _):Void {

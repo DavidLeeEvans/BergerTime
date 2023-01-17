@@ -1,30 +1,25 @@
 package entities;
 
-import defold.Timer;
-
-import entities.SWEN;
-
-import defold.Sprite.SpriteMessages;
-
 import Defold.hash;
-
-import defold.Vmath.vector3;
-
-import defold.types.Vector3;
-
-import ecs.c.GravityComponent;
-
-import defold.Physics;
-
-import defold.types.Hash;
 
 import defold.Go;
 import defold.Msg;
+import defold.Physics;
 
-import defold.types.Message;
-import defold.types.Url;
+import defold.Sprite.SpriteMessages;
+
+import defold.Timer;
+
+import defold.Vmath.vector3;
 
 import defold.support.Script;
+
+import defold.types.Hash;
+import defold.types.Message;
+import defold.types.Url;
+import defold.types.Vector3;
+
+import entities.SWEN;
 
 @:build(defold.support.MessageBuilder.build())
 class CrabCakeMessage {
@@ -45,7 +40,6 @@ typedef CrabCakeData = {
 	var tableWest:lua.Table<Int, Hash>;
 	var tableOnLadder:lua.Table<Int, Hash>;
 	//
-	var c0:GravityComponent;
 }
 
 class CrabCakeEntity extends Script<CrabCakeData> {
@@ -62,10 +56,7 @@ class CrabCakeEntity extends Script<CrabCakeData> {
 	final hFloor:Hash = hash('floor');
 	final hBorder:Hash = hash('border');
 
-
 	override function init(self:CrabCakeData) {
-		self.c0 = new GravityComponent(Go.get_id(), vector3(0, -0.20, 0));
-		self.c0.changeFlag = true;
 		//
 		set_animation_front();
 		self.isMoving = true;
@@ -107,16 +98,10 @@ class CrabCakeEntity extends Script<CrabCakeData> {
 	override function on_message<T>(self:CrabCakeData, message_id:Message<T>, message:T, sender:Url):Void {
 		switch (message_id) {
 			case defold.PhysicsMessages.ray_cast_response:
-				if (message.request_id == RCTABLE_FLOOR) {
-					self.c0.notOnGround = false;
-					self.c0.changeFlag = true;
-				}
+				if (message.request_id == RCTABLE_FLOOR) {}
 			case PhysicsMessages.ray_cast_missed:
 				// trace('message_id $message_id message $message');
-				if (message.request_id == RCTABLE_FLOOR) {
-					self.c0.notOnGround = true;
-					self.c0.changeFlag = true;
-				}
+				if (message.request_id == RCTABLE_FLOOR) {}
 			case defold.PhysicsMessages.collision_response:
 				if (message.other_group == hash('pepper')) {
 					Msg.post("#collision", GoMessages.disable);
@@ -138,28 +123,28 @@ class CrabCakeEntity extends Script<CrabCakeData> {
 	override function on_reload(self:CrabCakeData):Void {}
 
 	private function set_animation_back():Void {
-	  //Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-back")});
+		// Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-back")});
 	}
 
 	private function set_animation_left():Void {
-	  //		Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-left")});
-		}
+		//		Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-left")});
+	}
 
 	private function set_animation_right():Void {
-	  //			Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-right")});
-	       }
+		//			Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-right")});
+	}
 
 	private function set_animation_dead():Void {
-	  //				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-dead")});
-		}
+		//				Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-dead")});
+	}
 
 	private function set_animation_pepper():Void {
-	  //			Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-peppered")});
-	       }
+		//			Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-peppered")});
+	}
 
 	private function set_animation_front():Void {
-	  //			Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-front")});
-	       }
+		//			Msg.post("#sprite", SpriteMessages.play_animation, {id: hash("hotdog-front")});
+	}
 
 	private function callback_peppered(self, _, _):Void {
 		Msg.post("#collision", GoMessages.enable);

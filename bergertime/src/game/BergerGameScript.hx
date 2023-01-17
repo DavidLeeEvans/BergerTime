@@ -19,8 +19,6 @@ import defold.types.*;
 
 import defold.types.Hash;
 
-import ecs.s.SystemGravity;
-
 import entities.EnemyEntity.EnemyMessage;
 
 import haxe.Log.trace as ltrace;
@@ -79,14 +77,11 @@ class BergerGameScript extends Script<BergerGameData> {
 		Globals.total_num_lives = 3;
 		Msg.post('/go#hud', HudGUIMessage.set_lives, {lives: Globals.total_num_lives});
 		//
-		final sgrav = new SystemGravity(Globals.context);
-		Globals.systems.add(sgrav);
 		Msg.post(".", GoMessages.acquire_input_focus);
 	}
 
 	override function update(self:BergerGameData, dt:Float) {
 		//
-		Globals.systems.update(dt);
 		self._scratchPad--;
 		if (Globals.total_num_current_monsters <= self.num_monsters && self._scratchPad < 0) {
 			// Timer.delay(3.0, false, spawn_monster);

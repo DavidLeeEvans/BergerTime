@@ -1,32 +1,29 @@
 package entities;
 
-import defold.Vmath;
-import haxe.ValueException;
-import defold.Timer;
-
-import entities.SWEN;
-
-import defold.Sprite.SpriteMessages;
-
 import Defold.hash;
-
-import defold.Vmath.vector3;
-
-import defold.types.Vector3;
-
-import ecs.c.GravityComponent;
-
-import defold.Physics;
-
-import defold.types.Hash;
 
 import defold.Go;
 import defold.Msg;
+import defold.Physics;
 
-import defold.types.Message;
-import defold.types.Url;
+import defold.Sprite.SpriteMessages;
+
+import defold.Timer;
+
+import defold.Vmath.vector3;
+
+import defold.Vmath;
 
 import defold.support.Script;
+
+import defold.types.Hash;
+import defold.types.Message;
+import defold.types.Url;
+import defold.types.Vector3;
+
+import entities.SWEN;
+
+import haxe.ValueException;
 
 @:build(defold.support.MessageBuilder.build())
 class EnemyMessage {
@@ -49,9 +46,6 @@ typedef Data = {
 	var tableWest:lua.Table<Int, Hash>;
 	var tableOnLadder:lua.Table<Int, Hash>;
 	//
-	var c0:GravityComponent;
-	var e:eskimo.Entity;
-
 }
 
 class Entity extends Script<Data> {
@@ -67,8 +61,8 @@ class Entity extends Script<Data> {
 	final hladder:Hash = hash('ladder');
 	final hFloor:Hash = hash('fixture');
 	final hBorder:Hash = hash('border');
-	//
 
+	//
 	// Enemy Egg 0
 	// Enemy Pickle 1
 	// Enemy Sausage 2
@@ -76,11 +70,6 @@ class Entity extends Script<Data> {
 	override function init(self:Data) {
 		//
 		// self.not_peppered = true;
-		self.c0 = new GravityComponent(Go.get_id(), vector3(0, -0.20, 0));
-		self.c0.changeFlag = true;
-		self.e = Globals.context.entities.create();
-		// TODO dle left off here and enemy components 
-		Globals.context.components.set(self.e, self.c0);
 		//
 		set_animation_front(self.type);
 		self.isMoving = true;
@@ -132,14 +121,10 @@ class Entity extends Script<Data> {
 			case defold.PhysicsMessages.ray_cast_response:
 				if (message.request_id == RCTABLE_FLOOR) {
 					trace('!!!!!!HIT FLOOR message_id $message_id message $message');
-					self.c0.notOnGround = false;
-					self.c0.changeFlag = true;
 				}
 			case PhysicsMessages.ray_cast_missed:
 				if (message.request_id == RCTABLE_FLOOR) {
 					trace('******MISSED FLOOR message_id $message_id message $message');
-					self.c0.notOnGround = true;
-					self.c0.changeFlag = true;
 				}
 			case defold.PhysicsMessages.collision_response:
 				if (message.other_group == hash('pepper')) {

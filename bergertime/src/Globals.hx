@@ -2,12 +2,6 @@ import defold.Window.WindowSize;
 
 import dex.util.Rand;
 
-import eskimo.ComponentManager;
-import eskimo.Context;
-import eskimo.EntityManager;
-
-import eskimo.systems.SystemManager;
-
 @:build(defold.support.MessageBuilder.build())
 class GlobalMessage {
 	var can_pepper;
@@ -20,11 +14,6 @@ class Globals {
 	public static final version:String = "3.61.11"; // Y3K testing, not the real version number - will be set on publishing
 	//
 	public static var gameplates:Array<Int> = [1, 2, 4, 4, 4, 6, 6];
-	// ecs
-	public static var context:Context;
-	public static var systems:SystemManager;
-	public static var entities:EntityManager;
-	public static var components:ComponentManager;
 
 	//
 	public static var soundIsOn:Bool = true;

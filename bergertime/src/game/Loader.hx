@@ -17,12 +17,6 @@ import defold.types.Url;
 
 import dex.util.Rand;
 
-import eskimo.ComponentManager;
-import eskimo.Context;
-import eskimo.EntityManager;
-
-import eskimo.systems.SystemManager;
-
 //
 
 @:build(defold.support.MessageBuilder.build())
@@ -43,28 +37,6 @@ class LoaderScript extends Script<LoaderData> {
 	override function init(self:LoaderData) {
 		Globals.window_size = Window.get_size();
 
-		// Msg.post("loader_coll:/loader#cutscene_proxy", CollectionproxyMessages.load);
-		// Msg.post("loader_coll:/loader#cutscene_proxy", CollectionproxyMessages.enable);
-
-		// Msg.post("#go/cutscene_proxy", CutScenesMessage.set_cutscene, {
-		// 	ri: "ri0",
-		// 	li: "li0",
-		// 	bg: "bg0",
-		// 	text: "61 Isabella",
-		// 	delay: 11.11,
-		// 	next_collection: 1
-		// });
-
-		// End of Testing
-		// Lets initialize the ecs system
-		Globals.context = new Context();
-		lua.Lua.assert(Globals.context != null);
-		Globals.components = new ComponentManager();
-		lua.Lua.assert(Globals.components != null);
-		Globals.entities = new EntityManager(Globals.components);
-		lua.Lua.assert(Globals.entities != null);
-		Globals.systems = new SystemManager(Globals.entities);
-		lua.Lua.assert(Globals.systems != null);
 		//
 		Msg.post(".", GoMessages.acquire_input_focus);
 		trace('Loader.hx func init');
