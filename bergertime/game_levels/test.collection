@@ -1,4 +1,4 @@
-name: "level01"
+name: "test"
 instances {
   id: "ladder13"
   prototype: "/entities_go/floors/middle_ladder.go"
