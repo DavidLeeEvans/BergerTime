@@ -15,7 +15,7 @@ animations {
 }
 
 animations {
-  id: "egg-peppered"
+  id: "egg_peppered"
   images {
     image: "/assets/images/egg-peppered0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
