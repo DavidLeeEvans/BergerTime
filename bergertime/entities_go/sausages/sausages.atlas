@@ -1,5 +1,5 @@
 animations {
-  id: "hotdog-front"
+  id: "hotdog_front"
   images {
     image: "/assets/images/hotdog-front0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -14,7 +14,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: "hotdog-peppered"
+  id: "hotdog_peppered"
   images {
     image: "/assets/images/hotdog-peppered0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -29,7 +29,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: "hotdog-back"
+  id: "hotdog_back"
   images {
     image: "/assets/images/hotdog-back0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -44,7 +44,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: "hotdog-dead"
+  id: "hotdog_dead"
   images {
     image: "/assets/images/hotdog-dead0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF

@@ -1,5 +1,5 @@
 animations {
-  id: "egg-front"
+  id: "egg_front"
   images {
     image: "/assets/images/egg-front0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -30,7 +30,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: "egg-back"
+  id: "egg_back"
   images {
     image: "/assets/images/egg-back0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -45,7 +45,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: "egg-dead"
+  id: "egg_dead"
   images {
     image: "/assets/images/egg-dead0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -68,7 +68,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: "egg-left"
+  id: "egg_left"
   images {
     image: "/assets/images/egg-left0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -83,7 +83,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: "egg-right"
+  id: "egg_right"
   images {
     image: "/assets/images/egg-right0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF

@@ -1,5 +1,5 @@
 animations {
-  id: "pickle-front"
+  id: "pickle_front"
   images {
     image: "/assets/images/pickle-front0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -15,7 +15,7 @@ animations {
 }
 
 animations {
-  id: "pickle-peppered"
+  id: "pickle_peppered"
   images {
     image: "/assets/images/pickle-peppered0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -31,7 +31,7 @@ animations {
 }
 
 animations {
-  id: "pickle-back"
+  id: "pickle_back"
   images {
     image: "/assets/images/pickle-back0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -46,7 +46,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: "pickle-dead"
+  id: "pickle_dead"
   images {
     image: "/assets/images/pickle-dead0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -69,7 +69,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: "pickle-left"
+  id: "pickle_left"
   images {
     image: "/assets/images/pickle-left0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -84,7 +84,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: "pickle-right"
+  id: "pickle_right"
   images {
     image: "/assets/images/pickle-right0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
