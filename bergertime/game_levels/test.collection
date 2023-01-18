@@ -799,96 +799,12 @@ instances {
     z: 1.0
   }
 }
-instances {
-  id: "adv_topbun"
-  prototype: "/entities_go/hamburger/adv_topbun.go"
-  position {
-    x: 62.0
-    y: 605.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  component_properties {
-    id: "AdvanceLayerScript"
-    properties {
-      id: "type"
-      value: "0.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "adv_redstuff"
-  prototype: "/entities_go/hamburger/adv_redstuff.go"
-  position {
-    x: 68.0
-    y: 541.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  component_properties {
-    id: "AdvanceLayerScript"
-    properties {
-      id: "type"
-      value: "1.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "adv_pattie"
-  prototype: "/entities_go/hamburger/adv_pattie.go"
-  position {
-    x: 61.0
-    y: 474.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  component_properties {
-    id: "AdvanceLayerScript"
-    properties {
-      id: "type"
-      value: "2.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "adv_lettuce"
-  prototype: "/entities_go/hamburger/adv_lettuce.go"
+collection_instances {
+  id: "coll_advance_topbun"
+  collection: "/entities_go/hamburger/coll_advance_topbun.collection"
   position {
     x: 56.0
-    y: 406.0
+    y: 625.0
     z: 0.0
   }
   rotation {
@@ -896,70 +812,6 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
-  }
-  component_properties {
-    id: "AdvanceLayerScript"
-    properties {
-      id: "type"
-      value: "3.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "adv_yellowstuff"
-  prototype: "/entities_go/hamburger/adv_yellowstuff.go"
-  position {
-    x: 60.0
-    y: 338.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  component_properties {
-    id: "AdvanceLayerScript"
-    properties {
-      id: "type"
-      value: "4.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "adv_bottombun"
-  prototype: "/entities_go/hamburger/adv_bottombun.go"
-  position {
-    x: 60.0
-    y: 286.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  component_properties {
-    id: "AdvanceLayerScript"
-    properties {
-      id: "type"
-      value: "5.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
   }
   scale3 {
     x: 1.0
@@ -1384,7 +1236,7 @@ embedded_instances {
   children: "catch-plate4"
   data: ""
   position {
-    x: 0.0
+    x: 319.0
     y: 0.0
     z: 0.0
   }

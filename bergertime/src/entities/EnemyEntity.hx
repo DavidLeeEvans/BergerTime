@@ -26,6 +26,9 @@ import dex.util.Rand;
 
 import entities.SWEN;
 
+/**
+	Candy Berger Game:
+**/
 @:build(defold.support.MessageBuilder.build())
 class EnemyMessage {
 	var msg_init:{type:Int};
@@ -194,7 +197,7 @@ class Entity extends Script<Data> {
 		}
 
 		if (self._not_taking_off) {
-			Go.set_position(Go.get_position() + Vmath.vector3(0, -10, 0));
+			Go.set_position(Go.get_position() + Vmath.vector3(0, -0.1, 0));
 		}
 	}
 
