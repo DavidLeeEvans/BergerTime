@@ -47,7 +47,7 @@ class AdmobMsg {
 	var have_is_reward_video_loaded:{name:Bool};
 
 	// interstitial NA
-	var load_interstitial:{ad_id:String, placement:Int};
+	var load_interstitial:{ad_id:String, ?placement:Int};
 	var destroy_interstitial;
 	var show_interstitial;
 	var hide_interstitial_video;

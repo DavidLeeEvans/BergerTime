@@ -230,7 +230,7 @@ function on_message(self, message_id, message, sender)
   elseif (message_id == hash("load_banner")) then
     local info = sys.get_sys_info()
     if info.system_name == 'Linux' then
-      print("load_banner SHIMMED")
+      print("load_banner SHIMMED " ..message.ad_id)
       return
     end
     if message.size == nil then
@@ -252,6 +252,7 @@ function on_message(self, message_id, message, sender)
     local info = sys.get_sys_info()
     if info.system_name == 'Linux' then
       print("show_banner SHIMMED")
+      print(banner_ad_unit)
       return
     end
     if message.position == nil then
