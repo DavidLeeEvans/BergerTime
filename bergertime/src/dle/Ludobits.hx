@@ -5,6 +5,11 @@ import defold.types.*;
 import defold.types.Hash;
 import lua.Table;
 
+@:build(defold.support.MessageBuilder.build())
+class GestureMessage {
+	var on_gesture:{message:GestureTypeResults};
+}
+
 /**
 	Functions, messages and properties used to manipulate ludobits Bezier Points, Broadcast components.
 

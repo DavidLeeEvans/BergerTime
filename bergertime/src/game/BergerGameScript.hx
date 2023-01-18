@@ -19,6 +19,11 @@ import defold.types.*;
 
 import defold.types.Hash;
 
+import dle.AdmobMsg;
+import dle.Delayer;
+
+import dle.Ludobits.GestureMessage;
+
 import entities.EnemyEntity.EnemyMessage;
 
 import haxe.Log.trace as ltrace;
@@ -51,6 +56,16 @@ typedef BergerGameData = {
 	var handleTimerTreats:TimerHandle;
 	//
 	var _scratchPad:Float;
+	//
+	var delayer:Delayer;
+	var run_game:Bool;
+	var level:Int;
+	//
+	var admob_banner_ad:String;
+	var admob_interstitial_ad:String;
+	var admob_rewardvideo_ad:String;
+	//
+	var _loaded:Bool;
 }
 
 class BergerGameScript extends Script<BergerGameData> {
@@ -64,6 +79,18 @@ class BergerGameScript extends Script<BergerGameData> {
 
 	//
 	override function init(self:BergerGameData) {
+		// Ads
+		var fps = 30;
+		self.delayer = new Delayer(fps);
+
+		self.admob_banner_ad = "ca-app-pub-8289938137729980/4461795085";
+		self.admob_interstitial_ad = "ca-app-pub-8289938137729980/9851475726";
+		self.admob_rewardvideo_ad = "ca-app-pub-8289938137729980/2631461250";
+
+		//
+		self._loaded = false;
+		ads_runner(self);
+
 		self._scratchPad = lua.Math.random(20, 60);
 
 		lua.Math.randomseed(1000000 * (Socket.gettime() % 1));
@@ -91,6 +118,13 @@ class BergerGameScript extends Script<BergerGameData> {
 
 	override function on_message<T>(self:BergerGameData, message_id:Message<T>, message:T, _) {
 		switch (message_id) {
+			case AdmobMsg.have_is_banner_loaded:
+				Defold.pprint('have_banner_called_back MSG actionable ${message.name}');
+				self._loaded = message.name;
+			case GestureMessage.on_gesture:
+				Defold.pprint("GestureMessage on_gesture");
+				// Defold.pprint(message);
+				Defold.pprint(message);
 			case BergerGameMessage.game_load:
 				Globals.set_game_level(message.level);
 			// spawn_entities(); TODO rework this into a global spawner.
@@ -123,6 +157,12 @@ class BergerGameScript extends Script<BergerGameData> {
 			}
 		}
 		return false;
+	}
+
+	override function final_(self:BergerGameData):Void {
+		Msg.post(".", GoMessages.release_input_focus);
+		self.delayer.cancelEverything();
+		Msg.post('/go#ads', AdmobMsg.destroy_banner);
 	}
 
 	private function treate_create(self:BergerGameData, _, _):Void {
@@ -165,5 +205,14 @@ class BergerGameScript extends Script<BergerGameData> {
 			case 3:
 				Msg.post(Factory.create('#factory_sausages', p), EnemyMessage.msg_init, {type: 2});
 		}
+	}
+
+	private function ads_runner(self:BergerGameData):Void {
+		self.delayer.addS("load_ads", function() Msg.post('/go#ads', AdmobMsg.load_banner, {ad_id: self.admob_banner_ad}), 0);
+		self.delayer.addS("show_ads", function() Msg.post('/go#ads', AdmobMsg.show_banner, {position: ADMOB_POSITION.POS_TOP_CENTER}), 10);
+		self.delayer.addS("turnoff_ads", function() Msg.post('/go#ads', AdmobMsg.hide_banner), 60);
+		self.delayer.addS("destroy_ads", function() Msg.post('/go#ads', AdmobMsg.destroy_banner), 61);
+		self.delayer.addS("cancel_ads", function() self.delayer.cancelEverything, 62);
+		self.delayer.addS("reset_ads", function() ads_runner(self), 63);
 	}
 }
