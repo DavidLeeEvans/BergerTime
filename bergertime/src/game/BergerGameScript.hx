@@ -86,6 +86,7 @@ class BergerGameScript extends Script<BergerGameData> {
 		self.admob_banner_ad = "ca-app-pub-8289938137729980/4461795085";
 		self.admob_interstitial_ad = "ca-app-pub-8289938137729980/9851475726";
 		self.admob_rewardvideo_ad = "ca-app-pub-8289938137729980/2631461250";
+		Msg.post("/go#ads", AdmobMsg.load_banner, {ad_id: self.admob_banner_ad});
 
 		//
 		self._loaded = false;

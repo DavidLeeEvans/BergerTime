@@ -65,6 +65,8 @@ class EnemyEntityHash {
 
 typedef Data = {
 	// go.set("myobject#my_script", "my_property", val + 1)
+	var _not_taking_off:Bool;
+
 	var _debug:Bool;
 	@property(true) var not_peppered:Bool;
 	var type:Int;
@@ -104,6 +106,8 @@ class Entity extends Script<Data> {
 		//
 		// self.not_peppered = true;
 		//
+		self._not_taking_off = false;
+
 		self._debug = defold.Sys.get_engine_info().is_debug;
 		self.swenf = new SWENF();
 		set_animation_front(self.type);
@@ -172,7 +176,7 @@ class Entity extends Script<Data> {
 				final p = Go.get_position();
 				Go.set_position(p + Vmath.vector3(0, MOVEMENT_SPEED, 0));
 			} else if (self.swenf.e && !self.swenf.i) {
-//				trace("Moving East");
+				//				trace("Moving East");
 				final p = Go.get_position();
 				Go.set_position(p + Vmath.vector3(MOVEMENT_SPEED, 0, 0));
 			} else if (self.swenf.s && !self.swenf.i) {
@@ -180,7 +184,7 @@ class Entity extends Script<Data> {
 				final p = Go.get_position();
 				Go.set_position(p + Vmath.vector3(0, -MOVEMENT_SPEED, 0));
 			} else if (self.swenf.w && !self.swenf.i) {
-//				trace("Moving West");
+				//				trace("Moving West");
 				final p = Go.get_position();
 				Go.set_position(p + Vmath.vector3(-MOVEMENT_SPEED, 0, 0));
 			} else if (self.swenf.i) {
@@ -188,19 +192,23 @@ class Entity extends Script<Data> {
 			}
 			counter = 0.0;
 		}
-		//
+
+		if (self._not_taking_off) {
+			Go.set_position(Go.get_position() + Vmath.vector3(0, -10, 0));
+		}
 	}
 
 	override function on_message<T>(self:Data, message_id:Message<T>, message:T, sender:Url):Void {
 		switch (message_id) {
 			case defold.PhysicsMessages.ray_cast_response:
 				if (message.request_id == RCTABLE_FLOOR) {
-//					trace('!!!!!!HIT FLOOR message_id $message_id message $message');
+					//					trace('!!!!!!HIT FLOOR message_id $message_id message $message');
+					self._not_taking_off = false;
 				}
 			case PhysicsMessages.ray_cast_missed:
 				if (message.request_id == RCTABLE_FLOOR) {
-//					trace('******MISSED FLOOR message_id $message_id message $message');
-					Go.set_position(Go.get_position() + Vmath.vector3(0, -10, 0));
+					//					trace('******MISSED FLOOR message_id $message_id message $message');
+					self._not_taking_off = true;
 				}
 			case defold.PhysicsMessages.collision_response:
 				if (message.other_group == hash('pepper')) {
