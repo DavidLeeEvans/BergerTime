@@ -108,7 +108,7 @@ class BergerGameScript extends Script<BergerGameData> {
 	}
 
 	override function update(self:BergerGameData, dt:Float) {
-		//
+		self.delayer.update(1.0);
 		self._scratchPad--;
 		if (Globals.total_num_current_monsters <= self.num_monsters && self._scratchPad < 0) {
 			// Timer.delay(3.0, false, spawn_monster);
