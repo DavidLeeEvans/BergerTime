@@ -7,7 +7,6 @@ import defold.Msg;
 import defold.Physics;
 import defold.Sprite;
 import defold.Timer;
-import defold.Vmath;
 
 import defold.support.Script;
 
@@ -51,6 +50,14 @@ typedef AdvanceLayerData = {
 }
 
 class AdvanceLayerScript extends Script<AdvanceLayerData> {
+	final _layerArray = [
+		["top-bun0", "top-bun1", "top-bun2", "top-bun3"],
+		["redstuff0", "redstuff1", "redstuff2", "redstuff3"],
+		["meat0", "meat1", "meat2", "meat3"],
+		["lettuce0", "lettuce1", "lettuce2", "lettuce3"],
+		["yellowstuff0", "yellowstuff1", "yellowstuff2", "yellowstuff3"],
+		["bottom-bun0", "bottom-bun1", "bottom-bun2", "bottom-bun3"],
+	];
 	final hFloor:Hash = hash('fixture'); // TODO research
 
 	override function on_reload(self:AdvanceLayerData) {
@@ -60,7 +67,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 
 	//
 	override function init(self:AdvanceLayerData) {
-		//
+		lua.Lua.assert(self.type < 0, "Unitialized Layer");
 		self.tableFloor = lua.Table.create();
 		lua.Table.insert(self.tableFloor, hFloor);
 		//
@@ -76,8 +83,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		self.count = 0;
 		self.bounce = false;
 		self.isMultiple = true;
-		lua.Lua.assert(self.type < 0, "Unitialized Layer");
-		disable_full_layer(self);
+		// disable_full_layer(self);
 	}
 
 	override function update(self:AdvanceLayerData, dt:Float) {
@@ -96,45 +102,44 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 			case AdvanceLayerMessage.reset:
 				disable_full_layer(self);
 				self.count = 0;
-				//
 				Msg.post("#coll0", GoMessages.enable);
-				// Go.set_scale(Vmath.vector3(1, 0.5, 1), "#seg0");
-				Msg.post("", SpriteMessages.play_animation, {id: hFloor});
-				//
+				Sprite.play_flipbook("#seg0", hash(_layerArray[self.type][0]));
+				Msg.post("#coll1", GoMessages.enable);
+				Sprite.play_flipbook("#seg1", hash(_layerArray[self.type][1]));
 				Msg.post("#coll2", GoMessages.enable);
-				Go.set("#seg2", "scale", Vmath.vector3(1, 1, 1));
-				//
+				Sprite.play_flipbook("#seg2", hash(_layerArray[self.type][2]));
 				Msg.post("#coll3", GoMessages.enable);
-				Go.set("#seg3", "scale", Vmath.vector3(1, 1, 1));
-
+				Sprite.play_flipbook("#seg3", hash(_layerArray[self.type][3]));
 			case AdvanceLayerMessage.catch_plate_trans:
 				trace('catch plate trans');
 			case PhysicsMessages.collision_response:
 				if (message.other_group == self.hchef) {
 					if (message.own_group == self.hcollisionGroup0) {
+						Defold.pprint("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 						Msg.post("#coll0", GoMessages.disable);
-						Go.set_scale(Vmath.vector3(1, 0.5, 1), "#seg0");
+						Defold.pprint("t" + _layerArray[self.type][0]);
+						Sprite.play_flipbook("#seg0", hash("t" + _layerArray[self.type][0]));
 						self.count++;
 						if (self.count == 4) {
 							// transition_tofull(self);
 						}
 					} else if (message.own_group == self.hcollisionGroup1) {
 						Msg.post("#coll1", GoMessages.disable);
-						Go.set_scale(Vmath.vector3(1, 0.5, 1), "#seg1");
+						Sprite.play_flipbook("#seg1", hash("t" + _layerArray[self.type][1]));
 						self.count++;
 						if (self.count == 4) {
 							// transition_tofull(self);
 						}
 					} else if (message.own_group == self.hcollisionGroup2) {
 						Msg.post("#coll2", GoMessages.disable);
-						Go.set_scale(Vmath.vector3(1, 0.5, 1), "#seg2");
+						Sprite.play_flipbook("#seg2", hash("t" + _layerArray[self.type][2]));
 						self.count++;
 						if (self.count == 4) {
 							// transition_tofull(self);
 						}
 					} else if (message.own_group == self.hcollisionGroup3) {
 						Msg.post("#coll3", GoMessages.disable);
-						Go.set_scale(Vmath.vector3(1, 0.5, 1), "#seg3");
+						Sprite.play_flipbook("#seg3", hash("t" + _layerArray[self.type][3]));
 						self.count++;
 						if (self.count == 4) {
 							// transition_tofull(self);
