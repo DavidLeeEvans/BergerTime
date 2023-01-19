@@ -799,12 +799,12 @@ instances {
     z: 1.0
   }
 }
-collection_instances {
-  id: "col_bottom_bun"
-  collection: "/game_levels/col_bottom_bun.collection"
+instances {
+  id: "bottom_bun"
+  prototype: "/game_levels/bottom_bun.go"
   position {
-    x: 71.0
-    y: 632.0
+    x: 58.0
+    y: 607.0
     z: 0.0
   }
   rotation {
@@ -1172,6 +1172,23 @@ embedded_instances {
   "components {\n"
   "  id: \"factory_treats_candy\"\n"
   "  component: \"/factories/factory_treats_candy.factory\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  property_decls {\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"data_blob\"\n"
+  "  component: \"/game_levels/data_blob.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
