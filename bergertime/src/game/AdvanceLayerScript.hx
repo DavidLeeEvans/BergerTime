@@ -99,8 +99,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 				//
 				Msg.post("#coll0", GoMessages.enable);
 				// Go.set_scale(Vmath.vector3(1, 0.5, 1), "#seg0");
-				Msg.post("", SpriteProperties.scale, {message: Vmath.vector3(1, 1, 1)});
-				Go.set("#seg1", "scale", Vmath.vectdor3(1, 1, 1));
+				Msg.post("", SpriteMessages.play_animation, {id: hFloor});
 				//
 				Msg.post("#coll2", GoMessages.enable);
 				Go.set("#seg2", "scale", Vmath.vector3(1, 1, 1));
