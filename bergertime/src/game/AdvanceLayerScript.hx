@@ -5,7 +5,12 @@ import Defold.hash;
 import defold.Go;
 import defold.Msg;
 import defold.Physics;
+
+import defold.Sprite.SpriteProperties;
+
+import defold.Sprite;
 import defold.Timer;
+import defold.Vmath;
 
 import defold.support.Script;
 
@@ -95,62 +100,45 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 				disable_full_layer(self);
 				self.count = 0;
 				//
-				Msg.post("/go#coll0", GoMessages.enable);
-				var p:Vector3 = Go.get("/go#seg0", "position");
-				p.y = p.y + 20;
-				Go.set("gseg0", "position", p);
+				Msg.post("#coll0", GoMessages.enable);
+				// Go.set_scale(Vmath.vector3(1, 0.5, 1), "#seg0");
+				Msg.post("", SpriteProperties.scale, {message: Vmath.vector3(1, 1, 1)});
+				Go.set("#seg1", "scale", Vmath.vector3(1, 1, 1));
 				//
-				Msg.post("/go#coll1", GoMessages.enable);
-				var p:Vector3 = Go.get("/go#seg1", "position");
-				p.y = p.y + 20;
-				Go.set("/go#seg1", "position", p);
+				Msg.post("#coll2", GoMessages.enable);
+				Go.set("#seg2", "scale", Vmath.vector3(1, 1, 1));
 				//
-				Msg.post("/go#coll2", GoMessages.enable);
-				var p:Vector3 = Go.get("/go#seg2", "position");
-				p.y = p.y + 20;
-				Go.set("/go#seg2", "position", p);
-				//
-				Msg.post("/go#coll3", GoMessages.enable);
-				var p:Vector3 = Go.get("/go#seg3", "position");
-				p.y = p.y + 20;
-				Go.set("/go#seg3", "position", p);
+				Msg.post("#coll3", GoMessages.enable);
+				Go.set("#seg3", "scale", Vmath.vector3(1, 1, 1));
 
 			case AdvanceLayerMessage.catch_plate_trans:
 				trace('catch plate trans');
 			case PhysicsMessages.collision_response:
 				if (message.other_group == self.hchef) {
 					if (message.own_group == self.hcollisionGroup0) {
-						Msg.post("/go#coll0", GoMessages.disable);
-						var p:Vector3 = Go.get_world_position("/go#seg0");
-						p.y = p.y - 20;
-						Go.set_position(p, "/go#seg0");
+						Msg.post("#coll0", GoMessages.disable);
+						Go.set_scale(Vmath.vector3(1, 0.5, 1), "#seg0");
 						self.count++;
 						if (self.count == 4) {
 							// transition_tofull(self);
 						}
 					} else if (message.own_group == self.hcollisionGroup1) {
-						Msg.post("/go#coll1", GoMessages.disable);
-						var p:Vector3 = Go.get_world_position("/go#seg1");
-						p.y = p.y - 20;
-						Go.set_position(p, "/go#seg1");
+						Msg.post("#coll1", GoMessages.disable);
+						Go.set_scale(Vmath.vector3(1, 0.5, 1), "#seg1");
 						self.count++;
 						if (self.count == 4) {
 							// transition_tofull(self);
 						}
 					} else if (message.own_group == self.hcollisionGroup2) {
-						Msg.post("/go#coll2", GoMessages.disable);
-						var p:Vector3 = Go.get_world_position("/go#seg2");
-						p.y = p.y - 20;
-						Go.set_position(p, "/go#seg2");
+						Msg.post("#coll2", GoMessages.disable);
+						Go.set_scale(Vmath.vector3(1, 0.5, 1), "#seg2");
 						self.count++;
 						if (self.count == 4) {
 							// transition_tofull(self);
 						}
 					} else if (message.own_group == self.hcollisionGroup3) {
-						Msg.post("/go#coll3", GoMessages.disable);
-						var p:Vector3 = Go.get_world_position("/go#seg3");
-						p.y = p.y - 20;
-						Go.set_position(p, "/go#seg3");
+						Msg.post("#coll3", GoMessages.disable);
+						Go.set_scale(Vmath.vector3(1, 0.5, 1), "#seg3");
 						self.count++;
 						if (self.count == 4) {
 							// transition_tofull(self);
@@ -161,34 +149,34 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 	}
 
 	function disable_full_layer(self:AdvanceLayerData):Void {
-		Msg.post("/go#collf", GoMessages.disable);
-		Msg.post("/go#segf", GoMessages.disable);
+		Msg.post("#collf", GoMessages.disable);
+		Msg.post("#segf", GoMessages.disable);
 	}
 
 	function enable_full_layer(self:AdvanceLayerData):Void {
-		Msg.post("/go#collf", GoMessages.enable);
-		Msg.post("/go#segf", GoMessages.enable);
+		Msg.post("#collf", GoMessages.enable);
+		Msg.post("#segf", GoMessages.enable);
 	}
 
 	function disable_segments(self:AdvanceLayerData):Void {
 		//		trace('disable_segments');
-		Msg.post("/go#coll0", GoMessages.disable);
-		Msg.post("/go#coll1", GoMessages.disable);
-		Msg.post("/go#coll2", GoMessages.disable);
-		Msg.post("/go#coll3", GoMessages.disable);
+		Msg.post("#coll0", GoMessages.disable);
+		Msg.post("#coll1", GoMessages.disable);
+		Msg.post("#coll2", GoMessages.disable);
+		Msg.post("#coll3", GoMessages.disable);
 
-		Msg.post("/go#seg0", GoMessages.disable);
-		Msg.post("/go#seg1", GoMessages.disable);
-		Msg.post("/go#seg2", GoMessages.disable);
-		Msg.post("/go#seg3", GoMessages.disable);
+		Msg.post("#seg0", GoMessages.disable);
+		Msg.post("#seg1", GoMessages.disable);
+		Msg.post("#seg2", GoMessages.disable);
+		Msg.post("#seg3", GoMessages.disable);
 	}
 
 	function enable_segments(self:AdvanceLayerData):Void {
 		trace('enable_segments');
-		Msg.post("/go#coll0", GoMessages.enable);
-		Msg.post("/go#coll1", GoMessages.enable);
-		Msg.post("/go#coll2", GoMessages.enable);
-		Msg.post("/go#coll3", GoMessages.enable);
+		Msg.post("#coll0", GoMessages.enable);
+		Msg.post("#coll1", GoMessages.enable);
+		Msg.post("#coll2", GoMessages.enable);
+		Msg.post("#coll3", GoMessages.enable);
 	}
 
 	private function transition_tofull(self:AdvanceLayerData):Void {

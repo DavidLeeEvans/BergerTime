@@ -172,11 +172,11 @@ class BergerGameScript extends Script<BergerGameData> {
 		final p = vector3(99, 61, 0);
 		switch (treat) {
 			case 1:
-			// TODO	Factory.create('#factory_treats_candy', p);
+				Factory.create('#factory_treats_candy', p);
 			case 2:
-			// TODO 	Factory.create('#factory_treats_coffee', p);
+				Factory.create('#factory_treats_coffee', p);
 			case 3:
-			// TODO 	Factory.create('#factory_treats_icecream', p);
+				Factory.create('#factory_treats_icecream', p);
 			case 4:
 				// TODO	Factory.create('#factory_treats_fries', p);
 		}
@@ -201,11 +201,11 @@ class BergerGameScript extends Script<BergerGameData> {
 			p = vector3(161, 640, 0); // RIGHT
 		switch (mtype) {
 			case 1:
-				Msg.post(Factory.create('#factory_eggs', p), EnemyMessage.msg_init, {type: 0});
+			// Msg.post(Factory.create('#factory_eggs', p), EnemyMessage.msg_init, {type: 0});
 			case 2:
-				Msg.post(Factory.create('#factory_pickle', p), EnemyMessage.msg_init, {type: 1});
+			// Msg.post(Factory.create('#factory_pickle', p), EnemyMessage.msg_init, {type: 1});
 			case 3:
-				Msg.post(Factory.create('#factory_sausages', p), EnemyMessage.msg_init, {type: 2});
+				// Msg.post(Factory.create('#factory_sausages', p), EnemyMessage.msg_init, {type: 2});
 		}
 	}
 
