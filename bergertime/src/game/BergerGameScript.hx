@@ -172,13 +172,13 @@ class BergerGameScript extends Script<BergerGameData> {
 		final p = vector3(99, 61, 0);
 		switch (treat) {
 			case 1:
-				Factory.create('#factory_treats_candy', p);
+			// TODO	Factory.create('#factory_treats_candy', p);
 			case 2:
-				Factory.create('#factory_treats_coffee', p);
+			// TODO 	Factory.create('#factory_treats_coffee', p);
 			case 3:
-				Factory.create('#factory_treats_icecream', p);
+			// TODO 	Factory.create('#factory_treats_icecream', p);
 			case 4:
-				Factory.create('#factory_treats_fries', p);
+				// TODO	Factory.create('#factory_treats_fries', p);
 		}
 		// trace('treate_create Timer Fired type $treat created');
 		self.handleTimerTreats = Timer.delay(lua.Math.random(TREAT_SPAWNDELAY_LOWER, TREAT_SPAWNDELAY_UPPER), false, treate_create);
