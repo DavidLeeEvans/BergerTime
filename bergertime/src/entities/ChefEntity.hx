@@ -216,8 +216,7 @@ class ChefEntity extends Script<ChefData> {
 				}
 			case PhysicsMessages.collision_response:
 				if (message.other_group == ChefEntityHash.enemy) {
-					final socket:String = "level01";
-					var enemy_script:Url = defold.Msg.url(socket, message.other_id, "Entity");
+					var enemy_script:Url = defold.Msg.url(null, message.other_id, "Entity");
 					var not_peppered:Bool = Go.get(enemy_script, "not_peppered");
 					if (not_peppered) {
 						self.chefSpeed = 0; // Set Russian Chef Speed to Zero
