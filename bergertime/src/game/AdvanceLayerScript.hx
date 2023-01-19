@@ -51,12 +51,12 @@ typedef AdvanceLayerData = {
 
 class AdvanceLayerScript extends Script<AdvanceLayerData> {
 	final _layerArray = [
-		["top-bun0", "top-bun1", "top-bun2", "top-bun3"],
-		["redstuff0", "redstuff1", "redstuff2", "redstuff3"],
-		["meat0", "meat1", "meat2", "meat3"],
-		["lettuce0", "lettuce1", "lettuce2", "lettuce3"],
-		["yellowstuff0", "yellowstuff1", "yellowstuff2", "yellowstuff3"],
-		["bottom-bun0", "bottom-bun1", "bottom-bun2", "bottom-bun3"],
+		["top-bun0", "top-bun1", "top-bun2", "top-bun3", "top-bun"],
+		["redstuff0", "redstuff1", "redstuff2", "redstuff3", "redstuff"],
+		["meat0", "meat1", "meat2", "meat3", "meat"],
+		["lettuce0", "lettuce1", "lettuce2", "lettuce3", "lettuce"],
+		["yellowstuff0", "yellowstuff1", "yellowstuff2", "yellowstuff3", "yellowstuff"],
+		["bottom-bun0", "bottom-bun1", "bottom-bun2", "bottom-bun3", "bottom-bun"],
 	];
 	final hFloor:Hash = hash('fixture'); // TODO research
 
@@ -67,7 +67,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 
 	//
 	override function init(self:AdvanceLayerData) {
-		lua.Lua.assert(self.type < 0, "Unitialized Layer");
+		lua.Lua.assert(self.type >= 0, "Unitialized Layer");
 		self.tableFloor = lua.Table.create();
 		lua.Table.insert(self.tableFloor, hFloor);
 		//
@@ -83,7 +83,8 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		self.count = 0;
 		self.bounce = false;
 		self.isMultiple = true;
-		// disable_full_layer(self);
+		enable_segments(self);
+		disable_full_layer(self);
 	}
 
 	override function update(self:AdvanceLayerData, dt:Float) {
@@ -115,34 +116,32 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 			case PhysicsMessages.collision_response:
 				if (message.other_group == self.hchef) {
 					if (message.own_group == self.hcollisionGroup0) {
-						Defold.pprint("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 						Msg.post("#coll0", GoMessages.disable);
-						Defold.pprint("t" + _layerArray[self.type][0]);
 						Sprite.play_flipbook("#seg0", hash("t" + _layerArray[self.type][0]));
 						self.count++;
 						if (self.count == 4) {
-							// transition_tofull(self);
+							transition_tofull(self);
 						}
 					} else if (message.own_group == self.hcollisionGroup1) {
 						Msg.post("#coll1", GoMessages.disable);
 						Sprite.play_flipbook("#seg1", hash("t" + _layerArray[self.type][1]));
 						self.count++;
 						if (self.count == 4) {
-							// transition_tofull(self);
+							transition_tofull(self);
 						}
 					} else if (message.own_group == self.hcollisionGroup2) {
 						Msg.post("#coll2", GoMessages.disable);
 						Sprite.play_flipbook("#seg2", hash("t" + _layerArray[self.type][2]));
 						self.count++;
 						if (self.count == 4) {
-							// transition_tofull(self);
+							transition_tofull(self);
 						}
 					} else if (message.own_group == self.hcollisionGroup3) {
 						Msg.post("#coll3", GoMessages.disable);
 						Sprite.play_flipbook("#seg3", hash("t" + _layerArray[self.type][3]));
 						self.count++;
 						if (self.count == 4) {
-							// transition_tofull(self);
+							transition_tofull(self);
 						}
 					}
 				}
@@ -157,6 +156,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 	function enable_full_layer(self:AdvanceLayerData):Void {
 		Msg.post("#collf", GoMessages.enable);
 		Msg.post("#segf", GoMessages.enable);
+		Sprite.play_flipbook("#segf", hash(_layerArray[self.type][4]));
 	}
 
 	function disable_segments(self:AdvanceLayerData):Void {
@@ -178,12 +178,16 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		Msg.post("#coll1", GoMessages.enable);
 		Msg.post("#coll2", GoMessages.enable);
 		Msg.post("#coll3", GoMessages.enable);
+		Sprite.play_flipbook("#seg0", hash(_layerArray[self.type][0]));
+		Sprite.play_flipbook("#seg1", hash(_layerArray[self.type][1]));
+		Sprite.play_flipbook("#seg2", hash(_layerArray[self.type][2]));
+		Sprite.play_flipbook("#seg3", hash(_layerArray[self.type][3]));
 	}
 
 	private function transition_tofull(self:AdvanceLayerData):Void {
-		// trace('transitioning to full');
-		// enable_full_layer(self);
-		// disable_segments(self);
+		trace('transitioning to full');
+		enable_full_layer(self);
+		disable_segments(self);
 		// /*
 		// Topbun      = 0
 		// RedStuff    = 1
@@ -191,14 +195,14 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		// Lettuce     = 3
 		// YellowStuff = 4
 		// Bottumbun   = 5
-		// final cBouncingDuration = 6.0;
-		// final bounceDisplacements = 32.0;
-		// final p = Go.get(COLSTRING0, "position");
-		// self._scrap_reg_vector3 = p;
-		// final to = p - vector3(0, -bounceDisplacements, 0);
-		// Go.animate(COLSTRING0, "position", GoPlayback.PLAYBACK_LOOP_PINGPONG, to, GoEasing.EASING_INBOUNCE, cBouncingDuration, 0);
-		// self._scrap_reg_string = COLSTRING0;
-		// Timer.delay(3.0, false, stop_spin_callback);
+		// 	final cBouncingDuration = 6.0;
+		// 	final bounceDisplacements = 32.0;
+		// 	final p = Go.get(COLSTRING0, "position");
+		// 	self._scrap_reg_vector3 = p;
+		// 	final to = p - vector3(0, -bounceDisplacements, 0);
+		// 	Go.animate(COLSTRING0, "position", GoPlayback.PLAYBACK_LOOP_PINGPONG, to, GoEasing.EASING_INBOUNCE, cBouncingDuration, 0);
+		// 	self._scrap_reg_string = COLSTRING0;
+		// 	Timer.delay(3.0, false, stop_spin_callback);
 	}
 
 	private function stop_spin_callback(self:AdvanceLayerData, handle:TimerHandle, time_elapsed:Float) {
