@@ -3,6 +3,7 @@
 -lua main.lua
 -lib hxdefold
 -lib dex
+#-lib hxdefold-extensions
 -dce full
 -D analyzer-optimize
 --macro include("", true, null, ["src"])
