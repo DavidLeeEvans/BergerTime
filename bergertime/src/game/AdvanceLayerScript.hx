@@ -97,6 +97,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		self._bdescend = false;
 		enable_segments(self);
 		disable_full_layer(self);
+		setfrom_flags(self);
 	}
 
 	override function update(self:AdvanceLayerData, dt:Float) {
@@ -253,5 +254,36 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		trace('reset_layer');
 		disable_full_layer(self);
 		enable_segments(self);
+	}
+
+	private function setfrom_flags(self:AdvanceLayerData) {
+		if (self.c0) {
+			Sprite.play_flipbook("#seg0", hash(_layerArray[self.type][0]));
+			Msg.post("#coll0", GoMessages.enable);
+		} else {
+			Sprite.play_flipbook("#seg0", hash(_layerArray[self.type][0]));
+			Msg.post("#coll0", GoMessages.disable);
+		}
+		if (self.c1) {
+			Sprite.play_flipbook("#seg1", hash(_layerArray[self.type][1]));
+			Msg.post("#coll1", GoMessages.enable);
+		} else {
+			Sprite.play_flipbook("#seg1", hash(_layerArray[self.type][1]));
+			Msg.post("#coll1", GoMessages.disable);
+		}
+		if (self.c2) {
+			Sprite.play_flipbook("#seg2", hash(_layerArray[self.type][2]));
+			Msg.post("#coll2", GoMessages.enable);
+		} else {
+			Sprite.play_flipbook("#seg2", hash(_layerArray[self.type][2]));
+			Msg.post("#coll2", GoMessages.disable);
+		}
+		if (self.c3) {
+			Sprite.play_flipbook("#seg3", hash(_layerArray[self.type][3]));
+			Msg.post("#coll3", GoMessages.enable);
+		} else {
+			Sprite.play_flipbook("#seg3", hash(_layerArray[self.type][3]));
+			Msg.post("#coll3", GoMessages.disable);
+		}
 	}
 }
