@@ -37,7 +37,10 @@ typedef AdvanceLayerData = {
 	var bounce:Bool;
 	var isMultiple:Bool;
 	var hchef:Hash;
-	//
+	var c0:Bool;
+	var c1:Bool;
+	var c2:Bool;
+	var c3:Bool;
 	var hcollisionGroup0:Hash;
 	var hcollisionGroup1:Hash;
 	var hcollisionGroup2:Hash;
@@ -71,6 +74,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 	//
 	override function init(self:AdvanceLayerData) {
 		lua.Lua.assert(self.type >= 0, "Unitialized Layer");
+		Msg.post("#", AdvanceLayerMessage.reset);
 		self.tableFloor = lua.Table.create();
 		lua.Table.insert(self.tableFloor, hFloor);
 		Msg.post("#finalc", GoMessages.disable);
@@ -113,6 +117,10 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 			case AdvanceLayerMessage.test:
 				trace('test called NOP');
 			case AdvanceLayerMessage.reset:
+				self.c0 = false;
+				self.c1 = false;
+				self.c2 = false;
+				self.c3 = false;
 				disable_full_layer(self);
 				self.count = 0;
 				Msg.post("#coll0", GoMessages.enable);
