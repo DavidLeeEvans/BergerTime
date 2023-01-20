@@ -73,6 +73,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		lua.Lua.assert(self.type >= 0, "Unitialized Layer");
 		self.tableFloor = lua.Table.create();
 		lua.Table.insert(self.tableFloor, hFloor);
+		Msg.post("#finalc", GoMessages.disable);
 		//
 		self.bfallingOnOff = true;
 		// Hashes
@@ -95,6 +96,10 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 	}
 
 	override function update(self:AdvanceLayerData, dt:Float) {
+		if (self._bdescend) {
+			Go.set_position(Go.get_world_position() + Vmath.vector3(0, -2, 0));
+		}
+
 		if (self.bfallingOnOff) {
 			// TODO dle Stop Testing Here!!
 			// final p = Go.get("/coll_advance_lettuce", "position");
@@ -118,8 +123,11 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 				Sprite.play_flipbook("#seg2", hash(_layerArray[self.type][2]));
 				Msg.post("#coll3", GoMessages.enable);
 				Sprite.play_flipbook("#seg3", hash(_layerArray[self.type][3]));
+				Msg.post("#finalc", GoMessages.disable);
 			case AdvanceLayerMessage.catch_plate_trans:
 				trace('catch plate trans');
+			case PhysicsMessages.trigger_response:
+				trace('message_id $message_id message $message');
 			case PhysicsMessages.collision_response:
 				if (message.other_group == self.hchef) {
 					if (message.own_group == self.hcollisionGroup0) {
@@ -152,8 +160,11 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						}
 					}
 				}
-				if (message.other_group == self.hcatch_plate) {
+				// TODO A advoidable collision has happen, more intercept assembly is required
+				if (message.own_group == hash('trigcollf') && message.other_group == self.hcatch_plate) {
+					trace('CrowComm Collision Detected, join our seminar');
 					self._bdescend = false;
+					Msg.post("#finalc", GoMessages.enable);
 				}
 		}
 	}
@@ -212,17 +223,6 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		Go.cancel_animations(".", "position");
 		Go.set(".", "position", self._scrap_reg_vector3);
 		self._bdescend = true;
-		_descend_function(self);
-	}
-
-	private function _descend_function(self:AdvanceLayerData):Void {
-		do {
-			var p = Go.get_world_position();
-			p = p + Vmath.vector3(0, -10, 0);
-			Go.set_position(p);
-			Defold.pprint('------- $p----------running----------------');
-			Defold.pprint(p);
-		} while ((self._bdescend));
 	}
 
 	private function reset_layer(self:AdvanceLayerData):Void {
