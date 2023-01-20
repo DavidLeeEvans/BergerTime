@@ -7,6 +7,7 @@ import defold.Msg;
 import defold.Physics;
 import defold.Sprite;
 import defold.Timer;
+import defold.Vmath;
 
 import defold.support.Script;
 
@@ -43,7 +44,6 @@ typedef AdvanceLayerData = {
 	var hcollisionGroup3:Hash;
 	//
 	var bfallingOnOff:Bool;
-	var _scrap_reg_string:String;
 	var _scrap_reg_vector3:Vector3;
 	//
 	var tableFloor:lua.Table<Int, Hash>;
@@ -188,28 +188,25 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		trace('transitioning to full');
 		enable_full_layer(self);
 		disable_segments(self);
-		// /*
 		// Topbun      = 0
 		// RedStuff    = 1
 		// Pattie      = 2
 		// Lettuce     = 3
 		// YellowStuff = 4
 		// Bottumbun   = 5
-		// 	final cBouncingDuration = 6.0;
-		// 	final bounceDisplacements = 32.0;
-		// 	final p = Go.get(COLSTRING0, "position");
-		// 	self._scrap_reg_vector3 = p;
-		// 	final to = p - vector3(0, -bounceDisplacements, 0);
-		// 	Go.animate(COLSTRING0, "position", GoPlayback.PLAYBACK_LOOP_PINGPONG, to, GoEasing.EASING_INBOUNCE, cBouncingDuration, 0);
-		// 	self._scrap_reg_string = COLSTRING0;
-		// 	Timer.delay(3.0, false, stop_spin_callback);
+
+		final cBouncingDuration = 6.0;
+		final bounceDisplacements = 32.0;
+		final p = Go.get_position();
+		self._scrap_reg_vector3 = p;
+		final to = p - Vmath.vector3(0, -bounceDisplacements, 0);
+		Go.animate(".", "position", GoPlayback.PLAYBACK_LOOP_PINGPONG, to, GoEasing.EASING_INBOUNCE, cBouncingDuration, 0);
+		Timer.delay(3.0, false, stop_spin_callback);
 	}
 
 	private function stop_spin_callback(self:AdvanceLayerData, handle:TimerHandle, time_elapsed:Float) {
-		// Go.animate("","","")
-		trace("Security Collision advoidance completed Y3K"); // TODO dle testing callback functions in Defold.
-		Go.cancel_animations(self._scrap_reg_string, "position");
-		Go.set(self._scrap_reg_string, "position", self._scrap_reg_vector3);
+		Go.cancel_animations(".", "position");
+		Go.set(".", "position", self._scrap_reg_vector3);
 	}
 
 	private function reset_layer(self:AdvanceLayerData):Void {
