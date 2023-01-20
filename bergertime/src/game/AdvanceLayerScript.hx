@@ -43,8 +43,11 @@ typedef AdvanceLayerData = {
 	var hcollisionGroup2:Hash;
 	var hcollisionGroup3:Hash;
 	//
+	var hcatch_plate:Hash;
+	//
 	var bfallingOnOff:Bool;
 	var _scrap_reg_vector3:Vector3;
+	var _bdescend:Bool;
 	//
 	var tableFloor:lua.Table<Int, Hash>;
 }
@@ -77,12 +80,16 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		self.hcollisionGroup1 = hash('trigcoll1');
 		self.hcollisionGroup2 = hash('trigcoll2');
 		self.hcollisionGroup3 = hash('trigcoll3');
+		//
+		self.hcatch_plate = hash('catch_plate');
 
 		self.hchef = hash('chef');
 		//
 		self.count = 0;
 		self.bounce = false;
 		self.isMultiple = true;
+		//
+		self._bdescend = false;
 		enable_segments(self);
 		disable_full_layer(self);
 	}
@@ -145,21 +152,24 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						}
 					}
 				}
+				if (message.other_group == self.hcatch_plate) {
+					self._bdescend = false;
+				}
 		}
 	}
 
-	function disable_full_layer(self:AdvanceLayerData):Void {
+	private function disable_full_layer(self:AdvanceLayerData):Void {
 		Msg.post("#collf", GoMessages.disable);
 		Msg.post("#segf", GoMessages.disable);
 	}
 
-	function enable_full_layer(self:AdvanceLayerData):Void {
+	private function enable_full_layer(self:AdvanceLayerData):Void {
 		Msg.post("#collf", GoMessages.enable);
 		Msg.post("#segf", GoMessages.enable);
 		Sprite.play_flipbook("#segf", hash(_layerArray[self.type][4]));
 	}
 
-	function disable_segments(self:AdvanceLayerData):Void {
+	private function disable_segments(self:AdvanceLayerData):Void {
 		//		trace('disable_segments');
 		Msg.post("#coll0", GoMessages.disable);
 		Msg.post("#coll1", GoMessages.disable);
@@ -172,7 +182,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		Msg.post("#seg3", GoMessages.disable);
 	}
 
-	function enable_segments(self:AdvanceLayerData):Void {
+	private function enable_segments(self:AdvanceLayerData):Void {
 		trace('enable_segments');
 		Msg.post("#coll0", GoMessages.enable);
 		Msg.post("#coll1", GoMessages.enable);
@@ -188,12 +198,6 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		trace('transitioning to full');
 		enable_full_layer(self);
 		disable_segments(self);
-		// Topbun      = 0
-		// RedStuff    = 1
-		// Pattie      = 2
-		// Lettuce     = 3
-		// YellowStuff = 4
-		// Bottumbun   = 5
 
 		final cBouncingDuration = 6.0;
 		final bounceDisplacements = 32.0;
@@ -201,12 +205,24 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		self._scrap_reg_vector3 = p;
 		final to = p - Vmath.vector3(0, -bounceDisplacements, 0);
 		Go.animate(".", "position", GoPlayback.PLAYBACK_LOOP_PINGPONG, to, GoEasing.EASING_INBOUNCE, cBouncingDuration, 0);
-		Timer.delay(3.0, false, stop_spin_callback);
+		Timer.delay(3.0, false, _stop_spin_callback);
 	}
 
-	private function stop_spin_callback(self:AdvanceLayerData, handle:TimerHandle, time_elapsed:Float) {
+	private function _stop_spin_callback(self:AdvanceLayerData, handle:TimerHandle, time_elapsed:Float) {
 		Go.cancel_animations(".", "position");
 		Go.set(".", "position", self._scrap_reg_vector3);
+		self._bdescend = true;
+		_descend_function(self);
+	}
+
+	private function _descend_function(self:AdvanceLayerData):Void {
+		do {
+			var p = Go.get_world_position();
+			p = p + Vmath.vector3(0, -10, 0);
+			Go.set_position(p);
+			Defold.pprint('------- $p----------running----------------');
+			Defold.pprint(p);
+		} while ((self._bdescend));
 	}
 
 	private function reset_layer(self:AdvanceLayerData):Void {
