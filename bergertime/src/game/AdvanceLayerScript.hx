@@ -20,7 +20,7 @@ import defold.types.Vector3;
 class AdvanceLayerMessage {
 	var reset;
 	var test;
-	var catch_plate_trans;
+	var cascade;
 }
 
 typedef AdvanceLayerData = {
@@ -124,8 +124,8 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 				Msg.post("#coll3", GoMessages.enable);
 				Sprite.play_flipbook("#seg3", hash(_layerArray[self.type][3]));
 				Msg.post("#finalc", GoMessages.disable);
-			case AdvanceLayerMessage.catch_plate_trans:
-				trace('catch plate trans');
+			case AdvanceLayerMessage.cascade:
+				transition_tofull(self);
 			case PhysicsMessages.trigger_response:
 				trace('message_id $message_id message $message');
 			case PhysicsMessages.collision_response:
@@ -135,28 +135,28 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						Sprite.play_flipbook("#seg0", hash("t" + _layerArray[self.type][0]));
 						self.count++;
 						if (self.count == 4) {
-							transition_tofull(self);
+							Msg.post("#", AdvanceLayerMessage.cascade);
 						}
 					} else if (message.own_group == self.hcollisionGroup1) {
 						Msg.post("#coll1", GoMessages.disable);
 						Sprite.play_flipbook("#seg1", hash("t" + _layerArray[self.type][1]));
 						self.count++;
 						if (self.count == 4) {
-							transition_tofull(self);
+							Msg.post("#", AdvanceLayerMessage.cascade);
 						}
 					} else if (message.own_group == self.hcollisionGroup2) {
 						Msg.post("#coll2", GoMessages.disable);
 						Sprite.play_flipbook("#seg2", hash("t" + _layerArray[self.type][2]));
 						self.count++;
 						if (self.count == 4) {
-							transition_tofull(self);
+							Msg.post("#", AdvanceLayerMessage.cascade);
 						}
 					} else if (message.own_group == self.hcollisionGroup3) {
 						Msg.post("#coll3", GoMessages.disable);
 						Sprite.play_flipbook("#seg3", hash("t" + _layerArray[self.type][3]));
 						self.count++;
 						if (self.count == 4) {
-							transition_tofull(self);
+							Msg.post("#", AdvanceLayerMessage.cascade);
 						}
 					}
 				}
@@ -176,6 +176,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 					// TODO Stopped Here Moor Assembly required.
 					// TODO reset segment layer
 					// TODO Trigger cascade explosion for lower tomatoes layer!!!
+					Msg.post(message.other_id, AdvanceLayerMessage.cascade);
 				}
 		}
 	}
