@@ -173,6 +173,9 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						|| message.other_group == self.hcollisionGroup2
 						|| message.other_group == self.hcollisionGroup3)) {
 					self._bdescend = false;
+					// TODO Stopped Here Moor Assembly required.
+					// TODO reset segment layer
+					// TODO Trigger cascade explosion for lower tomatoes layer!!!
 				}
 		}
 	}
