@@ -160,11 +160,19 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						}
 					}
 				}
+				// Catch Plate
 				// TODO A advoidable collision has happen, more intercept assembly is required
 				if (message.own_group == hash('trigcollf') && message.other_group == self.hcatch_plate) {
-					trace('CrowComm Collision Detected, join our seminar');
 					self._bdescend = false;
 					Msg.post("#finalc", GoMessages.enable);
+				}
+
+				if (message.own_group == hash('trigcollf')
+					&& (message.other_group == self.hcollisionGroup0
+						|| message.other_group == self.hcollisionGroup1
+						|| message.other_group == self.hcollisionGroup2
+						|| message.other_group == self.hcollisionGroup3)) {
+					self._bdescend = false;
 				}
 		}
 	}
