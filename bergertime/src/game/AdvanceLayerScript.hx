@@ -141,6 +141,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 					if (message.own_group == self.hcollisionGroup0) {
 						Msg.post("#coll0", GoMessages.disable);
 						Sprite.play_flipbook("#seg0", hash("t" + _layerArray[self.type][0]));
+						self.c0 = true;
 						self.count++;
 						if (self.count == 4) {
 							Msg.post("#", AdvanceLayerMessage.cascade);
@@ -148,6 +149,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 					} else if (message.own_group == self.hcollisionGroup1) {
 						Msg.post("#coll1", GoMessages.disable);
 						Sprite.play_flipbook("#seg1", hash("t" + _layerArray[self.type][1]));
+						self.c1 = true;
 						self.count++;
 						if (self.count == 4) {
 							Msg.post("#", AdvanceLayerMessage.cascade);
@@ -155,6 +157,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 					} else if (message.own_group == self.hcollisionGroup2) {
 						Msg.post("#coll2", GoMessages.disable);
 						Sprite.play_flipbook("#seg2", hash("t" + _layerArray[self.type][2]));
+						self.c2 = true;
 						self.count++;
 						if (self.count == 4) {
 							Msg.post("#", AdvanceLayerMessage.cascade);
@@ -162,6 +165,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 					} else if (message.own_group == self.hcollisionGroup3) {
 						Msg.post("#coll3", GoMessages.disable);
 						Sprite.play_flipbook("#seg3", hash("t" + _layerArray[self.type][3]));
+						self.c3 = true;
 						self.count++;
 						if (self.count == 4) {
 							Msg.post("#", AdvanceLayerMessage.cascade);
