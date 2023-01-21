@@ -76,11 +76,6 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 	//
 	override function init(self:AdvanceLayerData) {
 		lua.Lua.assert(self.type >= 0, "Unitialized Layer");
-		if (Review.is_supported()) {
-			Defold.pprint("The REVIEW Is SUPPORTED");
-		} else {
-			Defold.pprint("!!!!!!The REVIEW Is NOT SUPPORTED!!!!!!!!");
-		}
 		Msg.post("#", AdvanceLayerMessage.reset);
 		self.tableFloor = lua.Table.create();
 		lua.Table.insert(self.tableFloor, hFloor);
