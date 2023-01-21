@@ -1,4 +1,4 @@
-sound: "/ui/panel/check.wav"
+sound: "/assets//sounds/check.wav"
 looping: 0
 group: "master"
 gain: 1.0
