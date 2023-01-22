@@ -1,0 +1,66 @@
+script: "/scripts/hud/ScoreMenu.gui_script"
+fonts {
+  name: "system_font"
+  font: "/builtins/fonts/system_font.font"
+}
+fonts {
+  name: "ch_font"
+  font: "/localizations/fonts/ch_font.font"
+}
+fonts {
+  name: "en_font"
+  font: "/localizations/fonts/en_font.font"
+}
+fonts {
+  name: "es_font"
+  font: "/localizations/fonts/es_font.font"
+}
+fonts {
+  name: "eu_font"
+  font: "/localizations/fonts/eu_font.font"
+}
+fonts {
+  name: "fr_font"
+  font: "/localizations/fonts/fr_font.font"
+}
+fonts {
+  name: "hr_font"
+  font: "/localizations/fonts/hr_font.font"
+}
+fonts {
+  name: "it_font"
+  font: "/localizations/fonts/it_font.font"
+}
+fonts {
+  name: "ja_font"
+  font: "/localizations/fonts/ja_font.font"
+}
+fonts {
+  name: "ko_font"
+  font: "/localizations/fonts/ko_font.font"
+}
+fonts {
+  name: "ne_font"
+  font: "/localizations/fonts/ne_font.font"
+}
+fonts {
+  name: "pt_font"
+  font: "/localizations/fonts/pt_font.font"
+}
+fonts {
+  name: "ru_font"
+  font: "/localizations/fonts/ru_font.font"
+}
+fonts {
+  name: "vi_font"
+  font: "/localizations/fonts/vi_font.font"
+}
+background_color {
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  w: 0.0
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
+max_nodes: 512
