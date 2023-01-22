@@ -6,7 +6,7 @@
   <string name="project_id" translatable="false">android-apps-c0a5e</string>
   <string name="google_api_key" translatable="false">AIzaSyBeveCeqS8JYEaUIy5NHQPOCvwQOGVTZfA</string>
   <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBeveCeqS8JYEaUIy5NHQPOCvwQOGVTZfA</string>
-  <string name="google_app_id" translatable="false">1:820073556501:android:4e9e3e1c45ae7cc3993c1c</string>
-  <string name="default_android_client_id" translatable="false">820073556501-av3k0mei93s7nanlhslik1s30cje7q3f.apps.googleusercontent.com</string>
+  <string name="google_app_id" translatable="false">1:820073556501:android:e67d1d21a6b18004993c1c</string>
+  <string name="default_android_client_id" translatable="false">820073556501-g6qcqe6okn51obflesr90ret2shioffg.apps.googleusercontent.com</string>
   <string name="default_web_client_id" translatable="false">820073556501-fc5michnd35ir6h58gbi2ku9machabqo.apps.googleusercontent.com</string>
 </resources>
