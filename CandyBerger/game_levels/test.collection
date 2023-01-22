@@ -967,6 +967,107 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "spawn0"
+  prototype: "/entities_go/floors/spawn_point.go"
+  children: "spawn4"
+  position {
+    x: 58.0
+    y: 36.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spawn3"
+  prototype: "/entities_go/floors/spawn_point.go"
+  position {
+    x: 149.0
+    y: 608.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spawn1"
+  prototype: "/entities_go/floors/spawn_point.go"
+  position {
+    x: 1093.0
+    y: 43.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spawn2"
+  prototype: "/entities_go/floors/spawn_point.go"
+  position {
+    x: 1081.0
+    y: 601.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spawn4"
+  prototype: "/entities_go/floors/spawn_point.go"
+  position {
+    x: 541.0
+    y: 313.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "platform2"
