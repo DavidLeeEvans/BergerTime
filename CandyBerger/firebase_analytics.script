@@ -1,0 +1,20 @@
+local analytics = firebase and firebase.analytics
+function init(self)
+	if firebase then
+		firebase.init()
+		print("Firebase init")
+	else
+		print("!!!!!!Firebase NOT init!!!!!!!!")
+	end
+	if analytics then
+		analytics.init()
+		print("Analyticd init")
+	else
+		print("!!!!!!Analyticd NOT init!!!!!!!!")
+	end
+end
+
+function on_reload(self)
+	-- Add input-handling code here
+	-- Remove this function if not needed
+end
