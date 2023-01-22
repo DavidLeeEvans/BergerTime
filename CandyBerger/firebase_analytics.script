@@ -12,6 +12,12 @@ function init(self)
 	else
 		print("!!!!!!Analyticd NOT init!!!!!!!!")
 	end
+	if remoteconfig then
+		remoteconfig.init()
+		print("Remote Config init")
+	else
+		print("!!!!!!Remote Config NOT init!!!!!!!!")
+	end
 end
 
 function on_reload(self)
