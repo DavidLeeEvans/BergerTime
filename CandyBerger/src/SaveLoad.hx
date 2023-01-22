@@ -1,8 +1,8 @@
 import lua.Table;
 
 class SaveLoad {
-	static final APP_NAME:String = "cat_herder";
-	static final FILE_NAME:String = "cat.dat";
+	static final APP_NAME:String = "candy_berger";
+	static final FILE_NAME:String = "candy.dat";
 
 	public static function get_all_saved_data():lua.AnyTable {
 		var fn:String = defold.Sys.get_save_file(APP_NAME, FILE_NAME);
@@ -29,6 +29,7 @@ class SaveLoad {
 				clothe_shirt:0,				
 				clothe_whip:0,				
 				high_score: 0,
+				num_boot: 0,				
 			});
 			defold.Sys.save(fn, t);
 			r = defold.Sys.load(fn);
