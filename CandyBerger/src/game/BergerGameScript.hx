@@ -3,15 +3,10 @@ package game;
 import Defold.hash;
 
 import defold.Factory;
-
-import defold.Go.GoMessages;
-
 import defold.Go;
 import defold.Msg;
 import defold.Profiler;
 import defold.Timer;
-
-import defold.Vmath.vector3;
 
 import defold.support.Script;
 import defold.support.ScriptOnInputAction;
@@ -30,8 +25,6 @@ import dle.Ludobits.GestureMessage;
 import entities.EnemyEntity.EnemyMessage;
 
 import haxe.Log.trace as ltrace;
-
-import haxe.ds.Vector;
 
 import hud.HudGUI.HudGUIMessage;
 
@@ -100,6 +93,7 @@ class BergerGameScript extends Script<BergerGameData> {
 
 		self._scratchPad = lua.Math.random(20, 60);
 
+		lua.Math.randomseed(1000000 * (Socket.gettime() % 1));
 		lua.Math.randomseed(1000000 * (Socket.gettime() % 1));
 		self.handleTimerTreats = Timer.delay(lua.Math.random(TREAT_SPAWNDELAY_LOWER, TREAT_SPAWNDELAY_UPPER), false, treate_create);
 		//
@@ -174,7 +168,7 @@ class BergerGameScript extends Script<BergerGameData> {
 
 	private function treate_create(self:BergerGameData, _, _):Void {
 		final treat:Int = lua.Math.floor(lua.Math.random(1, 4));
-		final n = Rand.int(0, 4);
+		final n = Rand.int(0, 3);
 		var p = Go.get_world_position("/go#" + "spawn" + n);
 		Defold.pprint(p);
 		switch (treat) {
@@ -202,8 +196,8 @@ class BergerGameScript extends Script<BergerGameData> {
 		self._scratchPad = lua.Math.random(20, 60);
 		var mtype:Int = lua.Math.floor(lua.Math.random(start_number, end_number));
 		var p:Vector3;
-		final n = Rand.int(0, 4);
-		var p = Go.get_world_position("/go#" + "spawn" + n);
+		final n = Rand.int(0, 3);
+		var p = Go.get_world_position("/spawn" + Std.string(n));
 		Defold.pprint(p);
 		switch (mtype) {
 			case 1:
