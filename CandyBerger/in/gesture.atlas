@@ -14,9 +14,16 @@ images {
   image: "/in/up.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
-
 images {
   image: "/in/idle.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/in/left.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/in/right.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0
