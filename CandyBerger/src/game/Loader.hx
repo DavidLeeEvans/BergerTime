@@ -36,8 +36,6 @@ typedef LoaderData = {}
 class LoaderScript extends Script<LoaderData> {
 	override function init(self:LoaderData) {
 		Globals.window_size = Window.get_size();
-
-		//
 		Msg.post(".", GoMessages.acquire_input_focus);
 		trace('Loader.hx func init');
 		Globals.set_game_level(-1);

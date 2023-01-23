@@ -6,6 +6,7 @@ import defold.Factory;
 
 import defold.Go.GoMessages;
 
+import defold.Go;
 import defold.Msg;
 import defold.Profiler;
 import defold.Timer;
@@ -19,6 +20,8 @@ import defold.types.*;
 
 import defold.types.Hash;
 
+import dex.util.Rand;
+
 import dle.AdmobMsg;
 import dle.Delayer;
 
@@ -27,6 +30,8 @@ import dle.Ludobits.GestureMessage;
 import entities.EnemyEntity.EnemyMessage;
 
 import haxe.Log.trace as ltrace;
+
+import haxe.ds.Vector;
 
 import hud.HudGUI.HudGUIMessage;
 
@@ -169,7 +174,8 @@ class BergerGameScript extends Script<BergerGameData> {
 
 	private function treate_create(self:BergerGameData, _, _):Void {
 		final treat:Int = lua.Math.floor(lua.Math.random(1, 4));
-		final p = vector3(99, 61, 0);
+		final n = Rand.int(0, 4);
+		var p = Go.get_world_position("/go#" + "spawn" + n);
 		switch (treat) {
 			case 1:
 				Factory.create('#factory_treats_candy', p);
