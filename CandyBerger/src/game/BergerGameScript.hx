@@ -201,17 +201,15 @@ class BergerGameScript extends Script<BergerGameData> {
 		self._scratchPad = lua.Math.random(20, 60);
 		var mtype:Int = lua.Math.floor(lua.Math.random(start_number, end_number));
 		var p:Vector3;
-		if (lua.Math.random(0, 1) > 0.5)
-			p = vector3(161, 640, 0) // LEFT
-		else
-			p = vector3(161, 640, 0); // RIGHT
+		final n = Rand.int(0, 4);
+		var p = Go.get_world_position("/go#" + "spawn" + n);
 		switch (mtype) {
 			case 1:
-			// Msg.post(Factory.create('#factory_eggs', p), EnemyMessage.msg_init, {type: 0});
+				Msg.post(Factory.create('#factory_eggs', p), EnemyMessage.msg_init, {type: 0});
 			case 2:
-			// Msg.post(Factory.create('#factory_pickle', p), EnemyMessage.msg_init, {type: 1});
+				Msg.post(Factory.create('#factory_pickle', p), EnemyMessage.msg_init, {type: 1});
 			case 3:
-				// Msg.post(Factory.create('#factory_sausages', p), EnemyMessage.msg_init, {type: 2});
+				Msg.post(Factory.create('#factory_sausages', p), EnemyMessage.msg_init, {type: 2});
 		}
 	}
 

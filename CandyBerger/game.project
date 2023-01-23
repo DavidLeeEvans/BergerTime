@@ -10,9 +10,8 @@ dependencies#2 = https://github.com/britzl/ludobits/archive/master.zip
 dependencies#3 = https://github.com/defold/extension-review/archive/master.zip
 dependencies#4 = https://github.com/defold/extension-safearea/archive/master.zip
 
-
 [bootstrap]
-main_collection = /Main.collectionc
+main_collection = /game_levels/test.collectionc
 render = /orthographic/render/orthographic.renderc
 
 [input]
@@ -74,3 +73,4 @@ include_dirs = extension-firebase extension-push extension-admob extension-fireb
 background_red = 1.0
 background_green = 0.0
 background_blue = 0.0
+

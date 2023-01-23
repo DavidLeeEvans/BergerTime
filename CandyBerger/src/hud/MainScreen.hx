@@ -10,14 +10,18 @@
 package hud;
 
 import Defold.hash;
+
 import defold.Go.GoMessages;
+
 import defold.Gui;
 import defold.Msg;
 import defold.Sound;
 import defold.Vmath;
 import defold.Window;
+
 import defold.support.GuiScript;
 import defold.support.ScriptOnInputAction;
+
 import defold.types.Hash;
 import defold.types.Message;
 import defold.types.Url;
@@ -66,7 +70,7 @@ class MainScreen extends GuiScript<MainScreenData> {
 				Sound.play('/sounds#click');
 				final t_url = Msg.url("default", "/go", "Main");
 				final i_level:Int = SaveLoad.get_all_saved_data().game_level;
-				final s_level:String = Tools.level_int_to_string(i_level, "/go#fac_l");
+				final s_level:String = Tools.level_int_to_string(i_level, "/go#fac_level"); // TODO testing
 				Msg.post(t_url, MainMessages.remote_new_screen, {next: s_level, current: "/go#mainscreen"});
 			} else if (Gui.pick_node(self.bscore, action.x, action.y)) {
 				trace('Score');
