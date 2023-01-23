@@ -176,6 +176,7 @@ class BergerGameScript extends Script<BergerGameData> {
 		final treat:Int = lua.Math.floor(lua.Math.random(1, 4));
 		final n = Rand.int(0, 4);
 		var p = Go.get_world_position("/go#" + "spawn" + n);
+		Defold.pprint(p);
 		switch (treat) {
 			case 1:
 				Factory.create('#factory_treats_candy', p);
@@ -203,6 +204,7 @@ class BergerGameScript extends Script<BergerGameData> {
 		var p:Vector3;
 		final n = Rand.int(0, 4);
 		var p = Go.get_world_position("/go#" + "spawn" + n);
+		Defold.pprint(p);
 		switch (mtype) {
 			case 1:
 				Msg.post(Factory.create('#factory_eggs', p), EnemyMessage.msg_init, {type: 0});
