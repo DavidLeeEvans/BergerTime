@@ -1,13 +1,16 @@
 package dle;
 
 import defold.support.ScriptOnInputAction;
+
 import defold.types.*;
+
 import defold.types.Hash;
+
 import lua.Table;
 
 @:build(defold.support.MessageBuilder.build())
 class GestureMessage {
-	var on_gesture:{message:GestureTypeResults};
+	var on_gesture:GestureTypeResults;
 }
 
 /**
@@ -66,6 +69,8 @@ extern class BroadCast {
 }
 
 typedef GestureTypeResults = {
+	tap:Bool,
+	double_tap:Bool,
 	swipe_right:Bool,
 	two_finger:{
 		swipe_right:Bool, swipe_up:Bool, swipe_down:Bool, repeated:Bool, tap:Bool, double_tap:Bool, long_press:Bool, swipe_left:Bool

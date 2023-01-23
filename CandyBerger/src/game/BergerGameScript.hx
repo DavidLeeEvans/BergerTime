@@ -26,6 +26,8 @@ import entities.EnemyEntity.EnemyMessage;
 
 import haxe.Log.trace as ltrace;
 
+import hud.GHud.GHudMessage;
+
 import hud.HudGUI.HudGUIMessage;
 
 import lua.lib.luasocket.Socket;
@@ -123,9 +125,26 @@ class BergerGameScript extends Script<BergerGameData> {
 				Defold.pprint('have_banner_called_back MSG actionable ${message.name}');
 				self._loaded = message.name;
 			case GestureMessage.on_gesture:
-				Defold.pprint("GestureMessage on_gesture");
-				// Defold.pprint(message);
-				Defold.pprint(message);
+				if (message.swipe_up) {
+					Defold.pprint('message.swipe_up');
+					Msg.post("/go#ghud", GHudMessage.sup);
+				} else if (message.swipe_left) {
+					Defold.pprint('message.swipe_left');
+					Msg.post("/go#ghud", GHudMessage.sleft);
+				} else if (message.swipe_down) {
+					Defold.pprint('message.swipe_down');
+					Msg.post("/go#ghud", GHudMessage.sdown);
+				} else if (message.swipe_right) {
+					Defold.pprint('message.swipe_right');
+					Msg.post("/go#ghud", GHudMessage.sright);
+				} else if (message.double_tap) {
+					Defold.pprint('message double tap');
+					Msg.post("/go#ghud", GHudMessage.double_tap);
+				} else if (message.tap) {
+					Defold.pprint('message tap');
+					Msg.post("/go#ghud", GHudMessage.tap);
+				}
+
 			case BergerGameMessage.game_load:
 				Globals.set_game_level(message.level);
 			// spawn_entities(); TODO rework this into a global spawner.
@@ -170,7 +189,6 @@ class BergerGameScript extends Script<BergerGameData> {
 		final treat:Int = lua.Math.floor(lua.Math.random(1, 4));
 		final n = Rand.int(0, 3);
 		var p = Go.get_world_position("/go#" + "spawn" + n);
-		Defold.pprint(p);
 		switch (treat) {
 			case 1:
 				Factory.create('#factory_treats_candy', p);
@@ -198,7 +216,6 @@ class BergerGameScript extends Script<BergerGameData> {
 		var p:Vector3;
 		final n = Rand.int(0, 3);
 		var p = Go.get_world_position("/spawn" + Std.string(n));
-		Defold.pprint(p);
 		switch (mtype) {
 			case 1:
 				Msg.post(Factory.create('#factory_eggs', p), EnemyMessage.msg_init, {type: 0});
