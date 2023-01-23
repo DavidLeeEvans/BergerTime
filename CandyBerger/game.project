@@ -10,7 +10,7 @@ dependencies#2 = https://github.com/britzl/ludobits/archive/master.zip
 dependencies#3 = https://github.com/defold/extension-review/archive/master.zip
 
 [bootstrap]
-main_collection = /game_levels/test.collectionc
+main_collection = /game_levels/level00.collectionc
 render = /orthographic/render/orthographic.renderc
 
 [input]
@@ -67,5 +67,4 @@ app_manifest = /generated.appmanifest
 
 [library]
 include_dirs = extension-firebase extension-push extension-admob extension-firebase-analytics extension-firebase-remoteconfig extension-push
-
 
