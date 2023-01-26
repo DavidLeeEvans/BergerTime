@@ -7,7 +7,7 @@ import defold.types.*;
 import defold.types.Hash;
 
 import lua.Table;
-
+@:luaRequire("in.gesture")
 @:build(defold.support.MessageBuilder.build())
 class GestureMessage {
 	var on_gesture:GestureTypeResults;
@@ -27,11 +27,15 @@ typedef LudoBitsCP = {
 	@param cp
 	@param points
 **/
+@:luaRequire("ludobits.m.bezier")
 @:native("bezier")
 extern class LudobitsBezier {
 	static function create<T>(cp:Array<LudoBitsCP>, points:Int):Array<Vector3>;
 }
 
+
+
+@:luaRequire("ludobits.m.broadcast")
 @:native("broadcast")
 extern class BroadCast {
 	/**
