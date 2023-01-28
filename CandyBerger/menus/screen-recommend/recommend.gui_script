@@ -1,5 +1,4 @@
 -- local dirtylarry = require("dirtylarry.dirtylarry")
-
 HTML = [[
 <html>
 <head>
@@ -53,9 +52,7 @@ local function webview_available()
 end
 
 local function webview_exists(self)
-    if not webview_available() then
-        return false
-    end
+    if not webview_available() then return false end
     if not self.webview_id then
         print("WebView has been destroyed. Create it again before calling this")
         return false
@@ -73,7 +70,7 @@ end
 
 function init(self)
     msg.post(".", "acquire_input_focus")
-    msg.post("@render:", "clear_color", { color = vmath.vector4(1.0) })
+    msg.post("@render:", "clear_color", {color = vmath.vector4(1.0)})
 
     if not webview_available() then return end
 
@@ -86,65 +83,74 @@ function init(self)
 end
 
 function on_message(self, message_id, message, url)
-  if message_id == hash("cancel_pane") then
-    -- todo remove 
-    print("cancel_pane")
-end 
-if message_id == hash("set_url") then
-  self.url = message
-end
+    if message_id == hash("cancel_pane") then
+        -- todo remove 
+        print("cancel_pane")
+        webview.set_visible(self.webview_id, 0)
+        webview.destroy(self.webview_id)
+        self.webview_id = nil
+    end
 
-if message_id == hash("set_html") then
-  HTML = message
-end
+    if message_id == hash("set_raw") then 
+      print("set_raw")
+      webview.open_raw(self.webview_id, HTML)
+    end
 
-if message_id == hash("set_title") then
-  self.title = message
-end
+    if message_id == hash("show_raw") then 
+      print("show_raw")
+      webview.set_position(self.webview_id, 0, 0, -1, 300)
+        webview.set_visible(self.webview_id, 1)
+        print('show raw')
+    end
 
-if message_id == hash("set_body") then
-  self.body = message
-end
+    if message_id == hash("set_url") then self.url = message end
 
-if message_id == hash("show_pane") then
-  -- show panel
-  print("show pane")
-end
+    if message_id == hash("set_html") then HTML = message end
+
+    if message_id == hash("set_title") then self.title = message end
+
+    if message_id == hash("set_body") then self.body = message end
+
+    if message_id == hash("show_pane") then
+      print("show pane")
+        webview.open(self.webview_id,self.url)
+        webview.set_position(self.webview_id, 0, 0, -1, 300)
+        webview.set_visible(self.webview_id, 1)
+    end
 end
 
 function on_input(self, action_id, action)
     -- dirtylarry:button("button_open", action_id, action, function()
-        if not webview_exists(self) then return end
+    if not webview_exists(self) then return end
 
-        webview.open(self.webview_id, "https://www.google.com")
+    webview.open(self.webview_id, "https://www.google.com")
 
-    --dirtylarry:button("button_eval", action_id, action, function()
-        if not webview_exists(self) then return end
+    -- dirtylarry:button("button_eval", action_id, action, function()
+    if not webview_exists(self) then return end
 
-        webview.eval(self.webview_id, "1+1")
+    webview.eval(self.webview_id, "1+1")
 
---    dirtylarry:button("button_html", action_id, action, function()
---        if not webview_exists(self) then return end
+    --    dirtylarry:button("button_html", action_id, action, function()
+    --        if not webview_exists(self) then return end
 
-  --  ??    webview.open_raw(self.webview_id, HTML)
-    
-  --      if not webview_exists(self) then return end
+    --  ??    webview.open_raw(self.webview_id, HTML)
+
+    --      if not webview_exists(self) then return end
 
     -- ??   webview.set_visible(self.webview_id, 1)
-    
+
     -- dirtylarry:button("button_hide", action_id, action, function()
     --    if not webview_exists(self) then return end
 
--- ??        webview.set_visible(self.webview_id, 0)
+    -- ??        webview.set_visible(self.webview_id, 0)
 
-    
---        self.webview_id = webview.create(webview_callback)
- --       webview.set_position(self.webview_id, 0, 0, -1, 300)
+    --        self.webview_id = webview.create(webview_callback)
+    --       webview.set_position(self.webview_id, 0, 0, -1, 300)
 
-    --dirtylarry:button("button_destroy", action_id, action, function()
-      --  if not webview_exists(self) then return end
+    -- dirtylarry:button("button_destroy", action_id, action, function()
+    --  if not webview_exists(self) then return end
 
-        -- ??webview.destroy(self.webview_id)
-        -- ?? self.webview_id = nil
+    -- ??webview.destroy(self.webview_id)
+    -- ?? self.webview_id = nil
 
-      end
+end
