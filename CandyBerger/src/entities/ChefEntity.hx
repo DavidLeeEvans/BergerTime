@@ -27,6 +27,8 @@ import entities.PepperEntity.PepperMessage;
 
 import game.BergerGameScript.BergerGameMessage;
 
+import hud.GHud;
+
 import hud.HudGUI.HudGUIMessage;
 
 @:build(defold.support.HashBuilder.build())
@@ -169,6 +171,23 @@ class ChefEntity extends Script<ChefData> {
 
 	override function on_message<T>(self:ChefData, message_id:Message<T>, message:T, _):Void {
 		switch (message_id) {
+			case GHudMessage.double_tap:
+				Defold.pprint("double_tap");
+			case GHudMessage.tap:
+				Defold.pprint("tap");
+
+			case GHudMessage.sdown:
+				Defold.pprint("sdown");
+
+			case GHudMessage.sup:
+				Defold.pprint("sup");
+
+			case GHudMessage.sleft:
+				Defold.pprint("seleft");
+
+			case GHudMessage.sright:
+				Defold.pprint("sright");
+
 			case PhysicsMessages.ray_cast_response:
 				// trace('message_id $message_id message $message');
 				// TODO try to get script property message.id For Future Use?? ?
