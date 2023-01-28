@@ -128,21 +128,27 @@ class BergerGameScript extends Script<BergerGameData> {
 				if (message.swipe_up) {
 					Defold.pprint('message.swipe_up');
 					Msg.post("/go#ghud", GHudMessage.sup);
+					Msg.post("/chef#ChefEntity", GHudMessage.sup);
 				} else if (message.swipe_left) {
 					Defold.pprint('message.swipe_left');
 					Msg.post("/go#ghud", GHudMessage.sleft);
+					Msg.post("/chef#ChefEntity", GHudMessage.sleft);
 				} else if (message.swipe_down) {
 					Defold.pprint('message.swipe_down');
 					Msg.post("/go#ghud", GHudMessage.sdown);
+					Msg.post("/chef#ChefEntity", GHudMessage.sdown);
 				} else if (message.swipe_right) {
 					Defold.pprint('message.swipe_right');
 					Msg.post("/go#ghud", GHudMessage.sright);
+					Msg.post("/chef#ChefEntity", GHudMessage.sright);
 				} else if (message.double_tap) {
 					Defold.pprint('message double tap');
 					Msg.post("/go#ghud", GHudMessage.double_tap);
+					Msg.post("/chef#ChefEntity", GHudMessage.double_tap);
 				} else if (message.tap) {
 					Defold.pprint('message tap');
 					Msg.post("/go#ghud", GHudMessage.tap);
+					Msg.post("/chef#ChefEntity", GHudMessage.tap);
 				}
 
 			case BergerGameMessage.game_load:
