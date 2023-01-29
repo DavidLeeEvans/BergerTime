@@ -4,6 +4,9 @@ import Defold.hash;
 
 import defold.Go;
 import defold.Msg;
+
+import defold.Physics.PhysicsMessages;
+
 import defold.Sprite;
 import defold.Timer;
 import defold.Vmath;
