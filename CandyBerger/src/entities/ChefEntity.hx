@@ -51,10 +51,12 @@ private class ChefEntityHash {
 	var pepper;
 	//
 	var chef_die;
+	var chef_idle;
 	var chef_front;
 	var chef_back;
 	var chef_left;
 	var chef_right;
+	//
 }
 
 private typedef ChefData = {
@@ -75,6 +77,8 @@ private typedef ChefData = {
 	var bEastEnable:Bool;
 	var bSouthEnable:Bool;
 	var bWestEnable:Bool;
+	//
+	var _movement_counter:Float;
 }
 
 class ChefEntity extends Script<ChefData> {
@@ -104,14 +108,14 @@ class ChefEntity extends Script<ChefData> {
 		self.bSouthEnable = false;
 		self.bWestEnable = false;
 		self.bGravity = false;
+		self._movement_counter = 0;
 
-		//
 		self.chefSpeed = CHEF_SPEED;
 		self.numPepperShots = 6;
 		Msg.post(sHud, HudGUIMessage.set_pepper, {num: self.numPepperShots});
 
 		//
-		self.faceDir = 0; // 0 Up, 1, Left, 2 Down, 3 Right
+		self.faceDir = 0; // 0 Up, 1, Left, 2 Down, 3 Right, 4 Idle
 		//
 		self.tableFloor = lua.Table.create();
 		self.tableBorder = lua.Table.create();
@@ -165,28 +169,50 @@ class ChefEntity extends Script<ChefData> {
 			// West
 			Physics.raycast_async(p, p + vector3(-weray / 2.0, 0.0, 0), self.tableBorder, RC_BORDER_WEST);
 			Tools.draw_line(p, p + vector3(-weray, 0, 0));
-			//
 		}
+		movement(self, dt);
 	}
 
 	override function on_message<T>(self:ChefData, message_id:Message<T>, message:T, _):Void {
 		switch (message_id) {
 			case GHudMessage.double_tap:
-				Defold.pprint("double_tap");
+				Defold.pprint("Chef double_tap");
+			// TODO Spawn Pepper
+
 			case GHudMessage.tap:
-				Defold.pprint("tap");
+				Defold.pprint("Chef tap");
+				if (self.faceDir != 4) {
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_idle});
+					self.faceDir = 4;
+				}
 
 			case GHudMessage.sdown:
-				Defold.pprint("sdown");
+				Defold.pprint("Chef sdown");
+				if (self.faceDir != 2) {
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_back});
+					self.faceDir = 2;
+				}
 
 			case GHudMessage.sup:
-				Defold.pprint("sup");
+				Defold.pprint("Chef sup");
+				if (self.faceDir != 0) {
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_front});
+					self.faceDir = 0;
+				}
 
 			case GHudMessage.sleft:
-				Defold.pprint("seleft");
+				Defold.pprint("Chef seleft");
+				if (self.faceDir != 1) {
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_left});
+					self.faceDir = 1;
+				}
 
 			case GHudMessage.sright:
-				Defold.pprint("sright");
+				Defold.pprint("Chef sright");
+				if (self.faceDir != 3) {
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_right});
+					self.faceDir = 3;
+				}
 
 			case PhysicsMessages.ray_cast_response:
 				// trace('message_id $message_id message $message');
@@ -267,10 +293,10 @@ class ChefEntity extends Script<ChefData> {
 	}
 
 	override function on_input(self:ChefData, action_id:Hash, action:ScriptOnInputAction) {
-		final p = Go.get(".", "position");
+		final p = Go.get(".", "position"); // TODO WHY ??????
 		// North
 		if (action_id == ChefEntityHash.move_up && !self.bNorthEnable) {
-			Go.set(".", "position", p + vector3(0, self.chefSpeed, 0));
+			Go.set(".", "position", p + vector3(0, self.chefSpeed, 0)); // TODO WHY ?????? For Enemies:
 			if (self.faceDir != 0)
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_front});
 			self.faceDir = 0;
@@ -313,6 +339,8 @@ class ChefEntity extends Script<ChefData> {
 		return false;
 	}
 
+	override function on_reload(self:ChefData):Void {}
+
 	override function final_(self:ChefData):Void {
 		Msg.post(".", GoMessages.release_input_focus);
 	}
@@ -321,5 +349,25 @@ class ChefEntity extends Script<ChefData> {
 		self.chefSpeed = CHEF_SPEED;
 	}
 
-	override function on_reload(self:ChefData):Void {}
+	private function movement(self:ChefData, dt:Float):Void {
+		var p:Vector3;
+		self._movement_counter += dt;
+		if (self._movement_counter < .020)
+			return;
+		self._movement_counter = 0;
+		p = Go.get_world_position();
+		// 0 Up, 1, Left, 2 Down, 3 Right, 4 Idle
+		switch (self.faceDir) {
+			case 0:
+				Go.set_position(p + Vmath.vector3(0, 1, 0));
+			case 1:
+				Go.set_position(p + Vmath.vector3(-1, 0, 0));
+			case 2:
+				Go.set_position(p + Vmath.vector3(0, -1, 0));
+			case 3:
+				Go.set_position(p + Vmath.vector3(1, 0, 0));
+			case 4:
+				// Left empty idle
+		}
+	}
 }
