@@ -4,7 +4,6 @@ import Defold.hash;
 
 import defold.Go;
 import defold.Msg;
-import defold.Physics;
 import defold.Sprite;
 import defold.Timer;
 import defold.Vmath;
@@ -19,7 +18,6 @@ import defold.types.Vector3;
 @:build(defold.support.MessageBuilder.build())
 class AdvanceLayerMessage {
 	var reset;
-	var test;
 	var cascade:Hash;
 }
 
@@ -116,8 +114,6 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 
 	override function on_message<T>(self:AdvanceLayerData, message_id:Message<T>, message:T, url:Url) {
 		switch (message_id) {
-			case AdvanceLayerMessage.test:
-				trace('test called NOP');
 			case AdvanceLayerMessage.reset:
 				self.c0 = false;
 				self.c1 = false;
@@ -250,7 +246,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		Go.cancel_animations(".", "position");
 		Go.set(".", "position", self._scrap_reg_vector3);
 		self._bdescend = true;
-		Msg.post(self.callback,)
+		Msg.post(self.callback, AdvanceLayerMessage.reset);
 	}
 
 	private function reset_layer(self:AdvanceLayerData):Void {
