@@ -18,7 +18,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: ""anime_chef_back"
+  id: "anime_chef_back"
   images {
     image: "/assets/images/chef-back0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -37,7 +37,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: ""anime_chef_left"
+  id: "anime_chef_left"
   images {
     image: "/assets/images/chef-left0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -56,7 +56,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: ""anime_chef_right"
+  id: "anime_chef_right"
   images {
     image: "/assets/images/chef-right0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -75,7 +75,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: ""anime_chef_die"
+  id: "anime_chef_die"
   images {
     image: "/assets/images/chef-dead0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF

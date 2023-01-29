@@ -21,7 +21,9 @@ import defold.types.Vector3;
 @:build(defold.support.MessageBuilder.build())
 class AdvanceLayerMessage {
 	var reset;
-	var cascade:Hash;
+	var fall;
+	var cascade_partial:{callback_id:Hash};
+	var cascade:{callback_id:Hash};
 }
 
 typedef AdvanceLayerData = {
@@ -117,6 +119,11 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 
 	override function on_message<T>(self:AdvanceLayerData, message_id:Message<T>, message:T, url:Url) {
 		switch (message_id) {
+			case AdvanceLayerMessage.fall:
+				self.callback = null;
+				transition_tofull(self);
+			case AdvanceLayerMessage.cascade_partial:
+			// TODO AdvanceLayerMessage.cascade_partial
 			case AdvanceLayerMessage.reset:
 				self.c0 = false;
 				self.c1 = false;
@@ -133,8 +140,9 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 				Msg.post("#coll3", GoMessages.enable);
 				Sprite.play_flipbook("#seg3", hash(_layerArray[self.type][3]));
 				Msg.post("#finalc", GoMessages.disable);
+				enable_segments(self);
 			case AdvanceLayerMessage.cascade:
-				self.callback = message;
+				self.callback = message.callback_id;
 				transition_tofull(self);
 			case PhysicsMessages.trigger_response:
 				trace('message_id $message_id message $message');
@@ -146,7 +154,8 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						self.c0 = true;
 						self.count++;
 						if (self.count == 4) {
-							Msg.post("#", AdvanceLayerMessage.cascade, Go.get_id());
+							// Msg.post("#", AdvanceLayerMessage.cascade, {callback_id: Go.get_id()});
+							Msg.post("#", AdvanceLayerMessage.fall);
 						}
 					} else if (message.own_group == self.hcollisionGroup1) {
 						Msg.post("#coll1", GoMessages.disable);
@@ -154,7 +163,8 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						self.c1 = true;
 						self.count++;
 						if (self.count == 4) {
-							Msg.post("#", AdvanceLayerMessage.cascade, Go.get_id());
+							// Msg.post("#", AdvanceLayerMessage.cascade, {callback_id: Go.get_id()});
+							Msg.post("#", AdvanceLayerMessage.fall);
 						}
 					} else if (message.own_group == self.hcollisionGroup2) {
 						Msg.post("#coll2", GoMessages.disable);
@@ -162,7 +172,8 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						self.c2 = true;
 						self.count++;
 						if (self.count == 4) {
-							Msg.post("#", AdvanceLayerMessage.cascade, Go.get_id());
+							// Msg.post("#", AdvanceLayerMessage.cascade, {callback_id: Go.get_id()});
+							Msg.post("#", AdvanceLayerMessage.fall);
 						}
 					} else if (message.own_group == self.hcollisionGroup3) {
 						Msg.post("#coll3", GoMessages.disable);
@@ -170,7 +181,8 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						self.c3 = true;
 						self.count++;
 						if (self.count == 4) {
-							Msg.post("#", AdvanceLayerMessage.cascade, Go.get_id());
+							// Msg.post("#", AdvanceLayerMessage.cascade, {callback_id: Go.get_id()});
+							Msg.post("#", AdvanceLayerMessage.fall);
 						}
 					}
 				}
@@ -190,7 +202,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 					// TODO Stopped Here Moor Assembly required.
 					// TODO reset segment layer
 					// TODO Trigger cascade explosion for lower tomatoes layer!!!
-					Msg.post(message.other_id, AdvanceLayerMessage.cascade, Go.get_id());
+					Msg.post(message.other_id, AdvanceLayerMessage.cascade, {callback_id: Go.get_id()});
 				}
 		}
 	}
@@ -225,6 +237,12 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		Msg.post("#coll1", GoMessages.enable);
 		Msg.post("#coll2", GoMessages.enable);
 		Msg.post("#coll3", GoMessages.enable);
+
+		Msg.post("#seg0", GoMessages.enable);
+		Msg.post("#seg1", GoMessages.enable);
+		Msg.post("#seg2", GoMessages.enable);
+		Msg.post("#seg3", GoMessages.enable);
+
 		Sprite.play_flipbook("#seg0", hash(_layerArray[self.type][0]));
 		Sprite.play_flipbook("#seg1", hash(_layerArray[self.type][1]));
 		Sprite.play_flipbook("#seg2", hash(_layerArray[self.type][2]));
@@ -249,7 +267,12 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		Go.cancel_animations(".", "position");
 		Go.set(".", "position", self._scrap_reg_vector3);
 		self._bdescend = true;
-		Msg.post(self.callback, AdvanceLayerMessage.reset);
+		if (self.callback != null) {
+			// Defold.pprint("!!!!!!!!!!!!!!!!!!!!!!!!!!!Callback is not NULL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			Msg.post(self.callback, AdvanceLayerMessage.reset);
+			Defold.pprint('!!!!!!!!!!!!!!!Reset Called ${self.callback} !!!!!!!!!!!!!!!');
+			self.callback = null;
+		}
 	}
 
 	private function reset_layer(self:AdvanceLayerData):Void {
