@@ -30,6 +30,6 @@ key_trigger {
 
 key_trigger {
   input: KEY_P
-  action: "pepper"
+  action: "move_pepper"
 }
 

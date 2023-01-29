@@ -48,14 +48,14 @@ private class ChefEntityHash {
 	var move_left;
 	var move_right;
 	//
-	var pepper;
+	var move_pepper;
 	//
-	var chef_die;
-	var chef_idle;
-	var chef_front;
-	var chef_back;
-	var chef_left;
-	var chef_right;
+	var anime_chef_die;
+	var anime_chef_idle;
+	var anime_chef_front;
+	var anime_chef_back;
+	var anime_chef_left;
+	var anime_chef_right;
 	//
 }
 
@@ -63,11 +63,9 @@ private typedef ChefData = {
 	var chefSpeed:Float;
 	var faceDir:Int;
 	//
-	//
 	var tableFloor:lua.Table<Int, Hash>;
 	var tableBorder:lua.Table<Int, Hash>;
 	var tableMovement:lua.Table<Int, Hash>;
-
 	//
 	var numPepperShots:Int;
 	// Direction flags
@@ -182,35 +180,35 @@ class ChefEntity extends Script<ChefData> {
 			case GHudMessage.tap:
 				Defold.pprint("Chef tap");
 				if (self.faceDir != 4) {
-					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_idle});
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_idle});
 					self.faceDir = 4;
 				}
 
 			case GHudMessage.sdown:
 				Defold.pprint("Chef sdown");
 				if (self.faceDir != 2) {
-					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_back});
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_back});
 					self.faceDir = 2;
 				}
 
 			case GHudMessage.sup:
 				Defold.pprint("Chef sup");
 				if (self.faceDir != 0) {
-					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_front});
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_front});
 					self.faceDir = 0;
 				}
 
 			case GHudMessage.sleft:
 				Defold.pprint("Chef seleft");
 				if (self.faceDir != 1) {
-					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_left});
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_left});
 					self.faceDir = 1;
 				}
 
 			case GHudMessage.sright:
 				Defold.pprint("Chef sright");
 				if (self.faceDir != 3) {
-					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_right});
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_right});
 					self.faceDir = 3;
 				}
 
@@ -252,7 +250,7 @@ class ChefEntity extends Script<ChefData> {
 					self.bWestEnable = true;
 				}
 			case SpriteMessages.animation_done:
-				if (message.id == ChefEntityHash.chef_die) {
+				if (message.id == ChefEntityHash.anime_chef_die) {
 					Globals.total_num_lives--;
 					if (Globals.total_num_lives <= 0)
 						Msg.post("/BergerGameScript", BergerGameMessage.game_over); // TODO NOT RIGHT
@@ -265,7 +263,7 @@ class ChefEntity extends Script<ChefData> {
 					var not_peppered:Bool = Go.get(enemy_script, "not_peppered");
 					if (not_peppered) {
 						self.chefSpeed = 0; // Set Russian Chef Speed to Zero
-						Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_die});
+						Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_die});
 					}
 				}
 
@@ -298,24 +296,24 @@ class ChefEntity extends Script<ChefData> {
 		if (action_id == ChefEntityHash.move_up && !self.bNorthEnable) {
 			Go.set(".", "position", p + vector3(0, self.chefSpeed, 0)); // TODO WHY ?????? For Enemies:
 			if (self.faceDir != 0)
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_front});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_front});
 			self.faceDir = 0;
 		} else if (action_id == ChefEntityHash.move_down && !self.bSouthEnable) {
 			Go.set(".", "position", p + vector3(0, -self.chefSpeed, 0));
 			if (self.faceDir != 2)
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_back});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_back});
 			self.faceDir = 2;
 		} else if (action_id == ChefEntityHash.move_left && self.bWestEnable) {
 			Go.set(".", "position", p + vector3(-self.chefSpeed, 0, 0));
 			if (self.faceDir != 3)
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_left});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_left});
 			self.faceDir = 3;
 		} else if (action_id == ChefEntityHash.move_right && self.bEastEnable) {
 			Go.set(".", "position", p + vector3(self.chefSpeed, 0, 0));
 			if (self.faceDir != 1)
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.chef_right});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_right});
 			self.faceDir = 1;
-		} else if (action_id == ChefEntityHash.pepper && action.released) {
+		} else if (action_id == ChefEntityHash.move_pepper && action.released) {
 			trace('pepper');
 			var collision_object:Vector3 = vector3(0, 0, 0);
 			switch (self.faceDir) {
@@ -359,13 +357,17 @@ class ChefEntity extends Script<ChefData> {
 		// 0 Up, 1, Left, 2 Down, 3 Right, 4 Idle
 		switch (self.faceDir) {
 			case 0:
-				Go.set_position(p + Vmath.vector3(0, 1, 0));
+				if (self.bNorthEnable)
+					Go.set_position(p + Vmath.vector3(0, 1, 0));
 			case 1:
-				Go.set_position(p + Vmath.vector3(-1, 0, 0));
+				if (self.bWestEnable)
+					Go.set_position(p + Vmath.vector3(-1, 0, 0));
 			case 2:
-				Go.set_position(p + Vmath.vector3(0, -1, 0));
+				if (self.bSouthEnable)
+					Go.set_position(p + Vmath.vector3(0, -1, 0));
 			case 3:
-				Go.set_position(p + Vmath.vector3(1, 0, 0));
+				if (self.bEastEnable)
+					Go.set_position(p + Vmath.vector3(1, 0, 0));
 			case 4:
 				// Left empty idle
 		}
