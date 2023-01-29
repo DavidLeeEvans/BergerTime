@@ -9,8 +9,6 @@ import defold.Sprite;
 import defold.Timer;
 import defold.Vmath;
 
-import defold.extensions.review.Review;
-
 import defold.support.Script;
 
 import defold.types.*;
@@ -22,7 +20,7 @@ import defold.types.Vector3;
 class AdvanceLayerMessage {
 	var reset;
 	var test;
-	var cascade;
+	var cascade:Hash;
 }
 
 typedef AdvanceLayerData = {
@@ -47,6 +45,7 @@ typedef AdvanceLayerData = {
 	var hcollisionGroup1:Hash;
 	var hcollisionGroup2:Hash;
 	var hcollisionGroup3:Hash;
+	var callback:Hash;
 	//
 	var hcatch_plate:Hash;
 	//
@@ -136,6 +135,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 				Sprite.play_flipbook("#seg3", hash(_layerArray[self.type][3]));
 				Msg.post("#finalc", GoMessages.disable);
 			case AdvanceLayerMessage.cascade:
+				self.callback = message;
 				transition_tofull(self);
 			case PhysicsMessages.trigger_response:
 				trace('message_id $message_id message $message');
@@ -147,7 +147,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						self.c0 = true;
 						self.count++;
 						if (self.count == 4) {
-							Msg.post("#", AdvanceLayerMessage.cascade);
+							Msg.post("#", AdvanceLayerMessage.cascade, Go.get_id());
 						}
 					} else if (message.own_group == self.hcollisionGroup1) {
 						Msg.post("#coll1", GoMessages.disable);
@@ -155,7 +155,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						self.c1 = true;
 						self.count++;
 						if (self.count == 4) {
-							Msg.post("#", AdvanceLayerMessage.cascade);
+							Msg.post("#", AdvanceLayerMessage.cascade, Go.get_id());
 						}
 					} else if (message.own_group == self.hcollisionGroup2) {
 						Msg.post("#coll2", GoMessages.disable);
@@ -163,7 +163,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						self.c2 = true;
 						self.count++;
 						if (self.count == 4) {
-							Msg.post("#", AdvanceLayerMessage.cascade);
+							Msg.post("#", AdvanceLayerMessage.cascade, Go.get_id());
 						}
 					} else if (message.own_group == self.hcollisionGroup3) {
 						Msg.post("#coll3", GoMessages.disable);
@@ -171,7 +171,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						self.c3 = true;
 						self.count++;
 						if (self.count == 4) {
-							Msg.post("#", AdvanceLayerMessage.cascade);
+							Msg.post("#", AdvanceLayerMessage.cascade, Go.get_id());
 						}
 					}
 				}
@@ -191,7 +191,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 					// TODO Stopped Here Moor Assembly required.
 					// TODO reset segment layer
 					// TODO Trigger cascade explosion for lower tomatoes layer!!!
-					Msg.post(message.other_id, AdvanceLayerMessage.cascade);
+					Msg.post(message.other_id, AdvanceLayerMessage.cascade, Go.get_id());
 				}
 		}
 	}
@@ -250,6 +250,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		Go.cancel_animations(".", "position");
 		Go.set(".", "position", self._scrap_reg_vector3);
 		self._bdescend = true;
+		Msg.post(self.callback,)
 	}
 
 	private function reset_layer(self:AdvanceLayerData):Void {
