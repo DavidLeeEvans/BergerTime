@@ -10,7 +10,7 @@ dependencies#2 = https://github.com/britzl/ludobits/archive/master.zip
 dependencies#3 = https://github.com/defold/extension-review/archive/master.zip
 
 [bootstrap]
-main_collection = /game_levels/level00.collectionc
+main_collection = /menus/screen-recommend/recommend.collectionc
 render = /orthographic/render/orthographic.renderc
 
 [input]
