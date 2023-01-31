@@ -4,26 +4,7 @@ animations {
     image: "/assets/images/chef-front0.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
-  playback: PLAYBACK_FORWARD
-  fps: 15
-  flip_horizontal: 0
-  flip_vertical: 0
-}
-animations {
-  id: "anime_chef_front"
-  images {
-    image: "/assets/images/chef-front0.png"
-    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-  }
-  images {
-    image: "/assets/images/chef-front1.png"
-    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-  }
-  images {
-    image: "/assets/images/chef-front2.png"
-    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-  }
-  playback: PLAYBACK_LOOP_FORWARD
+  playback: PLAYBACK_ONCE_FORWARD
   fps: 15
   flip_horizontal: 0
   flip_vertical: 0
@@ -113,6 +94,25 @@ animations {
   }
   playback: PLAYBACK_ONCE_FORWARD
   fps: 11
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "anime_chef_front"
+  images {
+    image: "/assets/images/chef-front0.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/assets/images/chef-front1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/assets/images/chef-front2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 15
   flip_horizontal: 0
   flip_vertical: 0
 }
