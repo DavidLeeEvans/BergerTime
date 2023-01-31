@@ -56,6 +56,7 @@ shared_state = 1
 gravity_y = -1000.0
 scale = 0.01
 debug = 0
+max_collision_object_count = 256
 
 [admob]
 app_id_ios = ca-app-pub-3940256099942544~1458002511
@@ -67,4 +68,7 @@ app_manifest = /generated.appmanifest
 
 [library]
 include_dirs = extension-firebase extension-push extension-admob extension-firebase-analytics extension-firebase-remoteconfig extension-push
+
+[sprite]
+max_count = 256
 
