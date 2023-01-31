@@ -1,4 +1,4 @@
-name: "l02"
+name: "l00"
 instances {
   id: "ladder13"
   prototype: "/entities_go/floors/middle_ladder.go"
@@ -784,7 +784,7 @@ instances {
   prototype: "/entities_go/chef/chef.go"
   position {
     x: 18.0
-    y: 628.0
+    y: 603.0
     z: 0.0
   }
   rotation {
@@ -813,6 +813,14 @@ instances {
     z: 0.0
     w: 1.0
   }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
   scale3 {
     x: 1.0
     y: 1.0
@@ -832,6 +840,14 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
   }
   scale3 {
     x: 1.0
@@ -853,6 +869,14 @@ instances {
     z: 0.0
     w: 1.0
   }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
   scale3 {
     x: 1.0
     y: 1.0
@@ -872,6 +896,14 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "3.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
   }
   scale3 {
     x: 1.0
@@ -893,6 +925,14 @@ instances {
     z: 0.0
     w: 1.0
   }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "4.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
   scale3 {
     x: 1.0
     y: 1.0
@@ -912,6 +952,14 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "5.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
   }
   scale3 {
     x: 1.0
@@ -1006,6 +1054,26 @@ instances {
   position {
     x: 541.0
     y: 313.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "camera"
+  prototype: "/orthographic/camera.go"
+  position {
+    x: 568.0
+    y: 320.0
     z: 0.0
   }
   rotation {
@@ -1390,6 +1458,40 @@ embedded_instances {
   "components {\n"
   "  id: \"data_blob\"\n"
   "  component: \"/game_levels/data_blob.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  property_decls {\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"ghud\"\n"
+  "  component: \"/in/ghud.gui\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  property_decls {\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"gesture\"\n"
+  "  component: \"/in/gesture.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
