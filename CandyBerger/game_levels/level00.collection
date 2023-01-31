@@ -1088,6 +1088,306 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "catch-plate5"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 50.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate6"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 82.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate7"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 114.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate8"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 146.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate9"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 178.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate10"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 50.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate11"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 82.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate12"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 114.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate13"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 146.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate14"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 178.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate15"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 50.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate16"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 82.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate17"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 114.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate18"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 146.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch-plate19"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 178.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "platform2"
@@ -1548,7 +1848,7 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "catchplate"
+  id: "catchplate4"
   children: "catch-plate"
   children: "catch-plate1"
   children: "catch-plate2"
@@ -1556,8 +1856,83 @@ embedded_instances {
   children: "catch-plate4"
   data: ""
   position {
-    x: -2.0
-    y: 120.0
+    x: 885.0
+    y: 20.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "catchplate1"
+  children: "catch-plate5"
+  children: "catch-plate6"
+  children: "catch-plate7"
+  children: "catch-plate8"
+  children: "catch-plate9"
+  data: ""
+  position {
+    x: 15.0
+    y: 20.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "catchplate2"
+  children: "catch-plate10"
+  children: "catch-plate11"
+  children: "catch-plate12"
+  children: "catch-plate13"
+  children: "catch-plate14"
+  data: ""
+  position {
+    x: 278.0
+    y: 20.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "catchplate3"
+  children: "catch-plate15"
+  children: "catch-plate16"
+  children: "catch-plate17"
+  children: "catch-plate18"
+  children: "catch-plate19"
+  data: ""
+  position {
+    x: 580.0
+    y: 20.0
     z: 0.0
   }
   rotation {
