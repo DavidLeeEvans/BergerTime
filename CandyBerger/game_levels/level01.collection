@@ -287,6 +287,26 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "catch_plate"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 113.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 collection_instances {
   id: "ladder_long"
   collection: "/prefabs_go/ladder_long.collection"
@@ -487,6 +507,46 @@ collection_instances {
     z: 1.0
   }
 }
+collection_instances {
+  id: "walk_plate_long"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 237.0
+    y: 573.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long1"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 395.0
+    y: 573.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "platform2"
@@ -533,6 +593,7 @@ embedded_instances {
 }
 embedded_instances {
   id: "go"
+  children: "catch_plate"
   children: "spawn4"
   children: "stop_plate"
   data: "components {\n"
