@@ -51,6 +51,7 @@ typedef AdvanceLayerData = {
 	var callback:Hash;
 	//
 	var hcatch_plate:Hash;
+	var htransisition_plate:Hash;
 	//
 	var bfallingOnOff:Bool;
 	var _scrap_reg_vector3:Vector3;
@@ -91,6 +92,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		self.hcollisionGroup3 = hash('trigcoll3');
 		//
 		self.hcatch_plate = hash('catch_plate');
+		self.htransisition_plate = hash('stop_plate');
 
 		self.hchef = hash('chef');
 		//
@@ -145,7 +147,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 				self.callback = message.callback_id;
 				transition_tofull(self);
 			case PhysicsMessages.trigger_response:
-//				trace('message_id $message_id message $message');
+			//				trace('message_id $message_id message $message');
 			case PhysicsMessages.collision_response:
 				if (message.other_group == self.hchef) {
 					if (message.own_group == self.hcollisionGroup0) {
@@ -186,11 +188,15 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						}
 					}
 				}
-				// Catch Plate
-				// TODO A advoidable collision has happen, more intercept assembly is required
+				// Final Catch Plate
 				if (message.own_group == hash('trigcollf') && message.other_group == self.hcatch_plate) {
 					self._bdescend = false;
 					Msg.post("#finalc", GoMessages.enable);
+				}
+				// Transisiton Catch Plate
+				if (message.own_group == hash('trigcollf') && message.other_group == self.htransisition_plate) {
+					self._bdescend = false;
+					Msg.post("#finalc", AdvanceLayerMessage.reset); // TODO left off here
 				}
 
 				if (message.own_group == hash('trigcollf')
