@@ -127,21 +127,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 			case AdvanceLayerMessage.cascade_partial:
 			// TODO AdvanceLayerMessage.cascade_partial
 			case AdvanceLayerMessage.reset:
-				self.c0 = false;
-				self.c1 = false;
-				self.c2 = false;
-				self.c3 = false;
 				disable_full_layer(self);
-				self.count = 0;
-				Msg.post("#coll0", GoMessages.enable);
-				Sprite.play_flipbook("#seg0", hash(_layerArray[self.type][0]));
-				Msg.post("#coll1", GoMessages.enable);
-				Sprite.play_flipbook("#seg1", hash(_layerArray[self.type][1]));
-				Msg.post("#coll2", GoMessages.enable);
-				Sprite.play_flipbook("#seg2", hash(_layerArray[self.type][2]));
-				Msg.post("#coll3", GoMessages.enable);
-				Sprite.play_flipbook("#seg3", hash(_layerArray[self.type][3]));
-				Msg.post("#finalc", GoMessages.disable);
 				enable_segments(self);
 			case AdvanceLayerMessage.cascade:
 				self.callback = message.callback_id;
@@ -239,6 +225,11 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 
 	private function enable_segments(self:AdvanceLayerData):Void {
 		trace('enable_segments');
+		self.c0 = false;
+		self.c1 = false;
+		self.c2 = false;
+		self.c3 = false;
+		self.count = 0;
 		Msg.post("#coll0", GoMessages.enable);
 		Msg.post("#coll1", GoMessages.enable);
 		Msg.post("#coll2", GoMessages.enable);

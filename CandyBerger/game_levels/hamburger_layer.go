@@ -97,6 +97,7 @@ embedded_components {
   "mask: \"trigcoll1\"\n"
   "mask: \"trigcoll2\"\n"
   "mask: \"trigcoll3\"\n"
+  "mask: \"stop_plate\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"
