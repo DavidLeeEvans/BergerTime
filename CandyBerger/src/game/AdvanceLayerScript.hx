@@ -145,7 +145,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 				self.callback = message.callback_id;
 				transition_tofull(self);
 			case PhysicsMessages.trigger_response:
-				trace('message_id $message_id message $message');
+//				trace('message_id $message_id message $message');
 			case PhysicsMessages.collision_response:
 				if (message.other_group == self.hchef) {
 					if (message.own_group == self.hcollisionGroup0) {
