@@ -174,15 +174,18 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						}
 					}
 				}
-				// Final Catch Plate
+				// Collision Detection: Final Catch Plate
 				if (message.own_group == hash('trigcollf') && message.other_group == self.hcatch_plate) {
 					self._bdescend = false;
 					Msg.post("#finalc", GoMessages.enable);
 				}
-				// Transisiton Catch Plate
+				// Collision Detection: Transisiton Catch Plate
 				if (message.own_group == hash('trigcollf') && message.other_group == self.htransisition_plate) {
 					self._bdescend = false;
-					Msg.post("#AdvanceLayerScript", AdvanceLayerMessage.reset); // TODO left off here
+					Msg.post("#AdvanceLayerScript", AdvanceLayerMessage.reset);
+					// let's disable the structures, so moore things collapse: I.K. unrealistic game physics
+					final u:Url = Msg.url(null, message.other_id, "collisionobject");
+					Msg.post(u, GoMessages.disable);
 				}
 
 				if (message.own_group == hash('trigcollf')
@@ -191,7 +194,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						|| message.other_group == self.hcollisionGroup2
 						|| message.other_group == self.hcollisionGroup3)) {
 					self._bdescend = false;
-					// TODO Stopped Here Moor Assembly required.
+					// TODO Stopped Here More Assembly required.
 					// TODO reset segment layer
 					// TODO Trigger cascade explosion for lower tomatoes layer!!!
 					Msg.post(message.other_id, AdvanceLayerMessage.cascade, {callback_id: Go.get_id()});

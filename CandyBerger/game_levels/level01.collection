@@ -267,12 +267,12 @@ instances {
     z: 1.0
   }
 }
-collection_instances {
-  id: "ladder_long"
-  collection: "/prefabs_go/ladder_long.collection"
+instances {
+  id: "stop_plate"
+  prototype: "/entities_go/floors/stop_plate.go"
   position {
-    x: 18.0
-    y: 540.0
+    x: 112.0
+    y: 119.0
     z: 0.0
   }
   rotation {
@@ -288,11 +288,11 @@ collection_instances {
   }
 }
 collection_instances {
-  id: "catch_plate"
-  collection: "/prefabs_go/catch_plate.collection"
+  id: "ladder_long"
+  collection: "/prefabs_go/ladder_long.collection"
   position {
-    x: 0.0
-    y: 9.0
+    x: 18.0
+    y: 540.0
     z: 0.0
   }
   rotation {
@@ -487,26 +487,6 @@ collection_instances {
     z: 1.0
   }
 }
-collection_instances {
-  id: "stop_collision_plate"
-  collection: "/prefabs_go/stop_collision_plate.collection"
-  position {
-    x: 49.0
-    y: 125.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
 scale_along_z: 0
 embedded_instances {
   id: "platform2"
@@ -554,6 +534,7 @@ embedded_instances {
 embedded_instances {
   id: "go"
   children: "spawn4"
+  children: "stop_plate"
   data: "components {\n"
   "  id: \"GameScript\"\n"
   "  component: \"/scripts/game/BergerGameScript.script\"\n"
