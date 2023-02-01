@@ -376,7 +376,6 @@ embedded_components {
   "friction: 0.1\n"
   "restitution: 0.5\n"
   "group: \"catch_plate\"\n"
-  "mask: \"chefcoll\"\n"
   "mask: \"enemy\"\n"
   "mask: \"trigcollf\"\n"
   "embedded_collision_shape {\n"
