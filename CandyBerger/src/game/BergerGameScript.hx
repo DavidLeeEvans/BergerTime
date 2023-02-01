@@ -49,6 +49,8 @@ typedef BergerGameData = {
 	var gameLevel:Int;
 	@property(4) var num_hamburgers:Int;
 	@property(6) var num_monsters:Int;
+	@property(true) var spawn_monsters:Bool;
+	@property(true) var spawn_treats:Bool;
 
 	var finish_hamburger:Int;
 	var spawn_position:Vector3;
@@ -114,8 +116,8 @@ class BergerGameScript extends Script<BergerGameData> {
 		self.delayer.update(1.0);
 		self._scratchPad--;
 		if (Globals.total_num_current_monsters <= self.num_monsters && self._scratchPad < 0) {
-			// Timer.delay(3.0, false, spawn_monster);
-			spawn_monster(self);
+			if (self.spawn_monsters)
+				spawn_monster(self);
 		}
 	}
 
@@ -192,6 +194,8 @@ class BergerGameScript extends Script<BergerGameData> {
 	}
 
 	private function treate_create(self:BergerGameData, _, _):Void {
+		if (!self.spawn_treats)
+			return;
 		final treat:Int = lua.Math.floor(lua.Math.random(1, 4));
 		final n = Rand.int(0, 3);
 		var p = Go.get_world_position("/go#" + "spawn" + n);
