@@ -182,7 +182,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 				// Transisiton Catch Plate
 				if (message.own_group == hash('trigcollf') && message.other_group == self.htransisition_plate) {
 					self._bdescend = false;
-					Msg.post("#finalc", AdvanceLayerMessage.reset); // TODO left off here
+					Msg.post("#AdvanceLayerScript", AdvanceLayerMessage.reset); // TODO left off here
 				}
 
 				if (message.own_group == hash('trigcollf')
