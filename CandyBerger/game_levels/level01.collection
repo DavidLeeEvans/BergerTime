@@ -84,7 +84,7 @@ instances {
   prototype: "/entities_go/floors/spawn_point.go"
   position {
     x: 58.0
-    y: 52.0
+    y: 154.0
     z: 0.0
   }
   rotation {
@@ -123,8 +123,8 @@ instances {
   id: "spawn1"
   prototype: "/entities_go/floors/spawn_point.go"
   position {
-    x: 1093.0
-    y: 43.0
+    x: 1059.0
+    y: 149.0
     z: 0.0
   }
   rotation {
@@ -143,8 +143,8 @@ instances {
   id: "spawn2"
   prototype: "/entities_go/floors/spawn_point.go"
   position {
-    x: 1081.0
-    y: 601.0
+    x: 1108.0
+    y: 615.0
     z: 0.0
   }
   rotation {
@@ -252,7 +252,7 @@ instances {
   prototype: "/entities_go/floors/spawn_point.go"
   position {
     x: 605.0
-    y: 313.0
+    y: 368.0
     z: 0.0
   }
   rotation {
@@ -292,6 +292,46 @@ instances {
   prototype: "/entities_go/floors/catch_plate.go"
   position {
     x: 113.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch_plate1"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 678.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch_plate2"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 1016.0
     y: 0.0
     z: 0.0
   }
@@ -492,7 +532,7 @@ collection_instances {
   collection: "/prefabs_go/walk_plate_medium.collection"
   position {
     x: 51.0
-    y: 106.0
+    y: 103.0
     z: 0.0
   }
   rotation {
@@ -533,6 +573,626 @@ collection_instances {
   position {
     x: 395.0
     y: 573.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ladder_long4"
+  collection: "/prefabs_go/ladder_long.collection"
+  position {
+    x: 558.0
+    y: 564.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ladder_long5"
+  collection: "/prefabs_go/ladder_long.collection"
+  position {
+    x: 558.0
+    y: 343.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ladder_long6"
+  collection: "/prefabs_go/ladder_long.collection"
+  position {
+    x: 913.0
+    y: 347.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ladder_long7"
+  collection: "/prefabs_go/ladder_long.collection"
+  position {
+    x: 912.0
+    y: 571.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ladder_long8"
+  collection: "/prefabs_go/ladder_long.collection"
+  position {
+    x: 1106.0
+    y: 572.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ladder_long9"
+  collection: "/prefabs_go/ladder_long.collection"
+  position {
+    x: 1106.0
+    y: 352.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ladder_long10"
+  collection: "/prefabs_go/ladder_long.collection"
+  position {
+    x: 388.0
+    y: 564.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ladder_long11"
+  collection: "/prefabs_go/ladder_long.collection"
+  position {
+    x: 388.0
+    y: 339.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long2"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 590.0
+    y: 569.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long3"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 593.0
+    y: 425.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long4"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 590.0
+    y: 188.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long5"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 796.0
+    y: 107.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long6"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 590.0
+    y: 324.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long7"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 945.0
+    y: 107.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long8"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 945.0
+    y: 200.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long9"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 945.0
+    y: 290.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long10"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 945.0
+    y: 383.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long11"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 945.0
+    y: 518.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long12"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 945.0
+    y: 570.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long13"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 945.0
+    y: 452.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long14"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 248.0
+    y: 425.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long15"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 400.0
+    y: 425.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long16"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 750.0
+    y: 569.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long17"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 753.0
+    y: 425.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long18"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 749.0
+    y: 324.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long19"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 752.0
+    y: 188.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_medium6"
+  collection: "/prefabs_go/walk_plate_medium.collection"
+  position {
+    x: 208.0
+    y: 103.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_medium7"
+  collection: "/prefabs_go/walk_plate_medium.collection"
+  position {
+    x: 370.0
+    y: 103.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_medium8"
+  collection: "/prefabs_go/walk_plate_medium.collection"
+  position {
+    x: 522.0
+    y: 103.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long20"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 251.0
+    y: 231.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "walk_plate_long21"
+  collection: "/prefabs_go/walk_plate_long.collection"
+  position {
+    x: 400.0
+    y: 288.0
     z: 0.0
   }
   rotation {
@@ -594,6 +1254,8 @@ embedded_instances {
 embedded_instances {
   id: "go"
   children: "catch_plate"
+  children: "catch_plate1"
+  children: "catch_plate2"
   children: "spawn4"
   children: "stop_plate"
   data: "components {\n"
