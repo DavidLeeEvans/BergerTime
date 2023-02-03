@@ -72,6 +72,7 @@ typedef Data = {
 
 	var _debug:Bool;
 	@property(true) var not_peppered:Bool;
+	@property(true) var track:Bool;
 	var type:Int;
 	var isMoving:Bool;
 	var swenf:SWENF; //
