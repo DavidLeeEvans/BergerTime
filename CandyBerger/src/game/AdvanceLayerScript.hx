@@ -48,7 +48,10 @@ typedef AdvanceLayerData = {
 	var hcollisionGroup1:Hash;
 	var hcollisionGroup2:Hash;
 	var hcollisionGroup3:Hash;
+	var hcollf:Hash;
 	var callback:Hash;
+	//
+	var henemy:Hash;
 	//
 	var hcatch_plate:Hash;
 	var htransisition_plate:Hash;
@@ -86,15 +89,19 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		//
 		self.bfallingOnOff = true;
 		// Hashes
-		self.hcollisionGroup0 = hash('trigcoll0');
-		self.hcollisionGroup1 = hash('trigcoll1');
-		self.hcollisionGroup2 = hash('trigcoll2');
-		self.hcollisionGroup3 = hash('trigcoll3');
+		self.hcollisionGroup0 = hash("trigcoll0");
+		self.hcollisionGroup1 = hash("trigcoll1");
+		self.hcollisionGroup2 = hash("trigcoll2");
+		self.hcollisionGroup3 = hash("trigcoll3");
 		//
-		self.hcatch_plate = hash('catch_plate');
-		self.htransisition_plate = hash('stop_plate');
+		self.hcollf = hash("collf");
+		//
+		self.henemy = hash("enemy");
+		//
+		self.hcatch_plate = hash("catch_plate");
+		self.htransisition_plate = hash("stop_plate");
 
-		self.hchef = hash('chef');
+		self.hchef = hash("chef");
 		//
 		self.count = 0;
 		self.bounce = false;
@@ -187,6 +194,10 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 					Msg.post(u, GoMessages.disable);
 				}
 
+				if (message.own_group == self.hcollf && message.other_group == self.henemy) {
+					Defold.pprint('Crushing Entities ');
+					// TODO left here dle
+				}
 				if (message.own_group == hash('trigcollf')
 					&& (message.other_group == self.hcollisionGroup0
 						|| message.other_group == self.hcollisionGroup1

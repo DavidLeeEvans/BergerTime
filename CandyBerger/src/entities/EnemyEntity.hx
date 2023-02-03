@@ -145,6 +145,12 @@ class Entity extends Script<Data> {
 				Label.set_text("#debug", "w");
 			}
 
+			if (self._not_taking_off) {
+				if (self.is_tracking) {
+					Go.set_position(Go.get_position() + Vmath.vector3(0, -0.1, 0));
+					return;
+				}
+			}
 			final rlenght:Float = 4.0;
 			var from = Go.get_position();
 			// South Direction
@@ -194,11 +200,6 @@ class Entity extends Script<Data> {
 				trace("Not Moving, Idle");
 			}
 			counter = 0.0;
-		}
-
-		if (self._not_taking_off) {
-			if (self.is_tracking)
-				Go.set_position(Go.get_position() + Vmath.vector3(0, -0.1, 0));
 		}
 	}
 
