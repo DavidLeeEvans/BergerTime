@@ -13,7 +13,6 @@ animations {
   flip_horizontal: 0
   flip_vertical: 0
 }
-
 animations {
   id: "pickle_peppered"
   images {
@@ -29,7 +28,6 @@ animations {
   flip_horizontal: 0
   flip_vertical: 0
 }
-
 animations {
   id: "pickle_back"
   images {
@@ -64,7 +62,7 @@ animations {
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 15
+  fps: 10
   flip_horizontal: 0
   flip_vertical: 0
 }

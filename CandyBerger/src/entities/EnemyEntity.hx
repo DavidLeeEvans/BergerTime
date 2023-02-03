@@ -73,7 +73,7 @@ typedef Data = {
 	var _debug:Bool;
 	@property(true) var not_peppered:Bool;
 	@property(true) var is_tracking:Bool;
-	var type:Int;
+	@property(-1) var type:Int;
 	var isMoving:Bool;
 	var swenf:SWENF; //
 	var tableFloor:lua.Table<Int, Hash>;
@@ -107,7 +107,7 @@ class Entity extends Script<Data> {
 	// Enemy Sausage 2
 
 	override function init(self:Data) {
-		//
+		lua.Lua.assert(self.type != -1, "Enemy Type Not Set");
 		self._not_taking_off = false;
 		self._border = true;
 		//
@@ -296,11 +296,17 @@ class Entity extends Script<Data> {
 	private function set_animation_dead(t:Int):Void {
 		switch (t) {
 			case 0:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_dead});
+				Timer.delay(3.0, false, function(self, handle:TimerHandle, time_elapsed:Float) {
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_dead});
+				});
 			case 1:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_dead});
+				Timer.delay(3.0, false, function(self, handle:TimerHandle, time_elapsed:Float) {
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_dead});
+				});
 			case 2:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_dead});
+				Timer.delay(3.0, false, function(self, handle:TimerHandle, time_elapsed:Float) {
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_dead});
+				});
 		}
 	}
 
