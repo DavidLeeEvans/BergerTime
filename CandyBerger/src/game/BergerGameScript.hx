@@ -22,13 +22,13 @@ import dle.Delayer;
 
 import dle.Ludobits.GestureMessage;
 
-import entities.EnemyEntity.EnemyMessage;
-
 import haxe.Log.trace as ltrace;
 
 import hud.GHud.GHudMessage;
 
 import hud.HudGUI.HudGUIMessage;
+
+import lua.Table;
 
 import lua.lib.luasocket.Socket;
 
@@ -228,11 +228,11 @@ class BergerGameScript extends Script<BergerGameData> {
 		var p = Go.get_world_position("/spawn" + Std.string(n));
 		switch (mtype) {
 			case 1:
-				Msg.post(Factory.create('#factory_eggs', p), EnemyMessage.msg_init, {type: 0});
+				Factory.create('#factory_eggs', p, null, Table.create({type: 0}));
 			case 2:
-				Msg.post(Factory.create('#factory_pickle', p), EnemyMessage.msg_init, {type: 1});
+				Factory.create('#factory_pickle', p, null, Table.create({type: 1}));
 			case 3:
-				Msg.post(Factory.create('#factory_sausages', p), EnemyMessage.msg_init, {type: 2});
+				Factory.create('#factory_sausages', p, null, Table.create({type: 2}));
 		}
 	}
 

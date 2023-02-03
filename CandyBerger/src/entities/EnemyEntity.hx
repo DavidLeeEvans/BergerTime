@@ -31,7 +31,6 @@ import entities.SWEN;
 **/
 @:build(defold.support.MessageBuilder.build())
 class EnemyMessage {
-	var msg_init:{type:Int};
 	var msg_modify_pos:{p:Vector3};
 	var msg_die; // Never really happens in the original game
 	var msg_spawn;
@@ -73,7 +72,7 @@ typedef Data = {
 	var _debug:Bool;
 	@property(true) var not_peppered:Bool;
 	@property(true) var is_tracking:Bool;
-	@property(-1) var type:Int;
+	@property(-1) var type:Int; // egg-0, pickle-1, sausage-2
 	var isMoving:Bool;
 	var swenf:SWENF; //
 	var tableFloor:lua.Table<Int, Hash>;
@@ -223,15 +222,11 @@ class Entity extends Script<Data> {
 					Timer.delay(6.0, false, callback_peppered);
 					set_animation_pepper(self.type);
 				}
-			case EnemyMessage.msg_init:
-				self.type = message.type;
 			case EnemyMessage.msg_die:
 				if (self._border) {
 					set_animation_dead(self.type);
 					self._border = false;
 				}
-			case EnemyMessage.msg_spawn:
-				trace('spawn');
 			case EnemyMessage.msg_modify_pos:
 				Go.set(".", "position.y", message.p.y);
 			case EnemyMessage.msg_go_left:
