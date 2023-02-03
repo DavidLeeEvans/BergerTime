@@ -291,14 +291,22 @@ class Entity extends Script<Data> {
 	private function set_animation_dead(self:Data):Void {
 		switch (self.type) {
 			case 0:
+				self.isMoving = false;
+				self.not_peppered = false;
 				Timer.delay(Rand.float(2, 3), false, function(self, handle:TimerHandle, time_elapsed:Float) {
 					Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_dead});
 				});
 			case 1:
+				self.isMoving = false;
+				self.not_peppered = false;
+
 				Timer.delay(Rand.float(2, 3), false, function(self, handle:TimerHandle, time_elapsed:Float) {
 					Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_dead});
 				});
 			case 2:
+				self.isMoving = false;
+				self.not_peppered = false;
+
 				Timer.delay(Rand.float(2, 3), false, function(self, handle:TimerHandle, time_elapsed:Float) {
 					Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.hotdog_dead});
 				});
@@ -317,7 +325,7 @@ class Entity extends Script<Data> {
 	}
 
 	private function set_animation_front(self:Data):Void {
-		switch (t) {
+		switch (self.type) {
 			case 0:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_front});
 			case 1:
