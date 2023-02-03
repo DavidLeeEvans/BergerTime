@@ -1164,7 +1164,7 @@ collection_instances {
   id: "walk_plate_medium7"
   collection: "/prefabs_go/walk_plate_medium.collection"
   position {
-    x: 370.0
+    x: 361.0
     y: 103.0
     z: 0.0
   }
@@ -1204,7 +1204,7 @@ collection_instances {
   id: "walk_plate_long20"
   collection: "/prefabs_go/walk_plate_long.collection"
   position {
-    x: 251.0
+    x: 242.0
     y: 231.0
     z: 0.0
   }
@@ -1304,6 +1304,11 @@ embedded_instances {
   "    y: 0.0\n"
   "    z: 0.0\n"
   "    w: 1.0\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"spawn_monsters\"\n"
+  "    value: \"false\"\n"
+  "    type: PROPERTY_TYPE_BOOLEAN\n"
   "  }\n"
   "  properties {\n"
   "    id: \"spawn_treats\"\n"

@@ -23,13 +23,13 @@ import defold.types.Message;
 import defold.types.Url;
 import defold.types.Vector3;
 
-import entities.PepperEntity.PepperMessage;
-
 import game.BergerGameScript.BergerGameMessage;
 
 import hud.GHud;
 
 import hud.HudGUI.HudGUIMessage;
+
+import lua.Table;
 
 @:build(defold.support.HashBuilder.build())
 private class ChefEntityHash {
@@ -139,7 +139,7 @@ class ChefEntity extends Script<ChefData> {
 			var to:Vector3 = vector3(efrom + lenght);
 			Physics.raycast_async(efrom, to, self.tableFloor, RC_ONGROUND);
 			if (self.bGravity) {
-//				trace("Gravity Firing True");
+				//				trace("Gravity Firing True");
 				Tools.draw_line(efrom, to, Vmath.vector4(0, 256, 256, 256));
 				Go.set_position(p + Vmath.vector3(0, FALL_RATE, 0));
 			}
@@ -174,11 +174,42 @@ class ChefEntity extends Script<ChefData> {
 	override function on_message<T>(self:ChefData, message_id:Message<T>, message:T, _):Void {
 		switch (message_id) {
 			case GHudMessage.double_tap:
-				Defold.pprint("Chef double_tap");
-			// TODO Spawn Pepper
+				Defold.pprint("Chef double_tap Firing Pepper");
+
+			// final PEPPER_SPEED = 3.2;
+			// var v:Vector3 = Vmath.vector3(0, 0, 0);
+			// if (self.numPepperShots > 0) {
+			// 	switch (self.faceDir) {
+			// 		case 0: // N
+			// 			v = Vmath.vector3(0, PEPPER_SPEED, 0);
+			// 		case 1: // W
+			// 			v = Vmath.vector3(-PEPPER_SPEED, 0, 0);
+			// 		case 2: // S
+			// 			v = Vmath.vector3(0, -PEPPER_SPEED, 0);
+			// 		case 3: // E
+			// 			v = Vmath.vector3(PEPPER_SPEED, 0, 0);
+			// 	}
+			// 	Factory.create("#pepper_factory", Go.get_world_position(), null, Table.create({direction: v}));
+			// }
 
 			case GHudMessage.tap:
 				Defold.pprint("Chef tap");
+				final PEPPER_SPEED = 3.2;
+				var v:Vector3 = Vmath.vector3(0, 0, 0);
+				if (self.numPepperShots > 0) {
+					switch (self.faceDir) {
+						case 0: // N
+							v = Vmath.vector3(0, PEPPER_SPEED, 0);
+						case 1: // W
+							v = Vmath.vector3(-PEPPER_SPEED, 0, 0);
+						case 2: // S
+							v = Vmath.vector3(0, -PEPPER_SPEED, 0);
+						case 3: // E
+							v = Vmath.vector3(PEPPER_SPEED, 0, 0);
+					}
+					Factory.create("#pepper_factory", Go.get_world_position(), null, Table.create({direction: v}));
+				}
+
 				if (self.faceDir != 4) {
 					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_idle});
 					self.faceDir = 4;
@@ -326,13 +357,12 @@ class ChefEntity extends Script<ChefData> {
 				case 3:
 					collision_object = vector3(-1, 0, 0);
 			}
-			if (self.numPepperShots > 0) {
-				var p = Factory.create(sPepperFactory, Go.get(".", "position"));
-				// Assertion.assert(p != null);
-				Msg.post(p, PepperMessage.flight_path, {flight_direction: collision_object});
-				self.numPepperShots--;
-				Msg.post(sHud, HudGUIMessage.set_pepper, {num: self.numPepperShots});
-			}
+			// if (self.numPepperShots > 0) {
+			// 	Factory.create(sPepperFactory, Go.get(".", "position"));
+			// 	// Assertion.assert(p != null);
+			// 	self.numPepperShots--;
+			// 	Msg.post(sHud, HudGUIMessage.set_pepper, {num: self.numPepperShots});
+			// }
 		}
 		return false;
 	}
