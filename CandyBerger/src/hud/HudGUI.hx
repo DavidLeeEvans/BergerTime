@@ -84,7 +84,7 @@ class HudGUI extends defold.support.GuiScript<HudGUIData> {
 				var n = Gui.get_node("amount_highscore");
 				Gui.set_text(n, Std.string(self.high_score));
 			case HudGUIMessage.set_lives:
-				trace("set lives");
+//				trace("set lives");
 				var n = Gui.get_node("amount_lives");
 				Gui.set_text(n, Std.string(message.lives));
 		}

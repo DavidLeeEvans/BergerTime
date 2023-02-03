@@ -44,6 +44,7 @@ embedded_components {
   "group: \"enemy\"\n"
   "mask: \"chef\"\n"
   "mask: \"pepper\"\n"
+  "mask: \"trigcollf\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"

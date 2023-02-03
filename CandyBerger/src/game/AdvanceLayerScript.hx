@@ -18,6 +18,8 @@ import defold.types.*;
 import defold.types.Hash;
 import defold.types.Vector3;
 
+import entities.EnemyEntity.EnemyMessage;
+
 @:build(defold.support.MessageBuilder.build())
 class AdvanceLayerMessage {
 	var reset;
@@ -94,7 +96,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		self.hcollisionGroup2 = hash("trigcoll2");
 		self.hcollisionGroup3 = hash("trigcoll3");
 		//
-		self.hcollf = hash("collf");
+		self.hcollf = hash("trigcollf");
 		//
 		self.henemy = hash("enemy");
 		//
@@ -196,7 +198,9 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 
 				if (message.own_group == self.hcollf && message.other_group == self.henemy) {
 					Defold.pprint('Crushing Entities ');
-					// TODO left here dle
+					final p:Vector3 = Vmath.vector3(Go.get_world_position(message.other_id).x, Go.get_world_position().y, 0);
+					Go.set_position(p, message.other_id);
+					Msg.post(message.other_id, EnemyMessage.msg_die);
 				}
 				if (message.own_group == hash('trigcollf')
 					&& (message.other_group == self.hcollisionGroup0
@@ -237,7 +241,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 	}
 
 	private function enable_segments(self:AdvanceLayerData):Void {
-		trace('enable_segments');
+		//		trace('enable_segments');
 		self.c0 = false;
 		self.c1 = false;
 		self.c2 = false;
@@ -260,7 +264,7 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 	}
 
 	private function transition_tofull(self:AdvanceLayerData):Void {
-		trace('transitioning to full');
+		//		trace('transitioning to full');
 		enable_full_layer(self);
 		disable_segments(self);
 

@@ -69,6 +69,7 @@ class EnemyEntityHash {
 typedef Data = {
 	// go.set("myobject#my_script", "my_property", val + 1)
 	var _not_taking_off:Bool;
+	var _border:Bool;
 	var _debug:Bool;
 	@property(true) var not_peppered:Bool;
 	@property(true) var is_tracking:Bool;
@@ -108,7 +109,8 @@ class Entity extends Script<Data> {
 	override function init(self:Data) {
 		//
 		self._not_taking_off = false;
-
+		self._border = true;
+		//
 		self._debug = defold.Sys.get_engine_info().is_debug;
 		self.swenf = new SWENF();
 		set_animation_front(self.type);
@@ -224,7 +226,10 @@ class Entity extends Script<Data> {
 			case EnemyMessage.msg_init:
 				self.type = message.type;
 			case EnemyMessage.msg_die:
-				set_animation_dead(self.type);
+				if (self._border) {
+					set_animation_dead(self.type);
+					self._border = false;
+				}
 			case EnemyMessage.msg_spawn:
 				trace('spawn');
 			case EnemyMessage.msg_modify_pos:

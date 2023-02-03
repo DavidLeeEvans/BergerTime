@@ -139,7 +139,7 @@ class ChefEntity extends Script<ChefData> {
 			var to:Vector3 = vector3(efrom + lenght);
 			Physics.raycast_async(efrom, to, self.tableFloor, RC_ONGROUND);
 			if (self.bGravity) {
-				trace("Gravity Firing True");
+//				trace("Gravity Firing True");
 				Tools.draw_line(efrom, to, Vmath.vector4(0, 256, 256, 256));
 				Go.set_position(p + Vmath.vector3(0, FALL_RATE, 0));
 			}
