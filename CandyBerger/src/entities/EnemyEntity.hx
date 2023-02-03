@@ -107,8 +107,6 @@ class Entity extends Script<Data> {
 
 	override function init(self:Data) {
 		//
-		// self.not_peppered = true;
-		//
 		self._not_taking_off = false;
 
 		self._debug = defold.Sys.get_engine_info().is_debug;
@@ -148,6 +146,7 @@ class Entity extends Script<Data> {
 			if (self._not_taking_off) {
 				if (self.is_tracking) {
 					Go.set_position(Go.get_position() + Vmath.vector3(0, -0.1, 0));
+				} else {
 					return;
 				}
 			}
