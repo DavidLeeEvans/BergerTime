@@ -31,11 +31,12 @@ import entities.SWEN;
 **/
 @:build(defold.support.MessageBuilder.build())
 class EnemyMessage {
-	var msg_modify_pos:{p:Vector3};
 	var msg_die; // Never really happens in the original game
-	var msg_spawn;
-	var msg_go_left;
 	var msg_go_right;
+	var msg_go_left;
+	var msg_go_up;
+	var msg_go_down;
+	var msg_retract_chef_transponder;
 }
 
 @:build(defold.support.HashBuilder.build())
@@ -222,32 +223,57 @@ class Entity extends Script<Data> {
 					Timer.delay(6.0, false, callback_peppered);
 					set_animation_pepper(self);
 				}
+			case SpriteMessages.animation_done:
+				if (message.id == EnemyEntityHash.pickle_dead) {
+					Globals.total_num_current_monsters--;
+					Go.delete();
+				} else if (message.id == EnemyEntityHash.egg_dead) {
+					Globals.total_num_current_monsters--;
+					Go.delete();
+				} else if (message.id == EnemyEntityHash.hotdog_dead) {
+					Globals.total_num_current_monsters--;
+					Go.delete();
+				} else if (message.id == EnemyEntityHash.pickle_peppered) {
+					Msg.post('#sprite', SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_front});
+					Msg.post("#", EnemyMessage.msg_retract_chef_transponder);
+					self.not_peppered = true;
+				} else if (message.id == EnemyEntityHash.egg_peppered) {
+					Msg.post('#sprite', SpriteMessages.play_animation, {id: EnemyEntityHash.egg_front});
+					Msg.post("#", EnemyMessage.msg_retract_chef_transponder);
+					self.not_peppered = true;
+				} else if (message.id == EnemyEntityHash.hotdog_peppered) {
+					Msg.post('#sprite', SpriteMessages.play_animation, {id: EnemyEntityHash.hotdog_front});
+					Msg.post("#", EnemyMessage.msg_retract_chef_transponder);
+					self.not_peppered = true;
+				}
+			// Game Messages
+			case EnemyMessage.msg_retract_chef_transponder:
+			// TODO Left off here
 			case EnemyMessage.msg_die:
 				if (self._border) {
 					set_animation_dead(self);
 					self._border = false;
 				}
-			case EnemyMessage.msg_modify_pos:
-				Go.set(".", "position.y", message.p.y);
 			case EnemyMessage.msg_go_left:
 				self.swenf.w = true;
 				self.swenf.e = false;
+				self.swenf.n = false;
+				self.swenf.s = false;
 			case EnemyMessage.msg_go_right:
 				self.swenf.w = false;
 				self.swenf.e = true;
-			case SpriteMessages.animation_done:
-				if (message.id == EnemyEntityHash.pickle_dead) {
-					Globals.total_num_current_monsters--;
-					Go.delete();
-				}
-				if (message.id == EnemyEntityHash.egg_dead) {
-					Globals.total_num_current_monsters--;
-					Go.delete();
-				}
-				if (message.id == EnemyEntityHash.hotdog_dead) {
-					Globals.total_num_current_monsters--;
-					Go.delete();
-				}
+				self.swenf.n = false;
+				self.swenf.s = false;
+			case EnemyMessage.msg_go_up:
+				self.swenf.w = false;
+				self.swenf.e = false;
+				self.swenf.n = true;
+				self.swenf.s = false;
+			case EnemyMessage.msg_go_down:
+				self.swenf.w = false;
+				self.swenf.e = false;
+				self.swenf.n = false;
+				self.swenf.s = true;
 		}
 	}
 
