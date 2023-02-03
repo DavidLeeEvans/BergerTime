@@ -142,7 +142,6 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 						self.c0 = true;
 						self.count++;
 						if (self.count == 4) {
-							// Msg.post("#", AdvanceLayerMessage.cascade, {callback_id: Go.get_id()});
 							Msg.post("#", AdvanceLayerMessage.fall);
 						}
 					} else if (message.own_group == self.hcollisionGroup1) {
@@ -270,7 +269,6 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		if (self.callback != null) {
 			// Defold.pprint("!!!!!!!!!!!!!!!!!!!!!!!!!!!Callback is not NULL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			Msg.post(self.callback, AdvanceLayerMessage.reset);
-			Defold.pprint('!!!!!!!!!!!!!!!Reset Called ${self.callback} !!!!!!!!!!!!!!!');
 			self.callback = null;
 		}
 	}
@@ -311,4 +309,6 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 			Msg.post("#coll3", GoMessages.disable);
 		}
 	}
+
+	private function collision_kill_enemies(self:AdvanceLayerData) {}
 }

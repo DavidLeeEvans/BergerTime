@@ -69,10 +69,9 @@ class EnemyEntityHash {
 typedef Data = {
 	// go.set("myobject#my_script", "my_property", val + 1)
 	var _not_taking_off:Bool;
-
 	var _debug:Bool;
 	@property(true) var not_peppered:Bool;
-	@property(true) var track:Bool;
+	@property(true) var is_tracking:Bool;
 	var type:Int;
 	var isMoving:Bool;
 	var swenf:SWENF; //
@@ -198,7 +197,8 @@ class Entity extends Script<Data> {
 		}
 
 		if (self._not_taking_off) {
-			Go.set_position(Go.get_position() + Vmath.vector3(0, -0.1, 0));
+			if (self.is_tracking)
+				Go.set_position(Go.get_position() + Vmath.vector3(0, -0.1, 0));
 		}
 	}
 
