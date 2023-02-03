@@ -57,15 +57,15 @@ class EnemyEntityHash {
 	var pickle_peppered;
 
 	//
-	var sausage_dead;
-	var sausage_left;
-	var sausage_right;
-	var sausage_front;
-	var sausage_back;
-	var sausage_peppered;
+	var hotdog_dead;
+	var hotdog_left;
+	var hotdog_right;
+	var hotdog_front;
+	var hotdog_back;
+	var hotdog_peppered;
 }
 
-typedef Data = {
+private typedef Data = {
 	// go.set("myobject#my_script", "my_property", val + 1)
 	var _not_taking_off:Bool;
 	var _border:Bool;
@@ -112,7 +112,7 @@ class Entity extends Script<Data> {
 		//
 		self._debug = defold.Sys.get_engine_info().is_debug;
 		self.swenf = new SWENF();
-		set_animation_front(self.type);
+		set_animation_front(self);
 		self.swenf.f = false;
 		self.swenf.n = false;
 		self.swenf.e = false;
@@ -220,11 +220,11 @@ class Entity extends Script<Data> {
 					self.not_peppered = false;
 					self.isMoving = false;
 					Timer.delay(6.0, false, callback_peppered);
-					set_animation_pepper(self.type);
+					set_animation_pepper(self);
 				}
 			case EnemyMessage.msg_die:
 				if (self._border) {
-					set_animation_dead(self.type);
+					set_animation_dead(self);
 					self._border = false;
 				}
 			case EnemyMessage.msg_modify_pos:
@@ -244,7 +244,7 @@ class Entity extends Script<Data> {
 					Globals.total_num_current_monsters--;
 					Go.delete();
 				}
-				if (message.id == EnemyEntityHash.sausage_dead) {
+				if (message.id == EnemyEntityHash.hotdog_dead) {
 					Globals.total_num_current_monsters--;
 					Go.delete();
 				}
@@ -255,41 +255,41 @@ class Entity extends Script<Data> {
 
 	override function on_reload(self:Data):Void {}
 
-	private function set_animation_back(t:Int):Void {
-		switch (t) {
+	private function set_animation_back(self:Data):Void {
+		switch (self.type) {
 			case 0:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_back});
 			case 1:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_dead});
 			case 2:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_back});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.hotdog_back});
 		}
 	}
 
-	private function set_animation_left(t:Int):Void {
-		switch (t) {
+	private function set_animation_left(self:Data):Void {
+		switch (self.type) {
 			case 0:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_left});
 			case 1:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_left});
 			case 2:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_left});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.hotdog_left});
 		}
 	}
 
-	private function set_animation_right(t:Int):Void {
-		switch (t) {
+	private function set_animation_right(self:Data):Void {
+		switch (self.type) {
 			case 0:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_right});
 			case 1:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_right});
 			case 2:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_right});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.hotdog_right});
 		}
 	}
 
-	private function set_animation_dead(t:Int):Void {
-		switch (t) {
+	private function set_animation_dead(self:Data):Void {
+		switch (self.type) {
 			case 0:
 				Timer.delay(Rand.float(2, 3), false, function(self, handle:TimerHandle, time_elapsed:Float) {
 					Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_dead});
@@ -300,37 +300,37 @@ class Entity extends Script<Data> {
 				});
 			case 2:
 				Timer.delay(Rand.float(2, 3), false, function(self, handle:TimerHandle, time_elapsed:Float) {
-					Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_dead});
+					Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.hotdog_dead});
 				});
 		}
 	}
 
-	private function set_animation_pepper(t:Int):Void {
-		switch (t) {
+	private function set_animation_pepper(self:Data):Void {
+		switch (self.type) {
 			case 0:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_peppered});
 			case 1:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_peppered});
 			case 2:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_peppered});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.hotdog_peppered});
 		}
 	}
 
-	private function set_animation_front(t:Int):Void {
+	private function set_animation_front(self:Data):Void {
 		switch (t) {
 			case 0:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_front});
 			case 1:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_front});
 			case 2:
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.sausage_front});
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.hotdog_front});
 		}
 	}
 
 	private function callback_peppered(self:Data, _, _):Void {
 		self.not_peppered = true;
 		self.isMoving = true;
-		set_animation_front(self.type);
+		set_animation_front(self);
 		// TODO SWEN SCAN ?
 	}
 }
