@@ -73,7 +73,7 @@ private typedef EnemyData = {
 	var _trig_abort:Bool;
 
 	//
-	var _not_taking_off:Bool;
+	// var _not_taking_off:Bool;
 	var _border:Bool;
 	var _debug:Bool;
 	@property(true) var not_peppered:Bool;
@@ -116,7 +116,6 @@ class Entity extends Script<EnemyData> {
 
 	override function init(self:EnemyData) {
 		lua.Lua.assert(self.type != -1, "Enemy Type Not Set");
-		self._not_taking_off = false;
 		self._border = true;
 		self._trig_abort = false;
 		//
@@ -165,20 +164,18 @@ class Entity extends Script<EnemyData> {
 				Label.set_text("#debug", "s");
 			}
 
-			if (self._not_taking_off) {
-				if (self.is_tracking) {
-					final ENEMY_MOVEMENT_SPEED = 6.9; // TODO?? dle
-					if (self.swenf.n)
-						Go.set_position(Go.get_position() + Vmath.vector3(0, ENEMY_MOVEMENT_SPEED, 0));
-					else if (self.swenf.e)
-						Go.set_position(Go.get_position() + Vmath.vector3(ENEMY_MOVEMENT_SPEED, 0, 0));
-					else if (self.swenf.s)
-						Go.set_position(Go.get_position() + Vmath.vector3(0, -ENEMY_MOVEMENT_SPEED, 0));
-					else if (self.swenf.w)
-						Go.set_position(Go.get_position() + Vmath.vector3(-ENEMY_MOVEMENT_SPEED, 0, 0));
-				} else {
-					return;
-				}
+			if (self.is_tracking) {
+				final ENEMY_MOVEMENT_SPEED = 6.9; // TODO?? dle
+				if (self.swenf.n)
+					Go.set_position(Go.get_position() + Vmath.vector3(0, ENEMY_MOVEMENT_SPEED, 0));
+				else if (self.swenf.e)
+					Go.set_position(Go.get_position() + Vmath.vector3(ENEMY_MOVEMENT_SPEED, 0, 0));
+				else if (self.swenf.s)
+					Go.set_position(Go.get_position() + Vmath.vector3(0, -ENEMY_MOVEMENT_SPEED, 0));
+				else if (self.swenf.w)
+					Go.set_position(Go.get_position() + Vmath.vector3(-ENEMY_MOVEMENT_SPEED, 0, 0));
+			} else {
+				return;
 			}
 			final rlenght:Float = 20.0;
 			var from = Go.get_position();
@@ -218,7 +215,6 @@ class Entity extends Script<EnemyData> {
 			case defold.PhysicsMessages.ray_cast_response:
 				if (message.request_id == RCTABLE_FLOOR) {
 					//					trace('!!!!!!HIT FLOOR message_id $message_id message $message');
-					self._not_taking_off = false;
 				} else if (message.request_id == RCEAST) {
 					if (message.group == hRBorder) {
 						Defold.pprint("East");
@@ -238,10 +234,7 @@ class Entity extends Script<EnemyData> {
 				}
 
 			case PhysicsMessages.ray_cast_missed:
-				if (message.request_id == RCTABLE_FLOOR) {
-					//					trace('******MISSED FLOOR message_id $message_id message $message');
-					self._not_taking_off = true;
-				}
+				if (message.request_id == RCTABLE_FLOOR) {}
 			case defold.PhysicsMessages.collision_response:
 				if (message.other_group == hash('pepper')) {
 					self.not_peppered = false;
