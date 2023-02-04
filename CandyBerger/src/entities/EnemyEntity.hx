@@ -66,8 +66,8 @@ class EnemyEntityHash {
 	var hotdog_peppered;
 }
 
-private typedef Data = {
-	// go.set("myobject#my_script", "my_property", val + 1)
+private typedef EnemyData = {
+	var _chef_position:Vector3;
 	var _not_taking_off:Bool;
 	var _border:Bool;
 	var _debug:Bool;
@@ -85,7 +85,7 @@ private typedef Data = {
 	//
 }
 
-class Entity extends Script<Data> {
+class Entity extends Script<EnemyData> {
 	var debug:Bool;
 	var counter:Float;
 	final MOVEMENT_SPEED = 6.0;
@@ -106,7 +106,7 @@ class Entity extends Script<Data> {
 	// Enemy Pickle 1
 	// Enemy Sausage 2
 
-	override function init(self:Data) {
+	override function init(self:EnemyData) {
 		lua.Lua.assert(self.type != -1, "Enemy Type Not Set");
 		self._not_taking_off = false;
 		self._border = true;
@@ -136,7 +136,7 @@ class Entity extends Script<Data> {
 		lua.Table.insert(self.tableFloor, hFloor);
 	}
 
-	override function update(self:Data, dt:Float):Void {
+	override function update(self:EnemyData, dt:Float):Void {
 		counter = counter + 1.0;
 		if (counter > 30.0) {
 			if (self.swenf.e) {
@@ -204,7 +204,7 @@ class Entity extends Script<Data> {
 		}
 	}
 
-	override function on_message<T>(self:Data, message_id:Message<T>, message:T, sender:Url):Void {
+	override function on_message<T>(self:EnemyData, message_id:Message<T>, message:T, sender:Url):Void {
 		switch (message_id) {
 			case defold.PhysicsMessages.ray_cast_response:
 				if (message.request_id == RCTABLE_FLOOR) {
@@ -248,7 +248,21 @@ class Entity extends Script<Data> {
 				}
 			// Game Messages
 			case EnemyMessage.msg_retract_chef_transponder:
-			// TODO Left off here
+				self.swenf.w = false;
+				self.swenf.e = false;
+				self.swenf.n = false;
+				self.swenf.s = false;
+				self._chef_position = Go.get_world_position("/chef");
+				final p = Go.get_world_position();
+				if (p.y > self._chef_position.y)
+					self.swenf.s = true;
+				else
+					self.swenf.n = true;
+				if (p.x > self._chef_position.x)
+					self.swenf.w = true;
+				else
+					self.swenf.e = true;
+
 			case EnemyMessage.msg_die:
 				if (self._border) {
 					set_animation_dead(self);
@@ -256,32 +270,20 @@ class Entity extends Script<Data> {
 				}
 			case EnemyMessage.msg_go_left:
 				self.swenf.w = true;
-				self.swenf.e = false;
-				self.swenf.n = false;
-				self.swenf.s = false;
 			case EnemyMessage.msg_go_right:
-				self.swenf.w = false;
 				self.swenf.e = true;
-				self.swenf.n = false;
-				self.swenf.s = false;
 			case EnemyMessage.msg_go_up:
-				self.swenf.w = false;
-				self.swenf.e = false;
 				self.swenf.n = true;
-				self.swenf.s = false;
 			case EnemyMessage.msg_go_down:
-				self.swenf.w = false;
-				self.swenf.e = false;
-				self.swenf.n = false;
 				self.swenf.s = true;
 		}
 	}
 
-	override function final_(self:Data):Void {}
+	override function final_(self:EnemyData):Void {}
 
-	override function on_reload(self:Data):Void {}
+	override function on_reload(self:EnemyData):Void {}
 
-	private function set_animation_back(self:Data):Void {
+	private function set_animation_back(self:EnemyData):Void {
 		switch (self.type) {
 			case 0:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_back});
@@ -292,7 +294,7 @@ class Entity extends Script<Data> {
 		}
 	}
 
-	private function set_animation_left(self:Data):Void {
+	private function set_animation_left(self:EnemyData):Void {
 		switch (self.type) {
 			case 0:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_left});
@@ -303,7 +305,7 @@ class Entity extends Script<Data> {
 		}
 	}
 
-	private function set_animation_right(self:Data):Void {
+	private function set_animation_right(self:EnemyData):Void {
 		switch (self.type) {
 			case 0:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_right});
@@ -314,7 +316,7 @@ class Entity extends Script<Data> {
 		}
 	}
 
-	private function set_animation_dead(self:Data):Void {
+	private function set_animation_dead(self:EnemyData):Void {
 		switch (self.type) {
 			case 0:
 				self.isMoving = false;
@@ -339,7 +341,7 @@ class Entity extends Script<Data> {
 		}
 	}
 
-	private function set_animation_pepper(self:Data):Void {
+	private function set_animation_pepper(self:EnemyData):Void {
 		switch (self.type) {
 			case 0:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_peppered});
@@ -350,7 +352,7 @@ class Entity extends Script<Data> {
 		}
 	}
 
-	private function set_animation_front(self:Data):Void {
+	private function set_animation_front(self:EnemyData):Void {
 		switch (self.type) {
 			case 0:
 				Msg.post("#sprite", SpriteMessages.play_animation, {id: EnemyEntityHash.egg_front});
@@ -361,7 +363,7 @@ class Entity extends Script<Data> {
 		}
 	}
 
-	private function callback_peppered(self:Data, _, _):Void {
+	private function callback_peppered(self:EnemyData, _, _):Void {
 		self.not_peppered = true;
 		self.isMoving = true;
 		set_animation_front(self);
