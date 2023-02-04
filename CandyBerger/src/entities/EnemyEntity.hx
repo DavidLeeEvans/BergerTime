@@ -183,29 +183,33 @@ class Entity extends Script<EnemyData> {
 			}
 			final rlenght:Float = 20.0;
 			var from = Go.get_position();
+
 			// South Direction
 			var lenght:Vector3 = vector3(0, -rlenght, 0); // TODO get image size and adjust
 			var efrom = from + vector3(0, -10, 0); // TODO get image size and adjust
 			var sto:Vector3 = vector3(efrom + lenght);
 			Physics.raycast_async(efrom, sto, self.tableFloor, RCTABLE_FLOOR);
-
 			Tools.draw_line(efrom, sto);
 			Physics.raycast_async(from, sto, self.tableSouth, RCSOUTH);
+
 			// North Direction
 			final nlenght:Vector3 = vector3(0, rlenght, 0);
 			final nto:Vector3 = vector3(from + nlenght);
 			Tools.draw_line(from, nto);
 			Physics.raycast_async(from, nto, self.tableNorth, RCNORTH);
+
 			// East Direction
 			final elenght:Vector3 = vector3(rlenght, 0, 0);
 			final eto:Vector3 = vector3(from + elenght);
 			Tools.draw_line(from, eto);
 			Physics.raycast_async(from, eto, self.tableEast, RCEAST);
+
 			// West Direction
 			final wlenght:Vector3 = vector3(-rlenght, 0, 0);
 			final wto:Vector3 = vector3(from + wlenght);
 			Tools.draw_line(from, wto);
 			Physics.raycast_async(from, wto, self.tableWest, RCWEST);
+			//
 			counter = 0.0;
 		}
 	}
@@ -217,11 +221,15 @@ class Entity extends Script<EnemyData> {
 					//					trace('!!!!!!HIT FLOOR message_id $message_id message $message');
 					self._not_taking_off = false;
 				} else if (message.request_id == RCEAST) {
-					if (message.group == hBorder)
+					if (message.group == hBorder) {
+						Defold.pprint("East");
 						Msg.post("#", EnemyMessage.msg_go_left);
+					}
 				} else if (message.request_id == RCWEST) {
-					if (message.group == hBorder)
+					if (message.group == hBorder) {
+						Defold.pprint("West");
 						Msg.post("#", EnemyMessage.msg_go_right);
+					}
 				} else if (message.request_id == RCNORTH) {
 					if (message.group == hPlate)
 						Defold.pprint("Testing Tracking Of Enemies North");

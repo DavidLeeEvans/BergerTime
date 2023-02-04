@@ -351,7 +351,7 @@ instances {
   id: "pickle"
   prototype: "/entities_go/pickle/pickle.go"
   position {
-    x: 104.0
+    x: 988.0
     y: 252.0
     z: 0.0
   }
@@ -370,7 +370,7 @@ instances {
     }
     properties {
       id: "is_tracking"
-      value: "false"
+      value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
   }
@@ -382,7 +382,7 @@ instances {
 }
 instances {
   id: "vborderL"
-  prototype: "/prefabs_go/vborder.go"
+  prototype: "/prefabs_go/vl_border.go"
   position {
     x: 0.0
     y: 320.0
@@ -402,9 +402,9 @@ instances {
 }
 instances {
   id: "vborderR"
-  prototype: "/prefabs_go/vborder.go"
+  prototype: "/prefabs_go/vl_border.go"
   position {
-    x: 1124.0
+    x: 1100.0
     y: 320.0
     z: 0.0
   }
