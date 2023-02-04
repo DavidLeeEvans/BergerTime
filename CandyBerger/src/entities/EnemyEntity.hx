@@ -152,7 +152,7 @@ class Entity extends Script<EnemyData> {
 					return;
 				}
 			}
-			final rlenght:Float = 4.0;
+			final rlenght:Float = 20.0;
 			var from = Go.get_position();
 			// South Direction
 			var lenght:Vector3 = vector3(0, -rlenght, 0); // TODO get image size and adjust
