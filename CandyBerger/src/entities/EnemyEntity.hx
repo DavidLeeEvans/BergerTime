@@ -82,6 +82,7 @@ private typedef EnemyData = {
 	var tableSouth:lua.Table<Int, Hash>;
 	var tableWest:lua.Table<Int, Hash>;
 	var tableOnLadder:lua.Table<Int, Hash>;
+	var vborder:lua.Table<Int, Hash>;
 	//
 }
 
@@ -99,7 +100,7 @@ class Entity extends Script<EnemyData> {
 	final hPlate:Hash = hash('fixture');
 	final hladder:Hash = hash('ladder');
 	final hFloor:Hash = hash('fixture');
-	final hBorder:Hash = hash('border');
+	final hBorder:Hash = hash('vborder');
 
 	//
 	// Enemy Egg 0
@@ -134,6 +135,15 @@ class Entity extends Script<EnemyData> {
 		self.tableWest = lua.Table.create();
 
 		lua.Table.insert(self.tableFloor, hFloor);
+		//
+		lua.Table.insert(self.tableEast, hBorder);
+		lua.Table.insert(self.tableWest, hBorder);
+		//
+		lua.Table.insert(self.tableEast, hladder);
+		lua.Table.insert(self.tableWest, hladder);
+		//
+		lua.Table.insert(self.tableNorth, h);
+		lua.Table.insert(self.tableSouth, h);
 	}
 
 	override function update(self:EnemyData, dt:Float):Void {
