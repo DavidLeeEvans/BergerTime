@@ -351,7 +351,7 @@ instances {
   id: "pickle"
   prototype: "/entities_go/pickle/pickle.go"
   position {
-    x: 988.0
+    x: 125.0
     y: 252.0
     z: 0.0
   }

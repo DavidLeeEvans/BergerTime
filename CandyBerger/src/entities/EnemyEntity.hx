@@ -144,8 +144,6 @@ class Entity extends Script<EnemyData> {
 
 		lua.Table.insert(self.tableFloor, hFloor);
 		//
-		lua.Table.insert(self.tableEast, hRBorder);
-		lua.Table.insert(self.tableWest, hLBorder);
 		//
 		lua.Table.insert(self.tableEast, hladder);
 		lua.Table.insert(self.tableWest, hladder);
@@ -170,14 +168,20 @@ class Entity extends Script<EnemyData> {
 			if (self._not_taking_off) {
 				if (self.is_tracking) {
 					final ENEMY_MOVEMENT_SPEED = 6.9; // TODO?? dle
-					if (self.swenf.n)
+					if (self.swenf.n) {
 						Go.set_position(Go.get_position() + Vmath.vector3(0, ENEMY_MOVEMENT_SPEED, 0));
-					else if (self.swenf.e)
+					} else if (self.swenf.e) {
 						Go.set_position(Go.get_position() + Vmath.vector3(ENEMY_MOVEMENT_SPEED, 0, 0));
-					else if (self.swenf.s)
+						Defold.pprint(Go.get_world_position());
+						if (Go.get_world_position().x > 1100)
+							Msg.post("#", EnemyMessage.msg_go_left); // TOOO dle
+					} else if (self.swenf.s) {
 						Go.set_position(Go.get_position() + Vmath.vector3(0, -ENEMY_MOVEMENT_SPEED, 0));
-					else if (self.swenf.w)
+					} else if (self.swenf.w) {
 						Go.set_position(Go.get_position() + Vmath.vector3(-ENEMY_MOVEMENT_SPEED, 0, 0));
+						if (Go.get_world_position().x <= 16)
+							Msg.post("#", EnemyMessage.msg_go_right);
+					}
 				} else {
 					return;
 				}
@@ -306,12 +310,16 @@ class Entity extends Script<EnemyData> {
 				}
 			case EnemyMessage.msg_go_left:
 				self.swenf.w = true;
+				set_animation_left(self);
 			case EnemyMessage.msg_go_right:
 				self.swenf.e = true;
+				set_animation_right(self);
 			case EnemyMessage.msg_go_up:
 				self.swenf.n = true;
+				set_animation_front(self);
 			case EnemyMessage.msg_go_down:
 				self.swenf.s = true;
+				set_animation_back(self);
 		}
 	}
 
