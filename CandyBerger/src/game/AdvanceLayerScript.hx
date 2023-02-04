@@ -282,7 +282,6 @@ class AdvanceLayerScript extends Script<AdvanceLayerData> {
 		Go.set(".", "position", self._scrap_reg_vector3);
 		self._bdescend = true;
 		if (self.callback != null) {
-			// Defold.pprint("!!!!!!!!!!!!!!!!!!!!!!!!!!!Callback is not NULL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			Msg.post(self.callback, AdvanceLayerMessage.reset);
 			self.callback = null;
 		}

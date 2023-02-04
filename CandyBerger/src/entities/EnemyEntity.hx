@@ -269,7 +269,7 @@ class Entity extends Script<EnemyData> {
 			case EnemyMessage.msg_retract_chef_transponder:
 				if (self._trig_abort)
 					return;
-				Defold.pprint("Tracking Enemy Movements Pickle");
+				Defold.pprint("Tracking Enemies Movements Pickle");
 				self._trig_abort = true;
 				Timer.delay(2.0, false, (self, _, _) -> self._trig_abort = false);
 				Defold.pprint("msg_retract_chef_transponder:");
@@ -279,6 +279,7 @@ class Entity extends Script<EnemyData> {
 				self.swenf.n = false;
 				self.swenf.s = false;
 				self._chef_position = Go.get_world_position("/chef");
+				lua.Lua.assert(self._chef_position != null, "Error Couldn't Locate the Chef Position");
 				final p = Go.get_world_position();
 				if (p.y > self._chef_position.y)
 					self.swenf.s = true;
