@@ -370,7 +370,7 @@ instances {
     }
     properties {
       id: "is_tracking"
-      value: "true"
+      value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
   }

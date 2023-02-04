@@ -68,6 +68,11 @@ class EnemyEntityHash {
 
 private typedef EnemyData = {
 	var _chef_position:Vector3;
+	var _chef_left_right:Bool;
+	var _chef_up_down:Bool;
+	var _trig_abort:Bool;
+
+	//
 	var _not_taking_off:Bool;
 	var _border:Bool;
 	var _debug:Bool;
@@ -87,6 +92,7 @@ private typedef EnemyData = {
 }
 
 class Entity extends Script<EnemyData> {
+	//
 	var debug:Bool;
 	var counter:Float;
 	final MOVEMENT_SPEED = 6.0;
@@ -98,7 +104,7 @@ class Entity extends Script<EnemyData> {
 	final RCONLADDER:Int = 6;
 	//
 	final hPlate:Hash = hash('fixture');
-	final hladder:Hash = hash('ladder');
+	final hladder:Hash = hash('movement');
 	final hFloor:Hash = hash('fixture');
 	final hBorder:Hash = hash('vborder');
 
@@ -111,16 +117,17 @@ class Entity extends Script<EnemyData> {
 		lua.Lua.assert(self.type != -1, "Enemy Type Not Set");
 		self._not_taking_off = false;
 		self._border = true;
+		self._trig_abort = false;
 		//
 		self._debug = defold.Sys.get_engine_info().is_debug;
 		self.swenf = new SWENF();
 		set_animation_front(self);
-		self.swenf.f = false;
 		self.swenf.n = false;
 		self.swenf.e = false;
 		self.swenf.s = false;
-		self.swenf.i = false;
 		self.swenf.w = false;
+		self.swenf.i = false;
+
 		self.isMoving = true;
 		if (Rand.bool())
 			Msg.post("#", EnemyMessage.msg_go_left);
@@ -142,8 +149,8 @@ class Entity extends Script<EnemyData> {
 		lua.Table.insert(self.tableEast, hladder);
 		lua.Table.insert(self.tableWest, hladder);
 		//
-		lua.Table.insert(self.tableNorth, h);
-		lua.Table.insert(self.tableSouth, h);
+		lua.Table.insert(self.tableNorth, hladder);
+		lua.Table.insert(self.tableSouth, hladder);
 	}
 
 	override function update(self:EnemyData, dt:Float):Void {
@@ -153,11 +160,23 @@ class Entity extends Script<EnemyData> {
 				Label.set_text("#debug", "e");
 			} else if (self.swenf.w) {
 				Label.set_text("#debug", "w");
+			} else if (self.swenf.n) {
+				Label.set_text("#debug", "n");
+			} else if (self.swenf.s) {
+				Label.set_text("#debug", "s");
 			}
 
 			if (self._not_taking_off) {
 				if (self.is_tracking) {
-					Go.set_position(Go.get_position() + Vmath.vector3(0, -0.1, 0));
+					final ENEMY_MOVEMENT_SPEED = 6.9; // TODO?? dle
+					if (self.swenf.n)
+						Go.set_position(Go.get_position() + Vmath.vector3(0, ENEMY_MOVEMENT_SPEED, 0));
+					else if (self.swenf.e)
+						Go.set_position(Go.get_position() + Vmath.vector3(ENEMY_MOVEMENT_SPEED, 0, 0));
+					else if (self.swenf.s)
+						Go.set_position(Go.get_position() + Vmath.vector3(0, -ENEMY_MOVEMENT_SPEED, 0));
+					else if (self.swenf.w)
+						Go.set_position(Go.get_position() + Vmath.vector3(-ENEMY_MOVEMENT_SPEED, 0, 0));
 				} else {
 					return;
 				}
@@ -187,29 +206,6 @@ class Entity extends Script<EnemyData> {
 			final wto:Vector3 = vector3(from + wlenght);
 			Tools.draw_line(from, wto);
 			Physics.raycast_async(from, wto, self.tableWest, RCWEST);
-			//
-			if (self.swenf.f) {
-				trace("Moving Falling");
-				self.swenf.i = false;
-			} else if (self.swenf.n && !self.swenf.i) {
-				trace("Moving North");
-				final p = Go.get_position();
-				Go.set_position(p + Vmath.vector3(0, MOVEMENT_SPEED, 0));
-			} else if (self.swenf.e && !self.swenf.i) {
-				//				trace("Moving East");
-				final p = Go.get_position();
-				Go.set_position(p + Vmath.vector3(MOVEMENT_SPEED, 0, 0));
-			} else if (self.swenf.s && !self.swenf.i) {
-				trace("Moving South");
-				final p = Go.get_position();
-				Go.set_position(p + Vmath.vector3(0, -MOVEMENT_SPEED, 0));
-			} else if (self.swenf.w && !self.swenf.i) {
-				//				trace("Moving West");
-				final p = Go.get_position();
-				Go.set_position(p + Vmath.vector3(-MOVEMENT_SPEED, 0, 0));
-			} else if (self.swenf.i) {
-				trace("Not Moving, Idle");
-			}
 			counter = 0.0;
 		}
 	}
@@ -220,7 +216,20 @@ class Entity extends Script<EnemyData> {
 				if (message.request_id == RCTABLE_FLOOR) {
 					//					trace('!!!!!!HIT FLOOR message_id $message_id message $message');
 					self._not_taking_off = false;
+				} else if (message.request_id == RCEAST) {
+					if (message.group == hBorder)
+						Msg.post("#", EnemyMessage.msg_go_left);
+				} else if (message.request_id == RCWEST) {
+					if (message.group == hBorder)
+						Msg.post("#", EnemyMessage.msg_go_right);
+				} else if (message.request_id == RCNORTH) {
+					if (message.group == hPlate)
+						Defold.pprint("Testing Tracking Of Enemies North");
+				} else if (message.request_id == RCSOUTH) {
+					if (message.group == hPlate)
+						Defold.pprint("Testing Tracking Of Enemies South");
 				}
+
 			case PhysicsMessages.ray_cast_missed:
 				if (message.request_id == RCTABLE_FLOOR) {
 					//					trace('******MISSED FLOOR message_id $message_id message $message');
@@ -258,6 +267,13 @@ class Entity extends Script<EnemyData> {
 				}
 			// Game Messages
 			case EnemyMessage.msg_retract_chef_transponder:
+				if (self._trig_abort)
+					return;
+				Defold.pprint("Tracking Enemy Movements Pickle");
+				self._trig_abort = true;
+				Timer.delay(2.0, false, (self, _, _) -> self._trig_abort = false);
+				Defold.pprint("msg_retract_chef_transponder:");
+
 				self.swenf.w = false;
 				self.swenf.e = false;
 				self.swenf.n = false;

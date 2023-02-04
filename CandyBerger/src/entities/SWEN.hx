@@ -6,7 +6,6 @@ class SWENF {
 	public var e:Bool;
 	public var n:Bool;
 	public var i:Bool;
-	public var f:Bool; // f is falling
 
 	public function new() {}
 }
