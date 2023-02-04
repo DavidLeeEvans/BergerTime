@@ -50,6 +50,7 @@ embedded_components {
   "mask: \"chef\"\n"
   "mask: \"pepper\"\n"
   "mask: \"trigcollf\"\n"
+  "mask: \"vborder\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"
