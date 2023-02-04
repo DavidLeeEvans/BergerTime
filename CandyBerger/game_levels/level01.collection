@@ -380,46 +380,6 @@ instances {
     z: 1.0
   }
 }
-instances {
-  id: "vborderL"
-  prototype: "/prefabs_go/vl_border.go"
-  position {
-    x: 0.0
-    y: 320.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "vr_border"
-  prototype: "/prefabs_go/vr_border.go"
-  position {
-    x: 1122.0
-    y: 324.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
 collection_instances {
   id: "ladder_long"
   collection: "/prefabs_go/ladder_long.collection"
