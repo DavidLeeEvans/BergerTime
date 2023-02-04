@@ -45,7 +45,6 @@ embedded_components {
   "mask: \"fixture\"\n"
   "mask: \"enemy\"\n"
   "mask: \"treat\"\n"
-  "mask: \"border\"\n"
   "mask: \"trigcoll0\"\n"
   "mask: \"trigcoll1\"\n"
   "mask: \"trigcoll2\"\n"
