@@ -6,7 +6,7 @@ embedded_components {
   "mass: 0.0\n"
   "friction: 0.1\n"
   "restitution: 0.5\n"
-  "group: \"vl_border\"\n"
+  "group: \"border\"\n"
   "mask: \"enemy\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
