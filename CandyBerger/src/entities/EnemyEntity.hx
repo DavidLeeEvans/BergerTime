@@ -154,7 +154,7 @@ class Entity extends Script<EnemyData> {
 
 	override function update(self:EnemyData, dt:Float):Void {
 		counter = counter + 1.0;
-		if (counter > 30.0) {
+		if (counter > 15.0) {
 			if (self.swenf.e) {
 				Label.set_text("#debug", "e");
 			} else if (self.swenf.w) {
@@ -249,6 +249,14 @@ class Entity extends Script<EnemyData> {
 					Timer.delay(6.0, false, callback_peppered);
 					set_animation_pepper(self);
 				}
+				if (message.other_group == hash('fixture')) {
+					final u:Url = Msg.url(null, message.other_id, "fixtures");
+					final type:Int = Std.int(Go.get(u, hash("fixture_type")));
+					if (type == 1)
+						Msg.post("#", EnemyMessage.msg_go_right);
+					else if (type == 2)
+						Msg.post("#", EnemyMessage.msg_go_left);
+				}
 			case SpriteMessages.animation_done:
 				if (message.id == EnemyEntityHash.pickle_dead) {
 					Globals.total_num_current_monsters--;
@@ -304,15 +312,31 @@ class Entity extends Script<EnemyData> {
 				}
 			case EnemyMessage.msg_go_left:
 				self.swenf.w = true;
+				self.swenf.e = false;
+				self.swenf.s = false;
+				self.swenf.n = false;
+
 				set_animation_left(self);
 			case EnemyMessage.msg_go_right:
 				self.swenf.e = true;
+				self.swenf.w = false;
+				self.swenf.s = false;
+				self.swenf.n = false;
+
 				set_animation_right(self);
 			case EnemyMessage.msg_go_up:
 				self.swenf.n = true;
+				self.swenf.s = false;
+				self.swenf.e = false;
+				self.swenf.w = false;
+
 				set_animation_front(self);
 			case EnemyMessage.msg_go_down:
 				self.swenf.s = true;
+				self.swenf.n = false;
+				self.swenf.e = false;
+				self.swenf.w = false;
+
 				set_animation_back(self);
 		}
 	}
