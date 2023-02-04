@@ -168,20 +168,14 @@ class Entity extends Script<EnemyData> {
 			if (self._not_taking_off) {
 				if (self.is_tracking) {
 					final ENEMY_MOVEMENT_SPEED = 6.9; // TODO?? dle
-					if (self.swenf.n) {
+					if (self.swenf.n)
 						Go.set_position(Go.get_position() + Vmath.vector3(0, ENEMY_MOVEMENT_SPEED, 0));
-					} else if (self.swenf.e) {
+					else if (self.swenf.e)
 						Go.set_position(Go.get_position() + Vmath.vector3(ENEMY_MOVEMENT_SPEED, 0, 0));
-						Defold.pprint(Go.get_world_position());
-						if (Go.get_world_position().x > 1100)
-							Msg.post("#", EnemyMessage.msg_go_left); // TOOO dle
-					} else if (self.swenf.s) {
+					else if (self.swenf.s)
 						Go.set_position(Go.get_position() + Vmath.vector3(0, -ENEMY_MOVEMENT_SPEED, 0));
-					} else if (self.swenf.w) {
+					else if (self.swenf.w)
 						Go.set_position(Go.get_position() + Vmath.vector3(-ENEMY_MOVEMENT_SPEED, 0, 0));
-						if (Go.get_world_position().x <= 16)
-							Msg.post("#", EnemyMessage.msg_go_right);
-					}
 				} else {
 					return;
 				}
