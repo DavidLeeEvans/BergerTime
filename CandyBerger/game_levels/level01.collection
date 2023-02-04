@@ -401,11 +401,11 @@ instances {
   }
 }
 instances {
-  id: "vborderR"
-  prototype: "/prefabs_go/vl_border.go"
+  id: "vr_border"
+  prototype: "/prefabs_go/vr_border.go"
   position {
-    x: 1100.0
-    y: 320.0
+    x: 1122.0
+    y: 324.0
     z: 0.0
   }
   rotation {

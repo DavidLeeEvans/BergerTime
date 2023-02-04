@@ -106,7 +106,8 @@ class Entity extends Script<EnemyData> {
 	final hPlate:Hash = hash('fixture');
 	final hladder:Hash = hash('movement');
 	final hFloor:Hash = hash('fixture');
-	final hBorder:Hash = hash('vborder');
+	final hLBorder:Hash = hash('vl_border');
+	final hRBorder:Hash = hash('vr_border');
 
 	//
 	// Enemy Egg 0
@@ -143,8 +144,8 @@ class Entity extends Script<EnemyData> {
 
 		lua.Table.insert(self.tableFloor, hFloor);
 		//
-		lua.Table.insert(self.tableEast, hBorder);
-		lua.Table.insert(self.tableWest, hBorder);
+		lua.Table.insert(self.tableEast, hRBorder);
+		lua.Table.insert(self.tableWest, hLBorder);
 		//
 		lua.Table.insert(self.tableEast, hladder);
 		lua.Table.insert(self.tableWest, hladder);
@@ -221,12 +222,12 @@ class Entity extends Script<EnemyData> {
 					//					trace('!!!!!!HIT FLOOR message_id $message_id message $message');
 					self._not_taking_off = false;
 				} else if (message.request_id == RCEAST) {
-					if (message.group == hBorder) {
+					if (message.group == hRBorder) {
 						Defold.pprint("East");
 						Msg.post("#", EnemyMessage.msg_go_left);
 					}
 				} else if (message.request_id == RCWEST) {
-					if (message.group == hBorder) {
+					if (message.group == hLBorder) {
 						Defold.pprint("West");
 						Msg.post("#", EnemyMessage.msg_go_right);
 					}
