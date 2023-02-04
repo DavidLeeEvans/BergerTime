@@ -110,7 +110,7 @@ class Entity extends Script<EnemyData> {
 	final hRBorder:Hash = hash('vr_border');
 
 	//
-	// Enemy Egg 0
+	// Enemy Egg 0 == Create Broken Eggs Animations
 	// Enemy Pickle 1
 	// Enemy Sausage 2
 
