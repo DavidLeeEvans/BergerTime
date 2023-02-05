@@ -55,8 +55,9 @@ shared_state = 1
 [physics]
 gravity_y = -1000.0
 scale = 0.01
-debug = 0
+debug = 1
 max_collision_object_count = 512
+debug_alpha = 0.7
 
 [admob]
 app_id_ios = ca-app-pub-3940256099942544~1458002511
