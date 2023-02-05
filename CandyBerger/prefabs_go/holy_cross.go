@@ -27,6 +27,11 @@ components {
     z: 0.0
     w: 1.0
   }
+  properties {
+    id: "fixture_type"
+    value: "3.0"
+    type: PROPERTY_TYPE_NUMBER
+  }
 }
 embedded_components {
   id: "collisionobject"
