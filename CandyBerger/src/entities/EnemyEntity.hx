@@ -248,7 +248,7 @@ class Entity extends Script<EnemyData> {
 					set_animation_pepper(self);
 				}
 				if (message.other_group == hash('fixture')) {
-					final u:Url = Msg.url(null, message.other_id, "fixtures");
+					final u:Url = Msg.url(null, message.other_id, "fixture");
 					final type:Int = Std.int(Go.get(u, hash("fixture_type")));
 					if (type == 1)
 						Msg.post("#", EnemyMessage.msg_go_right);
