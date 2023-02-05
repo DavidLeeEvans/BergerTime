@@ -177,7 +177,8 @@ class Entity extends Script<EnemyData> {
 			} else {
 				return;
 			}
-			final rlenght:Float = 20.0;
+			// final rlenght:Float = 20.0;
+			final rlenght:Float = 10.0;
 			var from = Go.get_position();
 
 			// South Direction
@@ -185,6 +186,7 @@ class Entity extends Script<EnemyData> {
 			var efrom = from + vector3(0, -10, 0); // TODO get image size and adjust
 			var sto:Vector3 = vector3(efrom + lenght);
 			Physics.raycast_async(efrom, sto, self.tableFloor, RCTABLE_FLOOR);
+			//
 			Tools.draw_line(efrom, sto);
 			Physics.raycast_async(from, sto, self.tableSouth, RCSOUTH);
 
@@ -234,7 +236,10 @@ class Entity extends Script<EnemyData> {
 				}
 
 			case PhysicsMessages.ray_cast_missed:
-				if (message.request_id == RCTABLE_FLOOR) {}
+				if (message.request_id == RCTABLE_FLOOR) {
+					Defold.pprint("---------------MISSED-------------");
+					Go.set_position(Go.get_world_position() + Vmath.vector3(0, -1.0, 0));
+				}
 			case defold.PhysicsMessages.collision_response:
 				if (message.other_group == hash('pepper')) {
 					self.not_peppered = false;
