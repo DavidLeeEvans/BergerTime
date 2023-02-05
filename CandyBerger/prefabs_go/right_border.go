@@ -1,5 +1,5 @@
 components {
-  id: "fixtures"
+  id: "fixture"
   component: "/entities_go/floors/fixtures.script"
   position {
     x: 0.0
