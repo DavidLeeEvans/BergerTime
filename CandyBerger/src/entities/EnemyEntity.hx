@@ -36,7 +36,14 @@ class EnemyMessage {
 	var msg_go_left;
 	var msg_go_up;
 	var msg_go_down;
-	var msg_retract_chef_transponder;
+	var msg_go_idle;
+	var msg_retract_chef_transponder_send;
+	var msg_retract_chef_transponder_receive:{
+		n:Bool,
+		e:Bool,
+		s:Bool,
+		w:Bool
+	};
 }
 
 @:build(defold.support.HashBuilder.build())
@@ -73,6 +80,10 @@ private typedef EnemyData = {
 	@property(true) var not_peppered:Bool;
 	@property(true) var is_tracking:Bool;
 	@property(-1) var type:Int; // egg-0, pickle-1, sausage-2
+	var can_go_n:Bool;
+	var can_go_e:Bool;
+	var can_go_s:Bool;
+	var can_go_w:Bool;
 	var down_none_up:Int;
 	var left_none_right:Int;
 	var isMoving:Bool;
@@ -114,6 +125,11 @@ class Entity extends Script<EnemyData> {
 		lua.Lua.assert(self.type != -1, "Enemy Type Not Set");
 		self._border = true;
 		self._trig_abort = false;
+		self.can_go_n = false;
+		self.can_go_e = false;
+		self.can_go_s = false;
+		self.can_go_w = false;
+
 		self.down_none_up = 0;
 		self.left_none_right = 0;
 		//
@@ -127,10 +143,15 @@ class Entity extends Script<EnemyData> {
 		self.swenf.i = false;
 
 		self.isMoving = true;
-		if (Rand.bool())
+		if (Rand.bool()) {
 			Msg.post("#", EnemyMessage.msg_go_left);
-		else
+			self.can_go_e = false;
+			self.can_go_w = true;
+		} else {
 			Msg.post("#", EnemyMessage.msg_go_right);
+			self.can_go_e = true;
+			self.can_go_w = false;
+		}
 
 		counter = 0.0;
 		self.tableFloor = lua.Table.create();
@@ -253,14 +274,14 @@ class Entity extends Script<EnemyData> {
 					else if (type == 2)
 						Msg.post("#", EnemyMessage.msg_go_left);
 					else if (type == 3) {
-						Msg.post("#", EnemyMessage.msg_retract_chef_transponder);
-						if (self.left_none_right == -1)
+						Msg.post("#", EnemyMessage.msg_retract_chef_transponder_send);
+						if (self.left_none_right == -1 && self.can_go_w)
 							Msg.post("#", EnemyMessage.msg_go_left);
-						else if (self.left_none_right == 1)
+						else if (self.left_none_right == 1 && self.can_go_e)
 							Msg.post("#", EnemyMessage.msg_go_right);
-						else if (self.down_none_up == -1)
+						else if (self.down_none_up == -1 && self.can_go_s)
 							Msg.post("#", EnemyMessage.msg_go_down);
-						else if (self.down_none_up == 1)
+						else if (self.down_none_up == 1 && self.can_go_n)
 							Msg.post("#", EnemyMessage.msg_go_up);
 					}
 				}
@@ -276,26 +297,30 @@ class Entity extends Script<EnemyData> {
 					Go.delete();
 				} else if (message.id == EnemyEntityHash.pickle_peppered) {
 					Msg.post('#sprite', SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_front});
-					Msg.post("#", EnemyMessage.msg_retract_chef_transponder);
+					Msg.post("#", EnemyMessage.msg_retract_chef_transponder_send);
 					self.not_peppered = true;
 				} else if (message.id == EnemyEntityHash.egg_peppered) {
 					Msg.post('#sprite', SpriteMessages.play_animation, {id: EnemyEntityHash.egg_front});
-					Msg.post("#", EnemyMessage.msg_retract_chef_transponder);
+					Msg.post("#", EnemyMessage.msg_retract_chef_transponder_send);
 					self.not_peppered = true;
 				} else if (message.id == EnemyEntityHash.hotdog_peppered) {
 					Msg.post('#sprite', SpriteMessages.play_animation, {id: EnemyEntityHash.hotdog_front});
-					Msg.post("#", EnemyMessage.msg_retract_chef_transponder);
+					Msg.post("#", EnemyMessage.msg_retract_chef_transponder_send);
 					self.not_peppered = true;
 				}
 			// Game Messages
-			case EnemyMessage.msg_retract_chef_transponder:
+			case EnemyMessage.msg_retract_chef_transponder_receive:
+				self.can_go_n = message.n;
+				self.can_go_e = message.e;
+				self.can_go_s = message.s;
+				self.can_go_w = message.w;
+			case EnemyMessage.msg_retract_chef_transponder_send:
 				if (self._trig_abort)
 					return;
 				Defold.pprint("Tracking Enemies Movements Pickle");
 				self._trig_abort = true;
 				Timer.delay(2.0, false, (self, _, _) -> self._trig_abort = false);
 				Defold.pprint("msg_retract_chef_transponder:");
-
 				self.swenf.w = false;
 				self.swenf.e = false;
 				self.swenf.n = false;
@@ -331,29 +356,31 @@ class Entity extends Script<EnemyData> {
 				self.swenf.e = false;
 				self.swenf.s = false;
 				self.swenf.n = false;
-
 				set_animation_left(self);
 			case EnemyMessage.msg_go_right:
 				self.swenf.e = true;
 				self.swenf.w = false;
 				self.swenf.s = false;
 				self.swenf.n = false;
-
 				set_animation_right(self);
 			case EnemyMessage.msg_go_up:
 				self.swenf.n = true;
 				self.swenf.s = false;
 				self.swenf.e = false;
 				self.swenf.w = false;
-
 				set_animation_front(self);
 			case EnemyMessage.msg_go_down:
 				self.swenf.s = true;
 				self.swenf.n = false;
 				self.swenf.e = false;
 				self.swenf.w = false;
-
 				set_animation_back(self);
+			case EnemyMessage.msg_go_idle:
+				self.swenf.s = false;
+				self.swenf.n = false;
+				self.swenf.e = false;
+				self.swenf.w = false;
+				Defold.pprint("!!!IDLE!!!");
 		}
 	}
 

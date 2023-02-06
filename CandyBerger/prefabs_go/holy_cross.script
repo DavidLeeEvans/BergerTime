@@ -1,4 +1,3 @@
-go.property("type", 3)
 go.property("n", false)
 go.property("e", false)
 go.property("s", false)

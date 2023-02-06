@@ -352,7 +352,7 @@ instances {
   prototype: "/entities_go/pickle/pickle.go"
   position {
     x: 1050.0
-    y: 252.0
+    y: 234.0
     z: 0.0
   }
   rotation {
