@@ -59,44 +59,4 @@ instances {
     z: 1.0
   }
 }
-instances {
-  id: "middle_ladder3"
-  prototype: "/entities_go/floors/middle_ladder.go"
-  position {
-    x: 0.0
-    y: -96.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "middle_ladder4"
-  prototype: "/entities_go/floors/middle_ladder.go"
-  position {
-    x: 0.0
-    y: -128.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
 scale_along_z: 0
