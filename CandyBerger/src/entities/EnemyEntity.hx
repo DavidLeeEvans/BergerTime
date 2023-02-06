@@ -303,14 +303,23 @@ class Entity extends Script<EnemyData> {
 				final _chef_position = Go.get_world_position("/chef");
 				lua.Lua.assert(_chef_position != null, "Error Couldn't Locate the Chef Position");
 				final p = Go.get_world_position();
-				if (p.y > _chef_position.y)
+				self.left_none_right = 0;
+				self.down_none_up = 0;
+				if (p.y > _chef_position.y) {
 					self.swenf.s = true;
-				else
+					self.down_none_up = -1;
+				} else {
 					self.swenf.n = true;
-				if (p.x > _chef_position.x)
+					self.down_none_up = 1;
+				}
+
+				if (p.x > _chef_position.x) {
 					self.swenf.w = true;
-				else
+					self.left_none_right = -1;
+				} else {
 					self.swenf.e = true;
+					self.left_none_right = 1;
+				}
 
 			case EnemyMessage.msg_die:
 				if (self._border) {
