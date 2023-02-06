@@ -37,7 +37,8 @@ class EnemyMessage {
 	var msg_go_up;
 	var msg_go_down;
 	var msg_go_idle;
-	var msg_retract_chef_transponder_send;
+	var local_msg_retract_chef_transponder_send;
+	var remote_msg_retract_chef_transponder_send;
 	var msg_retract_chef_transponder_receive:{
 		n:Bool,
 		e:Bool,
@@ -274,7 +275,8 @@ class Entity extends Script<EnemyData> {
 					else if (type == 2)
 						Msg.post("#", EnemyMessage.msg_go_left);
 					else if (type == 3) {
-						Msg.post("#", EnemyMessage.msg_retract_chef_transponder_send);
+						Msg.post(message.other_id, EnemyMessage.remote_msg_retract_chef_transponder_send);
+						Msg.post("#", EnemyMessage.local_msg_retract_chef_transponder_send);
 						if (self.left_none_right == -1 && self.can_go_w)
 							Msg.post("#", EnemyMessage.msg_go_left);
 						else if (self.left_none_right == 1 && self.can_go_e)
@@ -297,15 +299,15 @@ class Entity extends Script<EnemyData> {
 					Go.delete();
 				} else if (message.id == EnemyEntityHash.pickle_peppered) {
 					Msg.post('#sprite', SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_front});
-					Msg.post("#", EnemyMessage.msg_retract_chef_transponder_send);
+					Msg.post("#", EnemyMessage.local_msg_retract_chef_transponder_send);
 					self.not_peppered = true;
 				} else if (message.id == EnemyEntityHash.egg_peppered) {
 					Msg.post('#sprite', SpriteMessages.play_animation, {id: EnemyEntityHash.egg_front});
-					Msg.post("#", EnemyMessage.msg_retract_chef_transponder_send);
+					Msg.post("#", EnemyMessage.local_msg_retract_chef_transponder_send);
 					self.not_peppered = true;
 				} else if (message.id == EnemyEntityHash.hotdog_peppered) {
 					Msg.post('#sprite', SpriteMessages.play_animation, {id: EnemyEntityHash.hotdog_front});
-					Msg.post("#", EnemyMessage.msg_retract_chef_transponder_send);
+					Msg.post("#", EnemyMessage.local_msg_retract_chef_transponder_send);
 					self.not_peppered = true;
 				}
 			// Game Messages
@@ -314,7 +316,7 @@ class Entity extends Script<EnemyData> {
 				self.can_go_e = message.e;
 				self.can_go_s = message.s;
 				self.can_go_w = message.w;
-			case EnemyMessage.msg_retract_chef_transponder_send:
+			case EnemyMessage.local_msg_retract_chef_transponder_send:
 				if (self._trig_abort)
 					return;
 				Defold.pprint("Tracking Enemies Movements Pickle");
