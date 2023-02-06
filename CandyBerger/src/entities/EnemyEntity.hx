@@ -67,18 +67,14 @@ class EnemyEntityHash {
 }
 
 private typedef EnemyData = {
-	var _chef_position:Vector3;
-	var _chef_left_right:Bool;
-	var _chef_up_down:Bool;
 	var _trig_abort:Bool;
-
-	//
-	// var _not_taking_off:Bool;
 	var _border:Bool;
 	var _debug:Bool;
 	@property(true) var not_peppered:Bool;
 	@property(true) var is_tracking:Bool;
 	@property(-1) var type:Int; // egg-0, pickle-1, sausage-2
+	var down_none_up:Int;
+	var left_none_right:Int;
 	var isMoving:Bool;
 	var swenf:SWENF; //
 	var tableFloor:lua.Table<Int, Hash>;
@@ -118,6 +114,8 @@ class Entity extends Script<EnemyData> {
 		lua.Lua.assert(self.type != -1, "Enemy Type Not Set");
 		self._border = true;
 		self._trig_abort = false;
+		self.down_none_up = 0;
+		self.left_none_right = 0;
 		//
 		self._debug = defold.Sys.get_engine_info().is_debug;
 		self.swenf = new SWENF();
@@ -254,6 +252,17 @@ class Entity extends Script<EnemyData> {
 						Msg.post("#", EnemyMessage.msg_go_right);
 					else if (type == 2)
 						Msg.post("#", EnemyMessage.msg_go_left);
+					else if (type == 3) {
+						Msg.post("#", EnemyMessage.msg_retract_chef_transponder);
+						if (self.left_none_right == -1)
+							Msg.post("#", EnemyMessage.msg_go_left);
+						else if (self.left_none_right == 1)
+							Msg.post("#", EnemyMessage.msg_go_right);
+						else if (self.down_none_up == -1)
+							Msg.post("#", EnemyMessage.msg_go_down);
+						else if (self.down_none_up == 1)
+							Msg.post("#", EnemyMessage.msg_go_up);
+					}
 				}
 			case SpriteMessages.animation_done:
 				if (message.id == EnemyEntityHash.pickle_dead) {
@@ -291,14 +300,14 @@ class Entity extends Script<EnemyData> {
 				self.swenf.e = false;
 				self.swenf.n = false;
 				self.swenf.s = false;
-				self._chef_position = Go.get_world_position("/chef");
-				lua.Lua.assert(self._chef_position != null, "Error Couldn't Locate the Chef Position");
+				final _chef_position = Go.get_world_position("/chef");
+				lua.Lua.assert(_chef_position != null, "Error Couldn't Locate the Chef Position");
 				final p = Go.get_world_position();
-				if (p.y > self._chef_position.y)
+				if (p.y > _chef_position.y)
 					self.swenf.s = true;
 				else
 					self.swenf.n = true;
-				if (p.x > self._chef_position.x)
+				if (p.x > _chef_position.x)
 					self.swenf.w = true;
 				else
 					self.swenf.e = true;
