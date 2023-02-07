@@ -37,14 +37,7 @@ class EnemyMessage {
 	var msg_go_up;
 	var msg_go_down;
 	var msg_go_idle;
-	var local_msg_retract_chef_transponder_send;
-	var remote_msg_retract_chef_transponder_send;
-	var msg_retract_chef_transponder_receive:{
-		n:Bool,
-		e:Bool,
-		s:Bool,
-		w:Bool
-	};
+	var msg_retract_chef_transponder;
 }
 
 @:build(defold.support.HashBuilder.build())
@@ -75,6 +68,7 @@ class EnemyEntityHash {
 }
 
 private typedef EnemyData = {
+	var _trig3_abort:Bool;
 	var _trig_abort:Bool;
 	var _border:Bool;
 	var _debug:Bool;
@@ -126,6 +120,7 @@ class Entity extends Script<EnemyData> {
 		lua.Lua.assert(self.type != -1, "Enemy Type Not Set");
 		self._border = true;
 		self._trig_abort = false;
+		self._trig3_abort = false;
 		self.can_go_n = false;
 		self.can_go_e = false;
 		self.can_go_s = false;
@@ -275,16 +270,31 @@ class Entity extends Script<EnemyData> {
 					else if (type == 2)
 						Msg.post("#", EnemyMessage.msg_go_left);
 					else if (type == 3) {
-						Msg.post(message.other_id, EnemyMessage.remote_msg_retract_chef_transponder_send);
-						Msg.post("#", EnemyMessage.local_msg_retract_chef_transponder_send);
-						if (self.left_none_right == -1 && self.can_go_w)
+						if (self._trig3_abort)
+							return;
+						Defold.pprint('---------------------');
+						self._trig3_abort = true;
+						Msg.post("#", EnemyMessage.msg_retract_chef_transponder);
+						Timer.delay(3, false, (self, _, _) -> self._trig3_abort = false);
+						final u:Url = Msg.url(null, message.other_id, "holy_cross");
+						self.can_go_n = Go.get(u, hash('n'));
+						self.can_go_e = Go.get(u, hash('e'));
+						self.can_go_s = Go.get(u, hash('s'));
+						self.can_go_w = Go.get(u, hash('w'));
+						Defold.pprint('${self.can_go_n},${self.can_go_e},${self.can_go_s},${self.can_go_w}');
+						if (self.left_none_right == -1 && self.can_go_w) {
 							Msg.post("#", EnemyMessage.msg_go_left);
-						else if (self.left_none_right == 1 && self.can_go_e)
+							return;
+						} else if (self.left_none_right == 1 && self.can_go_e) {
 							Msg.post("#", EnemyMessage.msg_go_right);
-						else if (self.down_none_up == -1 && self.can_go_s)
+							return;
+						} else if (self.down_none_up == -1 && self.can_go_s) {
 							Msg.post("#", EnemyMessage.msg_go_down);
-						else if (self.down_none_up == 1 && self.can_go_n)
+							return;
+						} else if (self.down_none_up == 1 && self.can_go_n) {
 							Msg.post("#", EnemyMessage.msg_go_up);
+							return;
+						}
 					}
 				}
 			case SpriteMessages.animation_done:
@@ -299,24 +309,19 @@ class Entity extends Script<EnemyData> {
 					Go.delete();
 				} else if (message.id == EnemyEntityHash.pickle_peppered) {
 					Msg.post('#sprite', SpriteMessages.play_animation, {id: EnemyEntityHash.pickle_front});
-					Msg.post("#", EnemyMessage.local_msg_retract_chef_transponder_send);
+					Msg.post("#", EnemyMessage.msg_retract_chef_transponder);
 					self.not_peppered = true;
 				} else if (message.id == EnemyEntityHash.egg_peppered) {
 					Msg.post('#sprite', SpriteMessages.play_animation, {id: EnemyEntityHash.egg_front});
-					Msg.post("#", EnemyMessage.local_msg_retract_chef_transponder_send);
+					Msg.post("#", EnemyMessage.msg_retract_chef_transponder);
 					self.not_peppered = true;
 				} else if (message.id == EnemyEntityHash.hotdog_peppered) {
 					Msg.post('#sprite', SpriteMessages.play_animation, {id: EnemyEntityHash.hotdog_front});
-					Msg.post("#", EnemyMessage.local_msg_retract_chef_transponder_send);
+					Msg.post("#", EnemyMessage.msg_retract_chef_transponder);
 					self.not_peppered = true;
 				}
 			// Game Messages
-			case EnemyMessage.msg_retract_chef_transponder_receive:
-				self.can_go_n = message.n;
-				self.can_go_e = message.e;
-				self.can_go_s = message.s;
-				self.can_go_w = message.w;
-			case EnemyMessage.local_msg_retract_chef_transponder_send:
+			case EnemyMessage.msg_retract_chef_transponder:
 				if (self._trig_abort)
 					return;
 				Defold.pprint("Tracking Enemies Movements Pickle");
@@ -354,35 +359,39 @@ class Entity extends Script<EnemyData> {
 					self._border = false;
 				}
 			case EnemyMessage.msg_go_left:
+				Defold.pprint('Go Left');
 				self.swenf.w = true;
 				self.swenf.e = false;
 				self.swenf.s = false;
 				self.swenf.n = false;
 				set_animation_left(self);
 			case EnemyMessage.msg_go_right:
+				Defold.pprint('Go Right');
 				self.swenf.e = true;
 				self.swenf.w = false;
 				self.swenf.s = false;
 				self.swenf.n = false;
 				set_animation_right(self);
 			case EnemyMessage.msg_go_up:
+				Defold.pprint('Go Up');
 				self.swenf.n = true;
 				self.swenf.s = false;
 				self.swenf.e = false;
 				self.swenf.w = false;
 				set_animation_front(self);
 			case EnemyMessage.msg_go_down:
+				Defold.pprint('Go Down!!');
 				self.swenf.s = true;
 				self.swenf.n = false;
 				self.swenf.e = false;
 				self.swenf.w = false;
 				set_animation_back(self);
 			case EnemyMessage.msg_go_idle:
+				Defold.pprint('Go Idle');
 				self.swenf.s = false;
 				self.swenf.n = false;
 				self.swenf.e = false;
 				self.swenf.w = false;
-				Defold.pprint("!!!IDLE!!!");
 		}
 	}
 

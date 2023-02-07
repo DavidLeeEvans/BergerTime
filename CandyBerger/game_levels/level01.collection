@@ -351,8 +351,8 @@ instances {
   id: "pickle"
   prototype: "/entities_go/pickle/pickle.go"
   position {
-    x: 1050.0
-    y: 234.0
+    x: 707.0
+    y: 218.0
     z: 0.0
   }
   rotation {
@@ -959,7 +959,7 @@ instances {
   prototype: "/prefabs_go/holy_cross.go"
   position {
     x: 914.0
-    y: 231.0
+    y: 222.0
     z: 0.0
   }
   rotation {
@@ -977,7 +977,7 @@ instances {
     }
     properties {
       id: "e"
-      value: "true"
+      value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
@@ -2455,7 +2455,7 @@ collection_instances {
   collection: "/prefabs_go/walk_plate_long.collection"
   position {
     x: 945.0
-    y: 200.0
+    y: 188.0
     z: 0.0
   }
   rotation {
@@ -2475,7 +2475,7 @@ collection_instances {
   collection: "/prefabs_go/walk_plate_long.collection"
   position {
     x: 945.0
-    y: 290.0
+    y: 325.0
     z: 0.0
   }
   rotation {

@@ -2,11 +2,3 @@ go.property("n", false)
 go.property("e", false)
 go.property("s", false)
 go.property("w", false)
-
---remote_msg_retract_chef_transponder_send
-
-function on_message(self, message_id, message, sender)
-	if message_id == hash("remote_msg_retract_chef_transponder_send") then
-		msg.post(message.other_id, hash("msg_retract_chef_transponder_receive"),{'n' = n,'e' = e, 's' = s, 'w' = w}) 
-	end 
-end
