@@ -232,7 +232,7 @@ instances {
   prototype: "/entities_go/floors/plate.go"
   position {
     x: 20.0
-    y: 139.0
+    y: 137.0
     z: 0.0
   }
   rotation {
@@ -437,12 +437,12 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -470,17 +470,17 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -508,17 +508,17 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -546,17 +546,17 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -584,22 +584,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -627,22 +627,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -670,22 +670,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -701,7 +701,7 @@ instances {
   prototype: "/prefabs_go/holy_cross.go"
   position {
     x: 559.0
-    y: 602.0
+    y: 618.0
     z: 0.0
   }
   rotation {
@@ -713,22 +713,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -756,22 +756,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -799,22 +799,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -842,22 +842,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -885,22 +885,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -928,22 +928,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -971,22 +971,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1014,22 +1014,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1057,22 +1057,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1100,22 +1100,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1143,22 +1143,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1186,22 +1186,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1229,22 +1229,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1272,22 +1272,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1315,22 +1315,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1358,22 +1358,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1401,22 +1401,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1444,22 +1444,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1487,22 +1487,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1530,22 +1530,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1573,22 +1573,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1616,22 +1616,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1659,22 +1659,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1703,22 +1703,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1746,22 +1746,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1789,22 +1789,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1832,22 +1832,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1875,22 +1875,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1918,22 +1918,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -1961,22 +1961,22 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
@@ -2004,25 +2004,65 @@ instances {
   component_properties {
     id: "holy_cross"
     properties {
-      id: "n"
+      id: "hc_n"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "e"
+      id: "hc_e"
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "s"
+      id: "hc_s"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
     properties {
-      id: "w"
+      id: "hc_w"
       value: "true"
       type: PROPERTY_TYPE_BOOLEAN
     }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "plate1"
+  prototype: "/entities_go/floors/plate.go"
+  position {
+    x: 367.0
+    y: 134.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "plate2"
+  prototype: "/entities_go/floors/plate.go"
+  position {
+    x: 719.0
+    y: 137.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
   }
   scale3 {
     x: 1.0
@@ -3317,6 +3357,8 @@ embedded_instances {
   id: "platform"
   children: "ladder"
   children: "plate"
+  children: "plate1"
+  children: "plate2"
   data: ""
   position {
     x: 191.0
