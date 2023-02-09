@@ -1,4 +1,0 @@
-go.property("hc_n", false)
-go.property("hc_e", false)
-go.property("hc_s", false)
-go.property("hc_w", false)

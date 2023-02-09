@@ -168,7 +168,7 @@ class ChefEntity extends Script<ChefData> {
 			Physics.raycast_async(p, p + vector3(-weray / 2.0, 0.0, 0), self.tableBorder, RC_BORDER_WEST);
 			Tools.draw_line(p, p + vector3(-weray, 0, 0));
 		}
-		movement(self, dt);
+		// movement(self, dt);
 	}
 
 	override function on_message<T>(self:ChefData, message_id:Message<T>, message:T, _):Void {
