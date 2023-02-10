@@ -1,7 +1,7 @@
 name: "model"
 tags: "tile"
-vertex_program: "/defold-spine/assets/spine.vp"
-fragment_program: "/defold-spine/assets/spine.fp"
+vertex_program: "/extension-spine/assets/spine.vp"
+fragment_program: "/extension-spine/assets/spine.fp"
 vertex_space: VERTEX_SPACE_WORLD
 vertex_constants {
   name: "world_view_proj"

@@ -1,3 +1,6 @@
 spine_scene: ""
 default_animation: ""
 skin: ""
+blend_mode: BLEND_MODE_ALPHA
+material: "/extension-spine/assets/spine.material"
+create_go_bones: false
