@@ -8,6 +8,10 @@ package entities;
 //  1 = East
 //  2 = South
 //  3 = West
+//  4 = North-West
+//  5 = North-East
+//  6 = South-West
+//  7 = South-East
 class ChefController {
 	var _delay:Float;
 	var _prim_state:Int;

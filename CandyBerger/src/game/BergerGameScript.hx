@@ -167,6 +167,13 @@ class BergerGameScript extends Script<BergerGameData> {
 					// Msg.post("/go#ghud", GHudMessage.tap);
 					// Msg.post("/chef#ChefEntity", GHudMessage.tap);
 				}
+				switch (self.chefController.get_state()) {
+					case 0:
+					case 1:
+					case 2:
+					case 3:
+					case -1:
+				}
 
 			case BergerGameMessage.game_load:
 				Globals.set_game_level(message.level);
