@@ -26,8 +26,6 @@ import entities.ChefController;
 
 import haxe.Log.trace as ltrace;
 
-import hud.GHud.GHudMessage;
-
 import hud.HudGUI.HudGUIMessage;
 
 import lua.Table;
@@ -168,7 +166,7 @@ class BergerGameScript extends Script<BergerGameData> {
 					// Msg.post("/go#ghud", GHudMessage.tap);
 					// Msg.post("/chef#ChefEntity", GHudMessage.tap);
 				}
-				switch (self.chefController.get_state()) {
+				switch (self.chefController.get_state()) { // TODO left off here DLE
 					case -1:
 					case 0:
 					case 1:
