@@ -76,7 +76,10 @@ private typedef ChefData = {
 	var bSouthEnable:Bool;
 	var bWestEnable:Bool;
 	//
-	var _movement_counter:Float;
+	// var _movement_counter:Float;
+	//
+	var _move_stage0:Int;
+	var _move_stage:Int;
 }
 
 class ChefEntity extends Script<ChefData> {
@@ -106,7 +109,7 @@ class ChefEntity extends Script<ChefData> {
 		self.bSouthEnable = false;
 		self.bWestEnable = false;
 		self.bGravity = false;
-		self._movement_counter = 0;
+		// self._movement_counter = 0;
 
 		self.chefSpeed = CHEF_SPEED;
 		self.numPepperShots = 6;
