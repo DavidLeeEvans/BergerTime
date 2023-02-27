@@ -181,10 +181,10 @@ class ChefEntity extends Script<ChefData> {
 		switch (message_id) {
 			case GHudMessage.double_tap:
 				Defold.pprint("Chef double_tap Firing Pepper");
-				self.chefController.input_dir()
 
 			case GHudMessage.tap:
 				Defold.pprint("Chef tap");
+				self.chefController.input_dir(-1); //
 				final PEPPER_SPEED = 3.2;
 				var v:Vector3 = Vmath.vector3(0, 0, 0);
 				if (self.numPepperShots > 0) {
@@ -204,34 +204,6 @@ class ChefEntity extends Script<ChefData> {
 				if (self.faceDir != 4) {
 					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_idle});
 					self.faceDir = 4;
-				}
-
-			case GHudMessage.sdown:
-				Defold.pprint("Chef sdown");
-				if (self.faceDir != 2) {
-					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_back});
-					self.faceDir = 2;
-				}
-
-			case GHudMessage.sup:
-				Defold.pprint("Chef sup");
-				if (self.faceDir != 0) {
-					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_front});
-					self.faceDir = 0;
-				}
-
-			case GHudMessage.sleft:
-				Defold.pprint("Chef seleft");
-				if (self.faceDir != 1) {
-					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_left});
-					self.faceDir = 1;
-				}
-
-			case GHudMessage.sright:
-				Defold.pprint("Chef sright");
-				if (self.faceDir != 3) {
-					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_right});
-					self.faceDir = 3;
 				}
 
 			case PhysicsMessages.ray_cast_response:

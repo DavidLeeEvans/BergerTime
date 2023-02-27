@@ -121,6 +121,7 @@ class BergerGameScript extends Script<BergerGameData> {
 		}
 	}
 
+	// TODO Left here
 	override function on_message<T>(self:BergerGameData, message_id:Message<T>, message:T, _) {
 		switch (message_id) {
 			case AdmobMsg.have_is_banner_loaded:
