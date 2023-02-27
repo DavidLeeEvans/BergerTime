@@ -1,7 +1,6 @@
 package hud;
 
 import defold.Gui;
-import defold.Msg;
 
 import defold.support.GuiScript;
 
@@ -15,6 +14,10 @@ class GHudMessage {
 	var sdown;
 	var sright;
 	var sup;
+	var sup_left;
+	var sup_right;
+	var sdown_left;
+	var sdown_right;
 	var double_tap;
 	var tap;
 }
@@ -30,15 +33,18 @@ class GHudHash {
 	var idle;
 }
 
-// 0 idle
-// 1 right
-// 2 down
-// 3 left
-// 4 up
+// -1 = NONE
+//  0 = North
+//  1 = East
+//  2 = South
+//  3 = West
+//  4 = North-West
+//  5 = North-East
+//  6 = South-West
+//  7 = South-East
+
 private typedef GHudData = {
 	var sindex:Bool; // true current, false next
-	var display_current:Int;
-	var display_next:Int;
 	var current_display:Hash;
 	var dnode:GuiNode;
 }
@@ -48,8 +54,6 @@ class GHud extends GuiScript<GHudData> {
 		self.sindex = true;
 		self.dnode = Gui.get_node("display");
 		self.current_display = GHudHash.idle;
-		self.display_current = 0;
-		Msg.post("#", GHudMessage.tap);
 	}
 
 	override function update(self:GHudData, dt:Float):Void {}
@@ -58,23 +62,26 @@ class GHud extends GuiScript<GHudData> {
 		switch (message_id) {
 			case GHudMessage.sright:
 				Gui.play_flipbook(self.dnode, GHudHash.right);
-				self.display_current = 1;
 
 			case GHudMessage.sdown:
 				Gui.play_flipbook(self.dnode, GHudHash.down);
-				self.display_current = 2;
 
 			case GHudMessage.sleft:
 				Gui.play_flipbook(self.dnode, GHudHash.left);
-				self.display_current = 3;
 
 			case GHudMessage.sup:
 				Gui.play_flipbook(self.dnode, GHudHash.up);
-				self.display_current = 4;
+
+			case GHudMessage.sdown_left:
+
+			case GHudMessage.sdown_right:
+
+			case GHudMessage.sup_left:
+
+			case GHudMessage.sup_right:
 
 			case GHudMessage.tap:
 				Gui.play_flipbook(self.dnode, GHudHash.idle);
-				self.display_current = 0;
 
 			case GHudMessage.double_tap:
 		}

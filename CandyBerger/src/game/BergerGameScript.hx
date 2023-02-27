@@ -169,6 +169,7 @@ class BergerGameScript extends Script<BergerGameData> {
 				}
 				switch (self.chefController.get_state()) {
 					case 0:
+
 					case 1:
 					case 2:
 					case 3:
