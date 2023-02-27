@@ -121,6 +121,7 @@ class BergerGameScript extends Script<BergerGameData> {
 	}
 
 	override function update(self:BergerGameData, dt:Float) {
+		self.chefController.update(dt); // TODO still testing
 		self.delayer.update(1.0);
 		self._scratchPad--;
 		if (Globals.total_num_current_monsters <= self.num_monsters && self._scratchPad < 0) {
@@ -168,12 +169,15 @@ class BergerGameScript extends Script<BergerGameData> {
 					// Msg.post("/chef#ChefEntity", GHudMessage.tap);
 				}
 				switch (self.chefController.get_state()) {
+					case -1:
 					case 0:
-
 					case 1:
 					case 2:
 					case 3:
-					case -1:
+					case 4:
+					case 5:
+					case 6:
+					case 7:
 				}
 
 			case BergerGameMessage.game_load:
