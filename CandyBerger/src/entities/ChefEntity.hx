@@ -80,7 +80,6 @@ private typedef ChefData = {
 	//
 	var _movement_counter:Float;
 	//
-	var chefController:ChefController;
 }
 
 class ChefEntity extends Script<ChefData> {
@@ -105,7 +104,6 @@ class ChefEntity extends Script<ChefData> {
 	final FALL_RATE = -1.0;
 
 	override function init(self:ChefData) {
-		self.chefController = new ChefController(2.6);
 		//
 		self.bNorthEnable = false;
 		self.bEastEnable = false;
@@ -184,7 +182,6 @@ class ChefEntity extends Script<ChefData> {
 
 			case GHudMessage.tap:
 				Defold.pprint("Chef tap");
-				self.chefController.input_dir(-1); //
 				final PEPPER_SPEED = 3.2;
 				var v:Vector3 = Vmath.vector3(0, 0, 0);
 				if (self.numPepperShots > 0) {

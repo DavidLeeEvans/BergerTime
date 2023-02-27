@@ -22,6 +22,8 @@ import dle.Delayer;
 
 import dle.Ludobits.GestureMessage;
 
+import entities.ChefController;
+
 import haxe.Log.trace as ltrace;
 
 import hud.GHud.GHudMessage;
@@ -68,6 +70,8 @@ typedef BergerGameData = {
 	var admob_rewardvideo_ad:String;
 	//
 	var _loaded:Bool;
+	//
+	var chefController:ChefController;
 }
 
 class BergerGameScript extends Script<BergerGameData> {
@@ -99,6 +103,10 @@ class BergerGameScript extends Script<BergerGameData> {
 
 		lua.Math.randomseed(1000000 * (Socket.gettime() % 1));
 		lua.Math.randomseed(1000000 * (Socket.gettime() % 1));
+		//
+		self.chefController = new ChefController(2.6);
+
+		//
 		self.handleTimerTreats = Timer.delay(lua.Math.random(TREAT_SPAWNDELAY_LOWER, TREAT_SPAWNDELAY_UPPER), false, treate_create);
 		//
 		if (self.handleTimerTreats == Timer.INVALID_TIMER_HANDLE)
@@ -130,28 +138,34 @@ class BergerGameScript extends Script<BergerGameData> {
 			case GestureMessage.on_gesture:
 				if (message.swipe_up) {
 					Defold.pprint('message.swipe_up');
-					Msg.post("/go#ghud", GHudMessage.sup);
-					Msg.post("/chef#ChefEntity", GHudMessage.sup);
+					self.chefController.input_dir(0); //
+					// Msg.post("/go#ghud", GHudMessage.sup);
+					// Msg.post("/chef#ChefEntity", GHudMessage.sup);
 				} else if (message.swipe_left) {
 					Defold.pprint('message.swipe_left');
-					Msg.post("/go#ghud", GHudMessage.sleft);
-					Msg.post("/chef#ChefEntity", GHudMessage.sleft);
+					self.chefController.input_dir(3); //
+					// Msg.post("/go#ghud", GHudMessage.sleft);
+					// Msg.post("/chef#ChefEntity", GHudMessage.sleft);
 				} else if (message.swipe_down) {
 					Defold.pprint('message.swipe_down');
-					Msg.post("/go#ghud", GHudMessage.sdown);
-					Msg.post("/chef#ChefEntity", GHudMessage.sdown);
+					self.chefController.input_dir(2); //
+					// Msg.post("/go#ghud", GHudMessage.sdown);
+					// Msg.post("/chef#ChefEntity", GHudMessage.sdown);
 				} else if (message.swipe_right) {
 					Defold.pprint('message.swipe_right');
-					Msg.post("/go#ghud", GHudMessage.sright);
-					Msg.post("/chef#ChefEntity", GHudMessage.sright);
+					self.chefController.input_dir(1); //
+					// Msg.post("/go#ghud", GHudMessage.sright);
+					// Msg.post("/chef#ChefEntity", GHudMessage.sright);
 				} else if (message.double_tap) {
 					Defold.pprint('message double tap');
-					Msg.post("/go#ghud", GHudMessage.double_tap);
-					Msg.post("/chef#ChefEntity", GHudMessage.double_tap);
+					self.chefController.input_dir(-1); //
+					// Msg.post("/go#ghud", GHudMessage.double_tap);
+					// Msg.post("/chef#ChefEntity", GHudMessage.double_tap);
 				} else if (message.tap) {
 					Defold.pprint('message tap');
-					Msg.post("/go#ghud", GHudMessage.tap);
-					Msg.post("/chef#ChefEntity", GHudMessage.tap);
+					self.chefController.input_dir(-1); //
+					// Msg.post("/go#ghud", GHudMessage.tap);
+					// Msg.post("/chef#ChefEntity", GHudMessage.tap);
 				}
 
 			case BergerGameMessage.game_load:
