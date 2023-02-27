@@ -7,6 +7,14 @@ images {
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
+  image: "/in/down_turn_left.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/in/down_turn_right.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
   image: "/in/up_turn_right.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
