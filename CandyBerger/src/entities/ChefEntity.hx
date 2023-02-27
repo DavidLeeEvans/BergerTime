@@ -23,6 +23,8 @@ import defold.types.Message;
 import defold.types.Url;
 import defold.types.Vector3;
 
+import entities.ChefController;
+
 import game.BergerGameScript.BergerGameMessage;
 
 import hud.GHud;
@@ -78,8 +80,7 @@ private typedef ChefData = {
 	//
 	var _movement_counter:Float;
 	//
-	var _move_stage0:Int;
-	var _move_stage:Int;
+	var chefController:ChefController;
 }
 
 class ChefEntity extends Script<ChefData> {
@@ -104,6 +105,8 @@ class ChefEntity extends Script<ChefData> {
 	final FALL_RATE = -1.0;
 
 	override function init(self:ChefData) {
+		self.chefController = new ChefController(2.6);
+		//
 		self.bNorthEnable = false;
 		self.bEastEnable = false;
 		self.bSouthEnable = false;
@@ -178,6 +181,7 @@ class ChefEntity extends Script<ChefData> {
 		switch (message_id) {
 			case GHudMessage.double_tap:
 				Defold.pprint("Chef double_tap Firing Pepper");
+				self.chefController.input_dir()
 
 			case GHudMessage.tap:
 				Defold.pprint("Chef tap");
