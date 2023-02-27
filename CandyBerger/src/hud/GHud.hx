@@ -26,8 +26,10 @@ class GHudMessage {
 class GHudHash {
 	var down;
 	var up;
-	var turn_up;
-	var turn_down;
+	var up_turn_left;
+	var up_turn_right;
+	var down_turn_left;
+	var down_turn_right;
 	var left;
 	var right;
 	var idle;
@@ -73,12 +75,16 @@ class GHud extends GuiScript<GHudData> {
 				Gui.play_flipbook(self.dnode, GHudHash.up);
 
 			case GHudMessage.sdown_left:
+				Gui.play_flipbook(self.dnode, GHudHash.down_turn_left);
 
 			case GHudMessage.sdown_right:
+				Gui.play_flipbook(self.dnode, GHudHash.down_turn_right);
 
 			case GHudMessage.sup_left:
+				Gui.play_flipbook(self.dnode, GHudHash.up_turn_left);
 
 			case GHudMessage.sup_right:
+				Gui.play_flipbook(self.dnode, GHudHash.up_turn_right);
 
 			case GHudMessage.tap:
 				Gui.play_flipbook(self.dnode, GHudHash.idle);
