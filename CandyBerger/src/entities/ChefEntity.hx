@@ -177,9 +177,6 @@ class ChefEntity extends Script<ChefData> {
 
 	override function on_message<T>(self:ChefData, message_id:Message<T>, message:T, _):Void {
 		switch (message_id) {
-			case GHudMessage.double_tap:
-				Defold.pprint("Chef double_tap Firing Pepper");
-
 			case GHudMessage.tap:
 				Defold.pprint("Chef tap");
 				final PEPPER_SPEED = 3.2;

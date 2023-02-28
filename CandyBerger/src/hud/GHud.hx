@@ -18,7 +18,6 @@ class GHudMessage {
 	var sup_right;
 	var sdown_left;
 	var sdown_right;
-	var double_tap;
 	var idle;
 	var tap;
 }
@@ -87,10 +86,8 @@ class GHud extends GuiScript<GHudData> {
 			case GHudMessage.sup_right:
 				Gui.play_flipbook(self.dnode, GHudHash.up_turn_right);
 
-			case GHudMessage.tap:
+			case GHudMessage.idle:
 				Gui.play_flipbook(self.dnode, GHudHash.idle);
-
-			case GHudMessage.double_tap:
 		}
 	}
 

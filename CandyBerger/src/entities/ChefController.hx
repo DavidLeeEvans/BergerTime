@@ -1,5 +1,9 @@
 package entities;
 
+import defold.Msg;
+
+import hud.GHud.GHudMessage;
+
 // if (self.faceDir != 2) {
 // 	Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_back});
 // 	self.faceDir = 2;
@@ -87,6 +91,41 @@ class ChefController {
 			_final_state = 3;
 		else if (_prim_state == 3 && _sec_state == 8)
 			_final_state = 3;
+		else if (_prim_state == -1 && _sec_state == 0) //
+			_final_state = 0; // TODO WN
+		else if (_prim_state == -1 && _sec_state == -1)
+			_final_state = -1;
+		else if (_prim_state == -1 && _sec_state == 1)
+			_final_state = 1;
+		else if (_prim_state == -1 && _sec_state == 2)
+			_final_state = 2; // WS
+		else if (_prim_state == -1 && _sec_state == 3)
+			_final_state = 3;
+		else if (_prim_state == -1 && _sec_state == 8)
+			_final_state = -1;
+
+		switch (get_final_state()) {
+			case -1:
+				Msg.post("/go#ghud", GHudMessage.idle);
+			case 0:
+				Msg.post("/go#ghud", GHudMessage.sup);
+			case 1:
+				Msg.post("/go#ghud", GHudMessage.sright);
+			case 2:
+				Msg.post("/go#ghud", GHudMessage.sdown);
+			case 3:
+				Msg.post("/go#ghud", GHudMessage.sleft);
+			case 4:
+				Msg.post("/go#ghud", GHudMessage.sup_left);
+			case 5:
+				Msg.post("/go#ghud", GHudMessage.sup_right);
+			case 6:
+				Msg.post("/go#ghud", GHudMessage.sdown_left);
+			case 7:
+				Msg.post("/go#ghud", GHudMessage.sdown_right);
+			case 8:
+				trace("UNKNOWN STATE");
+		}
 
 		print_string();
 		_ps = true;
@@ -112,7 +151,7 @@ class ChefController {
 	public function update(delta:Float):Void {
 		_reg0 += delta;
 		if (_reg0 > _delay) {
-			trace("----------------------------ChefController Triggered-------------------------");
+			//			trace("----------------------------ChefController Triggered-------------------------");
 			finished();
 			_reg0 = 0;
 			_prim_state = 8;

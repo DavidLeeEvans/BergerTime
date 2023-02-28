@@ -100,8 +100,9 @@ class BergerGameScript extends Script<BergerGameData> {
 		lua.Math.randomseed(1000000 * (Socket.gettime() % 1));
 		lua.Math.randomseed(1000000 * (Socket.gettime() % 1));
 		//
-		self.chefController = new ChefController(2.6);
-
+		self.chefController = new ChefController(0.9);
+		// self.chefController = new ChefController(0.6);
+		self.chefController.start();
 		//
 		self.handleTimerTreats = Timer.delay(lua.Math.random(TREAT_SPAWNDELAY_LOWER, TREAT_SPAWNDELAY_UPPER), false, treate_create);
 		//
@@ -158,26 +159,6 @@ class BergerGameScript extends Script<BergerGameData> {
 					Defold.pprint('message tap');
 					self.chefController.input_dir(-1); //
 					// Msg.post("/chef#ChefEntity", GHudMessage.tap);
-				}
-				switch (self.chefController.get_final_state()) { // TODO left off here DLE
-					case -1:
-						Msg.post("/go#ghud", GHudMessage.idle);
-					case 0:
-						Msg.post("/go#ghud", GHudMessage.sup);
-					case 1:
-						Msg.post("/go#ghud", GHudMessage.sright);
-					case 2:
-						Msg.post("/go#ghud", GHudMessage.sdown);
-					case 3:
-						Msg.post("/go#ghud", GHudMessage.sleft);
-					case 4:
-						Msg.post("/go#ghud", GHudMessage.sup_left);
-					case 5:
-						Msg.post("/go#ghud", GHudMessage.sup_right);
-					case 6:
-						Msg.post("/go#ghud", GHudMessage.sdown_left);
-					case 7:
-						Msg.post("/go#ghud", GHudMessage.sdown_right);
 				}
 
 			case BergerGameMessage.game_load:
