@@ -34,10 +34,6 @@ import lua.Table;
 
 import lua.lib.luasocket.Socket;
 
-//
-//
-//
-
 @:build(defold.support.MessageBuilder.build())
 class BergerGameMessage {
 	var game_start;
@@ -137,6 +133,7 @@ class BergerGameScript extends Script<BergerGameData> {
 				Defold.pprint('have_banner_called_back MSG actionable ${message.name}');
 				self._loaded = message.name;
 			case GestureMessage.on_gesture:
+				self.chefController.start();
 				if (message.swipe_up) {
 					Defold.pprint('message.swipe_up');
 					self.chefController.input_dir(0); //
@@ -162,7 +159,7 @@ class BergerGameScript extends Script<BergerGameData> {
 					self.chefController.input_dir(-1); //
 					// Msg.post("/chef#ChefEntity", GHudMessage.tap);
 				}
-				switch (self.chefController.get_state()) { // TODO left off here DLE
+				switch (self.chefController.get_final_state()) { // TODO left off here DLE
 					case -1:
 						Msg.post("/go#ghud", GHudMessage.idle);
 					case 0:
