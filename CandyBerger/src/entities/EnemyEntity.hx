@@ -252,7 +252,7 @@ class Entity extends Script<EnemyData> {
 
 			case PhysicsMessages.ray_cast_missed:
 				if (message.request_id == RCTABLE_FLOOR) {
-					Defold.pprint("---------------MISSED-------------");
+					//	Defold.pprint("---------------MISSED-------------");
 					Go.set_position(Go.get_world_position() + Vmath.vector3(0, -1.0, 0));
 				}
 			case defold.PhysicsMessages.collision_response:
