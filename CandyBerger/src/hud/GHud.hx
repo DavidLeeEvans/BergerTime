@@ -12,13 +12,14 @@ import defold.types.Url;
 class GHudMessage {
 	var sleft;
 	var sdown;
-	var sright;
 	var sup;
+	var sright;
 	var sup_left;
 	var sup_right;
 	var sdown_left;
 	var sdown_right;
 	var double_tap;
+	var idle;
 	var tap;
 }
 

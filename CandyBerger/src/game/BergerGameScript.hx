@@ -26,6 +26,8 @@ import entities.ChefController;
 
 import haxe.Log.trace as ltrace;
 
+import hud.GHud.GHudMessage;
+
 import hud.HudGUI.HudGUIMessage;
 
 import lua.Table;
@@ -138,44 +140,47 @@ class BergerGameScript extends Script<BergerGameData> {
 				if (message.swipe_up) {
 					Defold.pprint('message.swipe_up');
 					self.chefController.input_dir(0); //
-					// Msg.post("/go#ghud", GHudMessage.sup);
 					// Msg.post("/chef#ChefEntity", GHudMessage.sup);
 				} else if (message.swipe_left) {
 					Defold.pprint('message.swipe_left');
 					self.chefController.input_dir(3); //
-					// Msg.post("/go#ghud", GHudMessage.sleft);
 					// Msg.post("/chef#ChefEntity", GHudMessage.sleft);
 				} else if (message.swipe_down) {
 					Defold.pprint('message.swipe_down');
 					self.chefController.input_dir(2); //
-					// Msg.post("/go#ghud", GHudMessage.sdown);
 					// Msg.post("/chef#ChefEntity", GHudMessage.sdown);
 				} else if (message.swipe_right) {
 					Defold.pprint('message.swipe_right');
 					self.chefController.input_dir(1); //
-					// Msg.post("/go#ghud", GHudMessage.sright);
 					// Msg.post("/chef#ChefEntity", GHudMessage.sright);
 				} else if (message.double_tap) {
 					Defold.pprint('message double tap');
 					self.chefController.input_dir(-1); //
-					// Msg.post("/go#ghud", GHudMessage.double_tap);
 					// Msg.post("/chef#ChefEntity", GHudMessage.double_tap);
 				} else if (message.tap) {
 					Defold.pprint('message tap');
 					self.chefController.input_dir(-1); //
-					// Msg.post("/go#ghud", GHudMessage.tap);
 					// Msg.post("/chef#ChefEntity", GHudMessage.tap);
 				}
 				switch (self.chefController.get_state()) { // TODO left off here DLE
 					case -1:
+						Msg.post("/go#ghud", GHudMessage.idle);
 					case 0:
+						Msg.post("/go#ghud", GHudMessage.sup);
 					case 1:
+						Msg.post("/go#ghud", GHudMessage.sright);
 					case 2:
+						Msg.post("/go#ghud", GHudMessage.sdown);
 					case 3:
+						Msg.post("/go#ghud", GHudMessage.sleft);
 					case 4:
+						Msg.post("/go#ghud", GHudMessage.sup_left);
 					case 5:
+						Msg.post("/go#ghud", GHudMessage.sup_right);
 					case 6:
+						Msg.post("/go#ghud", GHudMessage.sdown_left);
 					case 7:
+						Msg.post("/go#ghud", GHudMessage.sdown_right);
 				}
 
 			case BergerGameMessage.game_load:
