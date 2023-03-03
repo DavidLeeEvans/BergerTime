@@ -10,9 +10,6 @@ import defold.Physics;
 import defold.Sprite.SpriteMessages;
 
 import defold.Timer;
-
-import defold.Vmath.vector3;
-
 import defold.Vmath;
 
 import defold.support.Script;
@@ -61,21 +58,14 @@ private class ChefEntityHash {
 private typedef ChefData = {
 	var chefSpeed:Float;
 	var faceDir:Int;
-	//
-	var tableFloor:lua.Table<Int, Hash>;
-	var tableBorder:lua.Table<Int, Hash>;
-	var tableMovement:lua.Table<Int, Hash>;
-	//
 	var numPepperShots:Int;
 	// Direction flags
-	// Gravity
-	var bGravity:Bool;
+	var _movement_counter:Float;
+	//
 	var bNorthEnable:Bool;
 	var bEastEnable:Bool;
 	var bSouthEnable:Bool;
 	var bWestEnable:Bool;
-	//
-	var _movement_counter:Float;
 	//
 }
 
@@ -101,44 +91,24 @@ class ChefEntity extends Script<ChefData> {
 	final FALL_RATE = -1.0;
 
 	override function init(self:ChefData) {
-		//
 		self.bNorthEnable = false;
 		self.bEastEnable = false;
 		self.bSouthEnable = false;
 		self.bWestEnable = false;
-		self.bGravity = false;
+
 		self._movement_counter = 0;
 
 		self.chefSpeed = CHEF_SPEED;
 		self.numPepperShots = 6;
 		Msg.post(sHud, HudGUIMessage.set_pepper, {num: self.numPepperShots});
-
-		//
 		self.faceDir = 0; // 0 Up, 1, Left, 2 Down, 3 Right, 4 Idle
-		//
-		self.tableFloor = lua.Table.create();
-		self.tableBorder = lua.Table.create();
-		self.tableMovement = lua.Table.create();
-
-		// On the Floor, Collision Detection
-		// lua.Table.insert(self.tableFloor, hPlate);
-		lua.Table.insert(self.tableFloor, hFloor);
-		lua.Table.insert(self.tableMovement, hmovement);
-		lua.Table.insert(self.tableBorder, hBorder);
-		//
-		// Msg.post(".", GoMessages.acquire_input_focus);
 	}
 
 	override function update(self:ChefData, dt:Float):Void {
+		movement(self, dt);
 		counter = counter + 1.0;
-
 		if (counter > 15.0) {
-			// trace('counter fired');
 			counter = 0.0;
-			final p = Go.get_position();
-			var lenght:Vector3 = vector3(0, -6.0, 0); // TODO get image size and adjust
-			var efrom = p + vector3(0, -10, 0); // TODO get image size and adjust
-			var to:Vector3 = vector3(efrom + lenght);
 		}
 	}
 
@@ -186,7 +156,6 @@ class ChefEntity extends Script<ChefData> {
 				}
 
 			case PhysicsMessages.trigger_response:
-				// trace('TRIGGER message_id $message_id message $message');
 				if (message.own_group == ChefEntityHash.chef) {
 					if (message.other_group == ChefEntityHash.treat) {
 						if (message.other_id == ChefEntityHash.treats_coffee) {

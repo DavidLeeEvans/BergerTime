@@ -1,19 +1,4 @@
 components {
-  id: "PropertyFloor"
-  component: "/scripts/entities/PropertyFloor.script"
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-}
-components {
   id: "fixture"
   component: "/entities_go/floors/fixtures.script"
   position {
@@ -57,12 +42,13 @@ embedded_components {
   id: "collisionobject"
   type: "collisionobject"
   data: "collision_shape: \"\"\n"
-  "type: COLLISION_OBJECT_TYPE_KINEMATIC\n"
+  "type: COLLISION_OBJECT_TYPE_TRIGGER\n"
   "mass: 0.0\n"
   "friction: 0.1\n"
   "restitution: 0.5\n"
   "group: \"fixture\"\n"
   "mask: \"enemy\"\n"
+  "mask: \"chef\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"
