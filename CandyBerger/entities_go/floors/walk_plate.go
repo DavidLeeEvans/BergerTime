@@ -27,6 +27,11 @@ components {
     z: 0.0
     w: 1.0
   }
+  properties {
+    id: "fixture_type"
+    value: "1.0"
+    type: PROPERTY_TYPE_NUMBER
+  }
 }
 embedded_components {
   id: "sprite"
@@ -63,7 +68,7 @@ embedded_components {
   "    shape_type: TYPE_BOX\n"
   "    position {\n"
   "      x: 0.0\n"
-  "      y: 14.0\n"
+  "      y: 27.0\n"
   "      z: 0.0\n"
   "    }\n"
   "    rotation {\n"

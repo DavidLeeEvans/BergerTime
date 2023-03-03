@@ -16,14 +16,11 @@ import defold.Vmath.vector3;
 import defold.Vmath;
 
 import defold.support.Script;
-import defold.support.ScriptOnInputAction;
 
 import defold.types.Hash;
 import defold.types.Message;
 import defold.types.Url;
 import defold.types.Vector3;
-
-import entities.ChefController;
 
 import game.BergerGameScript.BergerGameMessage;
 
@@ -129,25 +126,11 @@ class ChefEntity extends Script<ChefData> {
 		lua.Table.insert(self.tableMovement, hmovement);
 		lua.Table.insert(self.tableBorder, hBorder);
 		//
-		Msg.post(".", GoMessages.acquire_input_focus);
+		// Msg.post(".", GoMessages.acquire_input_focus);
 	}
 
 	override function update(self:ChefData, dt:Float):Void {
 		counter = counter + 1.0;
-		gravity_counter = gravity_counter + 1.0;
-		if (gravity_counter > 2.0) {
-			gravity_counter = 0;
-			final p = Go.get_position();
-			var lenght:Vector3 = vector3(0, -6.0, 0);
-			var efrom = p + vector3(0, -10, 0);
-			var to:Vector3 = vector3(efrom + lenght);
-			Physics.raycast_async(efrom, to, self.tableFloor, RC_ONGROUND);
-			if (self.bGravity) {
-				//				trace("Gravity Firing True");
-				Tools.draw_line(efrom, to, Vmath.vector4(0, 256, 256, 256));
-				Go.set_position(p + Vmath.vector3(0, FALL_RATE, 0));
-			}
-		}
 
 		if (counter > 15.0) {
 			// trace('counter fired');
@@ -156,23 +139,7 @@ class ChefEntity extends Script<ChefData> {
 			var lenght:Vector3 = vector3(0, -6.0, 0); // TODO get image size and adjust
 			var efrom = p + vector3(0, -10, 0); // TODO get image size and adjust
 			var to:Vector3 = vector3(efrom + lenght);
-			// Physics.raycast_async(efrom, to, self.tableFloor, RC_ONGROUND);
-			//
-			final weray = 32.0;
-			// **North**
-			Physics.raycast_async(p, p + vector3(0, weray, 0), self.tableMovement, RC_BORDER_NORTH);
-			Tools.draw_line(p, p + vector3(0, -weray, 0));
-			// East
-			Physics.raycast_async(p, p + vector3(weray / 2.0, 0.0, 0), self.tableBorder, RC_BORDER_EAST);
-			Tools.draw_line(p, p + vector3(weray, 0, 0));
-			// **South**
-			Physics.raycast_async(p, p + vector3(0, -weray, 0), self.tableMovement, RC_BORDER_SOUTH);
-			Tools.draw_line(p, p + vector3(0, weray, 0));
-			// West
-			Physics.raycast_async(p, p + vector3(-weray / 2.0, 0.0, 0), self.tableBorder, RC_BORDER_WEST);
-			Tools.draw_line(p, p + vector3(-weray, 0, 0));
 		}
-		// movement(self, dt);
 	}
 
 	override function on_message<T>(self:ChefData, message_id:Message<T>, message:T, _):Void {
@@ -200,43 +167,6 @@ class ChefEntity extends Script<ChefData> {
 					self.faceDir = 4;
 				}
 
-			case PhysicsMessages.ray_cast_response:
-				// trace('message_id $message_id message $message');
-				// TODO try to get script property message.id For Future Use?? ?
-				if (message.request_id == RC_ONGROUND) {
-					self.bGravity = false;
-				}
-				if (message.request_id == RC_BORDER_NORTH) {
-					self.bNorthEnable = false;
-				}
-				if (message.request_id == RC_BORDER_EAST) {
-					self.bEastEnable = false;
-				}
-				if (message.request_id == RC_BORDER_SOUTH) {
-					self.bSouthEnable = false;
-				}
-				if (message.request_id == RC_BORDER_WEST) {
-					trace('Hit Left Border');
-					self.bWestEnable = false;
-				}
-
-			case PhysicsMessages.ray_cast_missed:
-				// trace('message_id $message_id message $message');
-				if (message.request_id == RC_ONGROUND) {
-					self.bGravity = true;
-				}
-				if (message.request_id == RC_BORDER_NORTH) {
-					self.bNorthEnable = true;
-				}
-				if (message.request_id == RC_BORDER_EAST) {
-					self.bEastEnable = true;
-				}
-				if (message.request_id == RC_BORDER_SOUTH) {
-					self.bSouthEnable = true;
-				}
-				if (message.request_id == RC_BORDER_WEST) {
-					self.bWestEnable = true;
-				}
 			case SpriteMessages.animation_done:
 				if (message.id == ChefEntityHash.anime_chef_die) {
 					Globals.total_num_lives--;
@@ -278,51 +208,9 @@ class ChefEntity extends Script<ChefData> {
 		}
 	}
 
-	override function on_input(self:ChefData, action_id:Hash, action:ScriptOnInputAction) {
-		final p = Go.get(".", "position"); // TODO WHY ??????
-		// North
-		if (action_id == ChefEntityHash.move_up && !self.bNorthEnable) {
-			Go.set(".", "position", p + vector3(0, self.chefSpeed, 0)); // TODO WHY ?????? For Enemies:
-			if (self.faceDir != 0)
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_front});
-			self.faceDir = 0;
-		} else if (action_id == ChefEntityHash.move_down && !self.bSouthEnable) {
-			Go.set(".", "position", p + vector3(0, -self.chefSpeed, 0));
-			if (self.faceDir != 2)
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_back});
-			self.faceDir = 2;
-		} else if (action_id == ChefEntityHash.move_left && self.bWestEnable) {
-			Go.set(".", "position", p + vector3(-self.chefSpeed, 0, 0));
-			if (self.faceDir != 3)
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_left});
-			self.faceDir = 3;
-		} else if (action_id == ChefEntityHash.move_right && self.bEastEnable) {
-			Go.set(".", "position", p + vector3(self.chefSpeed, 0, 0));
-			if (self.faceDir != 1)
-				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_right});
-			self.faceDir = 1;
-		} else if (action_id == ChefEntityHash.move_pepper && action.released) {
-			trace('pepper');
-			var collision_object:Vector3 = vector3(0, 0, 0);
-			switch (self.faceDir) {
-				case 0:
-					collision_object = vector3(0, 1, 0);
-				case 1:
-					collision_object = vector3(1, 0, 0);
-				case 2:
-					collision_object = vector3(0, -1, 0);
-				case 3:
-					collision_object = vector3(-1, 0, 0);
-			}
-		}
-		return false;
-	}
-
 	override function on_reload(self:ChefData):Void {}
 
-	override function final_(self:ChefData):Void {
-		Msg.post(".", GoMessages.release_input_focus);
-	}
+	override function final_(self:ChefData):Void {}
 
 	private function treat_callback(self:ChefData, _, _):Void {
 		self.chefSpeed = CHEF_SPEED;
@@ -350,7 +238,6 @@ class ChefEntity extends Script<ChefData> {
 				if (self.bEastEnable)
 					Go.set_position(p + Vmath.vector3(1, 0, 0));
 			case 4:
-				// Left empty idle
 		}
 	}
 }
