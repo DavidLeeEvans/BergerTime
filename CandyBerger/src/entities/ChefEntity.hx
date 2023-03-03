@@ -34,17 +34,17 @@ private class ChefEntityHash {
 	var treats_fries;
 	var treats_icecream;
 	var treats_candy;
+	//
 	var border;
 	var chef;
 	var die;
 	var enemy;
 	//
-	var move_up;
-	var move_down;
-	var move_left;
-	var move_right;
-	//
-	var move_pepper;
+	// var move_up;
+	// var move_down;
+	// var move_left;
+	// var move_right;
+	// var move_pepper;
 	//
 	var anime_chef_die;
 	var anime_chef_idle;
@@ -52,7 +52,6 @@ private class ChefEntityHash {
 	var anime_chef_back;
 	var anime_chef_left;
 	var anime_chef_right;
-	//
 }
 
 private typedef ChefData = {
@@ -79,9 +78,9 @@ class ChefEntity extends Script<ChefData> {
 	static final CHEF_SPEED:Float = 0.6;
 	static final CHEF_SPEED_COFFEE:Float = 1.2;
 
-	final hmovement:Hash = hash('movement');
-	final hFloor:Hash = hash('fixture');
-	final hBorder:Hash = hash('border');
+	final h_movement:Hash = hash('movement');
+	final h_Floor:Hash = hash('fixture');
+	final h_Border:Hash = hash('border');
 	var counter:Float = 0;
 	var gravity_counter:Float = 0;
 	//
@@ -156,6 +155,7 @@ class ChefEntity extends Script<ChefData> {
 				}
 
 			case PhysicsMessages.trigger_response:
+				trace('********trigger_response********');
 				if (message.own_group == ChefEntityHash.chef) {
 					if (message.other_group == ChefEntityHash.treat) {
 						if (message.other_id == ChefEntityHash.treats_coffee) {
@@ -172,6 +172,9 @@ class ChefEntity extends Script<ChefData> {
 					}
 					if (message.other_group == ChefEntityHash.border) {
 						// TODO test this dle
+					}
+					if (message.other_group == h_Floor) {
+						Defold.pprint('Treason 61');
 					}
 				}
 		}

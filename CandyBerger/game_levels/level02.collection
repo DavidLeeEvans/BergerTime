@@ -813,6 +813,14 @@ instances {
     z: 0.0
     w: 1.0
   }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
   scale3 {
     x: 1.0
     y: 1.0
@@ -832,6 +840,14 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
   }
   scale3 {
     x: 1.0
@@ -853,6 +869,14 @@ instances {
     z: 0.0
     w: 1.0
   }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
   scale3 {
     x: 1.0
     y: 1.0
@@ -872,6 +896,14 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "3.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
   }
   scale3 {
     x: 1.0
@@ -893,6 +925,14 @@ instances {
     z: 0.0
     w: 1.0
   }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "4.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
   scale3 {
     x: 1.0
     y: 1.0
@@ -912,6 +952,14 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "5.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
   }
   scale3 {
     x: 1.0

@@ -359,35 +359,35 @@ class Entity extends Script<EnemyData> {
 					self._border = false;
 				}
 			case EnemyMessage.msg_go_left:
-				Defold.pprint('Go Left');
+				//	Defold.pprint('Go Left');
 				self.swenf.w = true;
 				self.swenf.e = false;
 				self.swenf.s = false;
 				self.swenf.n = false;
 				set_animation_left(self);
 			case EnemyMessage.msg_go_right:
-				Defold.pprint('Go Right');
+				//	Defold.pprint('Go Right');
 				self.swenf.e = true;
 				self.swenf.w = false;
 				self.swenf.s = false;
 				self.swenf.n = false;
 				set_animation_right(self);
 			case EnemyMessage.msg_go_up:
-				Defold.pprint('Go Up');
+				//	Defold.pprint('Go Up');
 				self.swenf.n = true;
 				self.swenf.s = false;
 				self.swenf.e = false;
 				self.swenf.w = false;
 				set_animation_front(self);
 			case EnemyMessage.msg_go_down:
-				Defold.pprint('Go Down!!');
+				//	Defold.pprint('Go Down!!');
 				self.swenf.s = true;
 				self.swenf.n = false;
 				self.swenf.e = false;
 				self.swenf.w = false;
 				set_animation_back(self);
 			case EnemyMessage.msg_go_idle:
-				Defold.pprint('Go Idle');
+				//	Defold.pprint('Go Idle');
 				self.swenf.s = false;
 				self.swenf.n = false;
 				self.swenf.e = false;
