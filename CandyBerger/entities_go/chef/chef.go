@@ -26,7 +26,7 @@ embedded_components {
   "mass: 0.0\n"
   "friction: 0.1\n"
   "restitution: 0.5\n"
-  "group: \"chef\"\n"
+  "group: \"chefcoll\"\n"
   "mask: \"enemy\"\n"
   "mask: \"treat\"\n"
   "mask: \"trigcoll0\"\n"
