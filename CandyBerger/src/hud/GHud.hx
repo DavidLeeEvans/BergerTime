@@ -19,7 +19,7 @@ class GHudMessage {
 	var sdown_left;
 	var sdown_right;
 	var idle;
-	var tap;
+	var sstap;
 }
 
 @:build(defold.support.HashBuilder.build())
@@ -34,16 +34,6 @@ class GHudHash {
 	var right;
 	var idle;
 }
-
-// -1 = NONE
-//  0 = North
-//  1 = East
-//  2 = South
-//  3 = West
-//  4 = North-West
-//  5 = North-East
-//  6 = South-West
-//  7 = South-East
 
 private typedef GHudData = {
 	var sindex:Bool; // true current, false next

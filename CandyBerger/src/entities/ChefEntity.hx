@@ -95,7 +95,7 @@ class ChefEntity extends Script<ChefData> {
 		self.chefSpeed = CHEF_SPEED;
 		self.numPepperShots = 6;
 		Msg.post(sHud, HudGUIMessage.set_pepper, {num: self.numPepperShots});
-		self.faceDir = 0; // 0 Up, 1, Left, 2 Down, 3 Right, 4 Idle
+		self.faceDir = 0; // 0 Up, 1, Left, 2 Down, 3 Right, 4 Idle ///
 	}
 
 	override function update(self:ChefData, dt:Float):Void {
@@ -106,10 +106,25 @@ class ChefEntity extends Script<ChefData> {
 		}
 	}
 
+	/**
+		// Left here TODO
+		// -1 = NONE
+		//  0 = North
+		//  1 = East
+		//  2 = South
+		//  3 = West
+		///
+		//  4 = North-West
+		//  5 = North-East
+		//  6 = South-West
+		//  7 = South-East
+		//  8 = UNKNOWN
+	**/
 	override function on_message<T>(self:ChefData, message_id:Message<T>, message:T, _):Void {
 		switch (message_id) {
-			case GHudMessage.tap:
+			case GHudMessage.sstap:
 				Defold.pprint("Chef tap");
+				self.faceDir = 0;
 				final PEPPER_SPEED = 3.2;
 				var v:Vector3 = Vmath.vector3(0, 0, 0);
 				if (self.numPepperShots > 0) {
@@ -130,6 +145,25 @@ class ChefEntity extends Script<ChefData> {
 					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_idle});
 					self.faceDir = 4;
 				}
+
+			case GHudMessage.idle:
+				self.faceDir = 4;
+			case GHudMessage.sup:
+				self.faceDir = 0;
+			case GHudMessage.sdown:
+				self.faceDir = 0;
+			case GHudMessage.sright:
+				self.faceDir = 0;
+			case GHudMessage.sleft:
+				self.faceDir = 0;
+			case GHudMessage.sup_left:
+				self.faceDir = 0;
+			case GHudMessage.sup_right:
+				self.faceDir = 0;
+			case GHudMessage.sdown_left:
+				self.faceDir = 0;
+			case GHudMessage.sdown_right:
+				self.faceDir = 0;
 
 			case SpriteMessages.animation_done:
 				if (message.id == ChefEntityHash.anime_chef_die) {
