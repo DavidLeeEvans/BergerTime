@@ -146,10 +146,13 @@ class ChefEntity extends Script<ChefData> {
 
 			case GHudMessage.idle:
 				self.faceDir = -1;
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_idle});
 			case GHudMessage.sup:
 				self.faceDir = 0;
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_front});
 			case GHudMessage.sdown:
 				self.faceDir = 2;
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_back});
 			case GHudMessage.sright:
 				self.faceDir = 1;
 			case GHudMessage.sleft:
@@ -199,6 +202,18 @@ class ChefEntity extends Script<ChefData> {
 								self.bSouthEnable = false;
 								self.bEastEnable = true;
 								self.bWestEnable = true;
+							case 8:
+								trace(' ft == 8 ');
+								self.bNorthEnable = false;
+								self.bSouthEnable = false;
+								self.bEastEnable = true;
+								self.bWestEnable = false;
+							case 9:
+								trace(' ft == 9 ');
+								self.bNorthEnable = false;
+								self.bSouthEnable = false;
+								self.bEastEnable = false;
+								self.bWestEnable = true;
 						}
 					}
 				}
@@ -236,25 +251,27 @@ class ChefEntity extends Script<ChefData> {
 	private function movement(self:ChefData, dt:Float):Void {
 		var p:Vector3;
 		self._movement_counter += dt;
-		if (self._movement_counter < .020)
+		if (self._movement_counter < .020) {
 			return;
-		self._movement_counter = 0;
-		p = Go.get_world_position();
-		// 0 Up, 1, Left, 2 Down, 3 Right, 4 Idle
-		switch (self.faceDir) {
-			case 0:
-				if (self.bNorthEnable)
-					Go.set_position(p + Vmath.vector3(0, 1, 0));
-			case 1:
-				if (self.bWestEnable)
-					Go.set_position(p + Vmath.vector3(-1, 0, 0));
-			case 2:
-				if (self.bSouthEnable)
-					Go.set_position(p + Vmath.vector3(0, -1, 0));
-			case 3:
-				if (self.bEastEnable)
-					Go.set_position(p + Vmath.vector3(1, 0, 0));
-			case 4:
+		} else {
+			self._movement_counter = 0;
+			p = Go.get_world_position();
+			// 0 Up, 1, Left, 2 Down, 3 Right, 4 Idle
+			switch (self.faceDir) {
+				case 0:
+					if (self.bNorthEnable)
+						Go.set_position(p + Vmath.vector3(0, 1, 0));
+				case 1:
+					if (self.bWestEnable)
+						Go.set_position(p + Vmath.vector3(1, 0, 0));
+				case 2:
+					if (self.bSouthEnable)
+						Go.set_position(p + Vmath.vector3(0, -1, 0));
+				case 3:
+					if (self.bEastEnable)
+						Go.set_position(p + Vmath.vector3(-1, 0, 0));
+				case 4:
+			}
 		}
 	}
 }

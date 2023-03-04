@@ -14,7 +14,7 @@ components {
   }
   properties {
     id: "fixture_type"
-    value: "1.0"
+    value: "8.0"
     type: PROPERTY_TYPE_NUMBER
   }
 }

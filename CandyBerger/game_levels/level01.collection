@@ -197,7 +197,7 @@ instances {
     id: "AdvanceLayerScript"
     properties {
       id: "type"
-      value: "0.0"
+      value: "8.0"
       type: PROPERTY_TYPE_NUMBER
     }
   }
@@ -311,7 +311,7 @@ instances {
   id: "catch_plate1"
   prototype: "/entities_go/floors/catch_plate.go"
   position {
-    x: 678.0
+    x: 298.0
     y: 0.0
     z: 0.0
   }
@@ -486,6 +486,446 @@ instances {
   position {
     x: 916.0
     y: 137.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer1"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 62.0
+    y: 368.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "4.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer2"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 62.0
+    y: 448.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer3"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 62.0
+    y: 546.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "4.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer4"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 62.0
+    y: 608.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer5"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 252.0
+    y: 255.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "8.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer6"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 250.0
+    y: 456.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "3.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer7"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 250.0
+    y: 594.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer8"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 431.0
+    y: 456.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer9"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 431.0
+    y: 318.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "8.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer10"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 431.0
+    y: 611.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer11"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 957.0
+    y: 611.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer12"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 957.0
+    y: 558.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer13"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 957.0
+    y: 491.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer14"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 957.0
+    y: 424.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "3.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "hamburger_layer15"
+  prototype: "/game_levels/hamburger_layer.go"
+  position {
+    x: 957.0
+    y: 369.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "AdvanceLayerScript"
+    properties {
+      id: "type"
+      value: "8.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "catch_plate3"
+  prototype: "/entities_go/floors/catch_plate.go"
+  position {
+    x: 478.0
+    y: 0.0
     z: 0.0
   }
   rotation {
@@ -1509,6 +1949,7 @@ embedded_instances {
   children: "catch_plate"
   children: "catch_plate1"
   children: "catch_plate2"
+  children: "catch_plate3"
   children: "spawn4"
   children: "stop_plate"
   data: "components {\n"

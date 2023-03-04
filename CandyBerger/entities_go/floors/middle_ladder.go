@@ -1,6 +1,6 @@
 components {
-  id: "PropertyMiddleLadder"
-  component: "/scripts/entities/PropertyMiddleLadder.script"
+  id: "fixture"
+  component: "/entities_go/floors/fixtures.script"
   position {
     x: 0.0
     y: 0.0
