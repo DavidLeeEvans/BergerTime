@@ -113,18 +113,26 @@ class ChefController {
 				Msg.post("/chef", GHudMessage.sup);
 			case 1:
 				Msg.post("/go#ghud", GHudMessage.sright);
+				Msg.post("/chef", GHudMessage.sright);
 			case 2:
 				Msg.post("/go#ghud", GHudMessage.sdown);
+				Msg.post("/chef", GHudMessage.sdown);
 			case 3:
 				Msg.post("/go#ghud", GHudMessage.sleft);
+				Msg.post("/chef", GHudMessage.sleft);
 			case 4:
 				Msg.post("/go#ghud", GHudMessage.sup_left);
+				Msg.post("/chef", GHudMessage.sup_left);
 			case 5:
 				Msg.post("/go#ghud", GHudMessage.sup_right);
+				Msg.post("/chef", GHudMessage.sup_right);
 			case 6:
 				Msg.post("/go#ghud", GHudMessage.sdown_left);
+				Msg.post("/chef", GHudMessage.sdown_left);
 			case 7:
 				Msg.post("/go#ghud", GHudMessage.sdown_right);
+				Msg.post("/chef", GHudMessage.sdown_right);
+
 			case 8:
 				trace("UNKNOWN STATE");
 		}
