@@ -124,7 +124,7 @@ class ChefEntity extends Script<ChefData> {
 		switch (message_id) {
 			case GHudMessage.sstap:
 				Defold.pprint("Chef tap");
-				self.faceDir = 0;
+				self.faceDir = -1;
 				final PEPPER_SPEED = 3.2;
 				var v:Vector3 = Vmath.vector3(0, 0, 0);
 				if (self.numPepperShots > 0) {
@@ -141,29 +141,28 @@ class ChefEntity extends Script<ChefData> {
 					Factory.create("#pepper_factory", Go.get_world_position(), null, Table.create({direction: v}));
 				}
 
-				if (self.faceDir != 4) {
-					Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_idle});
-					self.faceDir = 4;
-				}
+				Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_idle});
+				self.faceDir = -1;
 
 			case GHudMessage.idle:
-				self.faceDir = 4;
+				self.faceDir = -1;
 			case GHudMessage.sup:
 				self.faceDir = 0;
 			case GHudMessage.sdown:
-				self.faceDir = 0;
+				self.faceDir = 2;
 			case GHudMessage.sright:
-				self.faceDir = 0;
+				self.faceDir = 1;
 			case GHudMessage.sleft:
-				self.faceDir = 0;
+				self.faceDir = 3;
+			//
 			case GHudMessage.sup_left:
-				self.faceDir = 0;
+				self.faceDir = 4;
 			case GHudMessage.sup_right:
-				self.faceDir = 0;
+				self.faceDir = 5;
 			case GHudMessage.sdown_left:
-				self.faceDir = 0;
+				self.faceDir = 6;
 			case GHudMessage.sdown_right:
-				self.faceDir = 0;
+				self.faceDir = 7;
 
 			case SpriteMessages.animation_done:
 				if (message.id == ChefEntityHash.anime_chef_die) {
