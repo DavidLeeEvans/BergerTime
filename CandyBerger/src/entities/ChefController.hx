@@ -104,11 +104,13 @@ class ChefController {
 		else if (_prim_state == -1 && _sec_state == 8)
 			_final_state = -1;
 
-		switch (get_final_state()) {
+		switch (get_final_state()) { // TODO Doc Touch Input
 			case -1:
 				Msg.post("/go#ghud", GHudMessage.idle);
+				Msg.post("/chef", GHudMessage.idle);
 			case 0:
 				Msg.post("/go#ghud", GHudMessage.sup);
+				Msg.post("/chef", GHudMessage.sup);
 			case 1:
 				Msg.post("/go#ghud", GHudMessage.sright);
 			case 2:

@@ -26,8 +26,6 @@ import entities.ChefController;
 
 import haxe.Log.trace as ltrace;
 
-import hud.GHud.GHudMessage;
-
 import hud.HudGUI.HudGUIMessage;
 
 import lua.Table;
@@ -101,7 +99,6 @@ class BergerGameScript extends Script<BergerGameData> {
 		lua.Math.randomseed(1000000 * (Socket.gettime() % 1));
 		//
 		self.chefController = new ChefController(0.9);
-		// self.chefController = new ChefController(0.6);
 		self.chefController.start();
 		//
 		self.handleTimerTreats = Timer.delay(lua.Math.random(TREAT_SPAWNDELAY_LOWER, TREAT_SPAWNDELAY_UPPER), false, treate_create);

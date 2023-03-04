@@ -36,7 +36,7 @@ private class ChefEntityHash {
 	var treats_candy;
 	//
 	var border;
-	var chef;
+	var chefcoll;
 	var die;
 	var enemy;
 	//
@@ -52,6 +52,8 @@ private class ChefEntityHash {
 	var anime_chef_back;
 	var anime_chef_left;
 	var anime_chef_right;
+	//
+	var hor_trig;
 }
 
 private typedef ChefData = {
@@ -69,12 +71,6 @@ private typedef ChefData = {
 }
 
 class ChefEntity extends Script<ChefData> {
-	static final RC_ONGROUND:Int = 1;
-	static final RC_BORDER_NORTH:Int = 2;
-	static final RC_BORDER_EAST:Int = 3;
-	static final RC_BORDER_SOUTH:Int = 4;
-	static final RC_BORDER_WEST:Int = 5;
-	static final RC_ON_LADDER:Int = 6;
 	static final CHEF_SPEED:Float = 0.6;
 	static final CHEF_SPEED_COFFEE:Float = 1.2;
 
@@ -82,7 +78,6 @@ class ChefEntity extends Script<ChefData> {
 	final h_Floor:Hash = hash('fixture');
 	final h_Border:Hash = hash('border');
 	var counter:Float = 0;
-	var gravity_counter:Float = 0;
 	//
 	final sPepperFactory = '/chef#pepper_factory';
 	final sHud = '/go#hud';
@@ -145,18 +140,38 @@ class ChefEntity extends Script<ChefData> {
 					Go.delete();
 				}
 			case PhysicsMessages.collision_response:
-				if (message.other_group == ChefEntityHash.enemy) {
-					var enemy_script:Url = defold.Msg.url(null, message.other_id, "Entity");
-					var not_peppered:Bool = Go.get(enemy_script, "not_peppered");
-					if (not_peppered) {
-						self.chefSpeed = 0; // Set Russian Chef Speed to Zero
-						Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_die});
+				// trace(message.other_group, message.other_id);
+				if (message.own_group == ChefEntityHash.chefcoll) {
+					if (message.other_group == ChefEntityHash.enemy) {
+						var enemy_script:Url = defold.Msg.url(null, message.other_id, "Entity");
+						var not_peppered:Bool = Go.get(enemy_script, "not_peppered");
+						if (not_peppered) {
+							self.chefSpeed = 0; // Set Russian Chef Speed to Zero
+							Msg.post("#sprite", SpriteMessages.play_animation, {id: ChefEntityHash.anime_chef_die});
+						}
+					}
+					if (message.other_group == ChefEntityHash.hor_trig) {
+						final u:Url = Msg.url(null, message.other_id, "fixture");
+						var ft:Int = Std.int(Go.get(u, hash("fixture_type")));
+						switch (ft) {
+							case 0:
+								trace(' ft == 0 ');
+								self.bNorthEnable = true;
+								self.bSouthEnable = true;
+								self.bEastEnable = false;
+								self.bWestEnable = false;
+							case 1:
+								trace(' ft == 1 ');
+								self.bNorthEnable = false;
+								self.bSouthEnable = false;
+								self.bEastEnable = true;
+								self.bWestEnable = true;
+						}
 					}
 				}
 
 			case PhysicsMessages.trigger_response:
-				trace('********trigger_response********');
-				if (message.own_group == ChefEntityHash.chef) {
+				if (message.own_group == ChefEntityHash.chefcoll) {
 					if (message.other_group == ChefEntityHash.treat) {
 						if (message.other_id == ChefEntityHash.treats_coffee) {
 							Msg.post("/go#hud", HudGUIMessage.add_score, {num: 11});
@@ -172,9 +187,6 @@ class ChefEntity extends Script<ChefData> {
 					}
 					if (message.other_group == ChefEntityHash.border) {
 						// TODO test this dle
-					}
-					if (message.other_group == h_Floor) {
-						Defold.pprint('Treason 61');
 					}
 				}
 		}
